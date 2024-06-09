@@ -12,13 +12,15 @@ default_language_version:
 repos:
 # Test if the python code is formatted according to the Black standard.
  - repo: https://github.com/Quantco/pre-commit-mirrors-black
-   rev: 24.3.0
+   rev: 24.4.2
    hooks:
      - id: black-conda
        args:
          - --safe
          - --target-version=py312
-         - --experimental-string-processing
+         #- --experimental-string-processing
+         - --preview
+         - --enable-unstable-feature=string_processing
          - --line-length=80
 
 # Test if the python code is formatted according to the flake8 standard.
@@ -26,13 +28,15 @@ repos:
    rev: 7.0.0
    hooks:
     - id: flake8-conda
+      args:
+        - --max-line-length=80
 
 # Test if the import statements are sorted correctly.
  - repo: https://github.com/PyCQA/isort
    rev: 5.13.2
    hooks:
     - id: isort
-      args: ["--profile", "black", --line-length=79]
+      args: ["--profile", "black", --line-length=80]
 
 # Test if the variable typing is correct. (Variable typing is when you say:
 # def is_larger(nr: int) -> bool: instead of def is_larger(nr). It makes
@@ -40,7 +44,7 @@ repos:
 # - repo: https://github.com/python/mypy
  - repo: https://github.com/pre-commit/mirrors-mypy
 ### - repo: https://github.com/a-t-0/mypy
-   rev: v1.9.0
+   rev: v1.10.0
    hooks:
     - id: mypy
       # args: ["--disallow-untyped-calls", "--disallow-untyped-defs"]
@@ -60,7 +64,7 @@ repos:
 
 # Tests if there are spelling errors in the code.
  - repo: https://github.com/codespell-project/codespell
-   rev: v2.2.6
+   rev: v2.3.0
    hooks:
     - id: codespell
 
@@ -80,7 +84,7 @@ repos:
 
 # Runs additional tests that are created by the pre-commit software itself.
  - repo: https://github.com/pre-commit/pre-commit-hooks
-   rev: v4.5.0
+   rev: v4.6.0
    hooks:
     # Check user did not add large files.
     #- id: check-added-large-files
@@ -136,9 +140,6 @@ repos:
     - id: trailing-whitespace
 
 
-
-
-
  - repo: https://github.com/PyCQA/autoflake
    rev: v2.3.1
    hooks:
@@ -188,7 +189,7 @@ repos:
 # Updates the syntax of `.py` files to the specified python version.
 # It is not compatible with: pre-commit hook: fix-encoding-pragma
  - repo: https://github.com/asottile/pyupgrade
-   rev: v3.15.2
+   rev: v3.16.0
    hooks:
      - id: pyupgrade
        args: [--py38-plus]

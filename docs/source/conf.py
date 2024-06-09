@@ -116,9 +116,7 @@ def filter_unwanted_files(*, filepaths: List[str]) -> List[str]:
     """
 
     return [
-        filepath
-        for filepath in filepaths
-        if not is_unwanted(filepath=filepath)
+        filepath for filepath in filepaths if not is_unwanted(filepath=filepath)
     ]
 
 
@@ -152,9 +150,7 @@ def abs_to_relative_python_paths_from_root(
         if abs_root_path not in flattened_filepath:
             print(f"abs_root_path={abs_root_path}")
             print(f"flattened_filepath={flattened_filepath}")
-            raise ValueError(
-                "Error, root dir should be in flattened_filepath."
-            )
+            raise ValueError("Error, root dir should be in flattened_filepath.")
         rel_py_filepaths.append(
             os.path.relpath(flattened_filepath, abs_root_path)
         )

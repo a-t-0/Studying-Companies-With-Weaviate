@@ -1,7 +1,7 @@
 # This is used to configure the black, isort and mypy such that the packages don't conflict.
 # This file is read by the pre-commit program.
 [tool.black]
-line-length = 79
+line-length = 80
 include = '\.pyi?$'
 exclude = '''
 /(
