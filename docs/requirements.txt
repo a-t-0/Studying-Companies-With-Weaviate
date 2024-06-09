@@ -1,0 +1,10 @@
+# Allow importing a test file using this method:
+astunparse
+# Allow parsing .md files in the documentation.
+myst_parser
+# Allow sphinx to build the documentation in CI.
+sphinx-rtd-theme
+# Allow nested toctree structures when you show the structure of the documentation.
+sphinx_rtd_theme
+# Allow the autogen.py file to run Typed.
+typeguard
