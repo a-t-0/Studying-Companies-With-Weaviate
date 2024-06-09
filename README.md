@@ -9,6 +9,50 @@ Example Python repository to quickly fork into new clean environment.
 - typechecking
 - pre-commit
 
+## Weaviate usage
+
+Copy/create the relevant docker filecontent from the [website](https://weaviate.io/developers/weaviate/modules/reader-generator-modules/sum-transformers) into `docker-compose.yml`.
+
+```sh
+# Install docker
+sudo apt install docker-compose
+# Run the first docker-compose file that is given.
+docker-compose up -d
+# Install weaviate
+pip install -U weaviate-client  # For beta versions: `pip install --pre -U "weaviate-client==4.*"`
+# Not needed:
+#  docker run -p 8080:8080 -p 50051:50051 cr.weaviate.io/semitechnologies/weaviate:1.24.17
+```
+
+Then you can use basic Weaviate.
+
+## Summation
+
+[Source.](https://weaviate.io/developers/weaviate/modules/reader-generator-modules/sum-transformers) To use the summation feature, you also need to make sure something can do the summation.
+To do this, create a file named:
+
+```txt
+my-model.Dockerfile
+```
+
+with content:
+
+```Dockerfile
+FROM semitechnologies/sum-transformers:custom
+RUN chmod +x ./download.py
+RUN MODEL_NAME=google/pegasus-pubmed ./download.py
+```
+
+and run and build it with:
+
+```sh
+docker build -f my-model.Dockerfile -t google-pegasus-pubmed .
+```
+
+Then you can verify your summation module works, by `UNKNOWN`. You can use this
+summation module in other docker files by referring to its tag: `google-pegasus-pubmed`.
+I do not yet know how exactly.
+
 ## Usage
 
 First install this pip package with:

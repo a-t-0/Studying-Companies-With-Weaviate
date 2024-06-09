@@ -1,0 +1,26 @@
+[
+  {
+    "Answer": "Whales are keystone species, meaning their presence is essential for the health of the entire marine ecosystem. They help to control populations of smaller fish and plankton, which in turn helps to maintain healthy coral reefs and other marine habitats. Whales also play a role in nutrient cycling, by bringing nutrients from the deep ocean to the surface where they can be used by other organisms.",
+    "Category": "Animals",
+    "Question": "What are the biggest animals on Earth and where can we find them? What is their role in the ocean?",
+    "content": "Whales are the largest mammals on Earth. They can grow up to 100 feet long and weigh hundreds of tons. Whales are found in all of the world's oceans and play an important role in the marine ecosystem."
+  },
+  {
+    "Answer": "The Great Barrier Reef can be seen from outer space and is the world's biggest single structure made by living organisms. This reef structure is home to a wide diversity of life and is considered a UNESCO World Heritage Site. Unfortunately, the Great Barrier Reef is facing threats from climate change, pollution, and overfishing.",
+    "Category": "Geography",
+    "Question": "What is the largest coral reef system in the world and where is it located? Can you tell me some interesting facts about it?",
+    "content": "The Great Barrier Reef is the world's largest coral reef system composed of over 2,900 individual reefs and 900 islands stretching for over 2,300 kilometres (1,400 mi) over an area of approximately 344,400 square kilometres (133,000 sq mi). The reef is located in the Coral Sea, off the coast of Queensland, Australia."
+  },
+  {
+    "Answer": "Pizza has become one of the most popular foods in the world and variations are enjoyed across different cultures. The origins of pizza can be traced back to ancient civilizations in the Mediterranean, but the modern version we know today originated in Naples, Italy. There are two main types of pizza: Neapolitan pizza and New York-style pizza, each with distinct characteristics in terms of dough, sauce, and cheese.",
+    "Category": "Food",
+    "Question": "What is pizza and where did it come from? Why is it so popular?",
+    "content": "Pizza is a savory dish of Italian origin consisting of a usually round, flattened base of leavened wheat-based dough topped with tomatoes, cheese, and often various other ingredients (anchovies, mushrooms, onions, olives, pineapple etc.), which is then baked at a high temperature, traditionally in a wood-fired oven."
+  },
+  {
+    "Answer": "The internet has revolutionized communication, commerce, and access to information. It has transformed how we learn, work, and socialize. The internet is constantly evolving, with new technologies and applications emerging all the time. Some of the key components of the internet include websites, web browsers, email, and social media.",
+    "Category": "Technology",
+    "Question": "What is the internet and how does it work? What are some of the ways it has impacted our lives?",
+    "content": "The Internet is a global system of interconnected computer networks that use the Internet Protocol Suite (TCP/IP) to link devices worldwide. It is a network of networks that allows users to access information, communicate with others, and conduct business electronically."
+  }
+]
