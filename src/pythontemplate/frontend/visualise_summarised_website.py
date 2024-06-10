@@ -18,7 +18,9 @@ def create_mdbook(graph, root, output_dir):
 
 def generate_summary(graph, node, level):
     indent = "    " * level
-    content = f"{indent}* [{node}](./{node}.md)\n"
+    content = (
+        f"{indent}* [{node.replace("/","_")}](./{node.replace("/","_")}.md)\n"
+    )
     for child in graph.successors(node):
         content += "".join(generate_summary(graph, child, level + 1))
     return content
@@ -28,7 +30,7 @@ def create_markdown_files(graph, node, output_dir):
     file_path = os.path.join(output_dir, f"{node.replace("/","_")}.md")
     print(f"file_path={file_path}")
     with open(file_path, "w") as f:
-        f.write(f"# {node}\n")
+        f.write(f"# {node.replace("/","_")}\n")
         #
         if "summary" in graph.nodes[node]:
             f.write(
