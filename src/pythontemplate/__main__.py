@@ -75,8 +75,6 @@ inject_summarisation_into_website_graph(
     website_graph=website_graph,
     max_nr_of_queries=max_nr_of_queries,
 )
-# visualize_tree(G=website_graph, root=0)
-# visualize_tree_v0(tree=website_graph, root=0)
 visualize_tree_v1(G=website_graph)
 
 
