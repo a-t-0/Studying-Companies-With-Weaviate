@@ -4,95 +4,43 @@
 [![License: AGPL v3][agpl3_badge]](https://www.gnu.org/licenses/agpl-3.0)
 [![Code Style: Black][black_badge]](https://github.com/ambv/black)
 
-Dear reader, hi!
-
-This will work as of 2024-06-10T15:00 CEST. It is a workflow that uses the summarise function by Weaviate to speed up studying a company.
+Hi! Thanks for checking out this Weaviate workflow that uses the summarise function by Weaviate to speed up studying a company.
 
 - It takes in an url,
-- Crawls that entire webiste for subdomains and stores its content into a json file.
+- Crawls that entire website for subdomains and stores its content into a json file.
 - This json file is then uploaded to your local Weaviate instance.
 - Then it uses GraphQL to get summaries of the company website structure.
-- This summarised website structure is then reconverted into a simplified mdbook to enable you to quicly develop a broad understanding of a company.
+- This summarised website structure is then reconverted into a simplified mdbook to enable you to quickly develop a broad understanding of a company.
+  The summarised webpages are then visualised in a tree structure on a website.
 
-## How can this be made more awesome?
+## Example 1
 
-- First of all the code can be decluttered by converting it into a simple runnable `.ipynb`.
-- Most of the time, it is not just the raw data you want from a company website but the secondary (or ternary) insights gained in processing that data and/or combining it with other relevant or recent developments. This is where Weaviate may shine, as it supports enhancing your own databases in combination with LLMs. A guided structure may be set up to facilitate this.
+**Before:**
 
-## Weaviate usage
+![Before Image](images/a0.png)
 
-Copy/create the relevant docker filecontent from the [website](https://weaviate.io/developers/weaviate/modules/reader-generator-modules/sum-transformers) into `docker-compose.yml`.
+**After:**
 
-```sh
-# Install docker
-sudo apt install docker-compose
-# Run the first docker-compose file that is given.
-docker-compose up -d
-# Install weaviate
-pip install -U weaviate-client  # For beta versions: `pip install --pre -U "weaviate-client==4.*"`
-```
+![After Image](images/b0.png)
 
-Then you can use basic Weaviate.
+## Another example
 
-## Clear Weaviate database
+**Before:**
 
-Instead of writing a proper delete function, change `QUERY_DEFAULTS_LIMIT: 35` in `docker-compose.yml` and
-reinitialise the Weaviate docker with:
+![Before Image](images/a1.png)
 
-```sh
-docker-compose up -d
-```
+**After:**
 
-## Summation
-
-[Source.](https://weaviate.io/developers/weaviate/modules/reader-generator-modules/sum-transformers) To use the summation feature, you also need to make sure something can do the summation.
-To do this, create a file named:
-
-```txt
-my-model.Dockerfile
-```
-
-with content:
-
-```Dockerfile
-FROM semitechnologies/sum-transformers:custom
-RUN chmod +x ./download.py
-RUN MODEL_NAME=google/pegasus-pubmed ./download.py
-```
-
-and run and build it with:
-
-```sh
-docker build -f my-model.Dockerfile -t google-pegasus-pubmed .
-```
-
-Then you can verify your summation module works, by `UNKNOWN`. You can use this
-summation module in other docker files by referring to its tag: `google-pegasus-pubmed`.
-I do not yet know how exactly.
+![After Image](images/b1.png)
 
 ## Usage
 
-First install this pip package with:
+To use this code, install the prerequisites, and run [this](TODO) Jupiter Notebook.
 
-```bash
-pip install pythontemplate
-```
+## How can this be made more awesome?
 
-Then run:
-
-```sh
-python -m src.pythontemplate
-```
-
-## Frontend
-
-run:
-
-```sh
-mdbook build &&  mdbook serve
-```
-
-to show the website you want to study, as a tree with leafs summarised by weaviate.
+- The tree structure of the website does not yet count the edges.
+- Most of the time, it is not just the raw data you want from a company website but the secondary (or ternary) insights gained in processing that data and/or combining it with other relevant or recent developments. This is where Weaviate may shine, as it supports enhancing your own databases in combination with LLMs. A guided structure may be set up to facilitate this.
 
 [agpl3_badge]: https://img.shields.io/badge/License-AGPL_v3-blue.svg
 [black_badge]: https://img.shields.io/badge/code%20style-black-000000.svg
