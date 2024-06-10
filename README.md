@@ -26,6 +26,15 @@ pip install -U weaviate-client  # For beta versions: `pip install --pre -U "weav
 
 Then you can use basic Weaviate.
 
+## Clear Weaviate database
+
+Instead of writing a proper delete function, change `QUERY_DEFAULTS_LIMIT: 35` in `docker-compose.yml` and
+reinitialise the Weaviate docker with:
+
+```sh
+docker-compose up -d
+```
+
 ## Summation
 
 [Source.](https://weaviate.io/developers/weaviate/modules/reader-generator-modules/sum-transformers) To use the summation feature, you also need to make sure something can do the summation.

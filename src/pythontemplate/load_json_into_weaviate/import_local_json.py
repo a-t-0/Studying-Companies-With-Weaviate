@@ -32,11 +32,17 @@ def load_local_json_data_into_weaviate(
     with client.batch as batch:
 
         # Batch import all Questions
-        for i, d in enumerate(data):
+        for i, node in enumerate(data["nodes"]):
+            input(f"data elem ={node}")
             if i < 3:
                 # TODO: verify the data element is not already in weaviate.
-                properties = {
-                    type_property: d["Answer"],
-                }
+                try:
+                    properties = {
+                        # type_property: d["Answer"],
+                        type_property: node["text_content"],
+                        # type_property: json_type,
+                    }
 
-                batch.add_data_object(properties, json_type)
+                    batch.add_data_object(properties, json_type)
+                except:
+                    print(f"Skipped data element:{node}")

@@ -68,19 +68,3 @@ def website_to_json(
                 visited=visited,
                 indent=indent + 2,
             )
-
-
-def get_main_text(*, url: str):
-    # Fetch the content of the URL
-    response = requests.get(url)
-    response.raise_for_status()  # Raise an error for bad responses
-
-    # Parse the HTML content
-    soup = BeautifulSoup(response.text, "html.parser")
-
-    # Extract main text (example: getting all the text inside <p> tags)
-    main_text = ""
-    for p_tag in soup.find_all("p"):
-        main_text += p_tag.get_text() + "\n"
-
-    return main_text

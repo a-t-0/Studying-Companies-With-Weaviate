@@ -62,6 +62,8 @@ dependencies:
 # Enable creating the pip package.
   - setuptools
   - wheel
+# Show graph
+  - pygraphviz
 # pip packages:
   - pip
   - pip:
@@ -75,3 +77,6 @@ dependencies:
     - myst_parser
     # Build the pip package.
     - build
+    - matplotlib
+    # visualise website graph as tree.
+    - pydot

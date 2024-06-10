@@ -1,32 +1,72 @@
 """Entry point for the project."""
 
+import json
+import os
 from typing import List
 
-from src.pythontemplate.get_website_data.crawl_website import website_to_json
+import networkx as nx
 
-company_urls: List[str] = ["https://weaviate.io/"]
-json_output_path: str = "weaviate.json"
+from src.pythontemplate.get_website_data.website_to_graph import (
+    graph_to_json,
+    website_to_graph,
+)
+from src.pythontemplate.load_json_into_weaviate.import_local_json import (
+    load_local_json_data_into_weaviate,
+)
+from src.pythontemplate.summarise_json import ask_weaviate_to_summarise
+
+# company_urls: List[str] = ["https://weaviate.io"]
+# company_urls: List[str] = ["https://thebestmotherfucking.website"]
+# company_urls: List[str] = ["https://waarneming.nl/"]
+company_urls: List[str] = ["https://trucol.io/"]
+website_data_path: str = "website_data.json"
+summarised_website_data_path: str = "summarised_by_weaviate.json"
 weaveate_local_host_url: str = "http://localhost:8080"
 
 # Get the json data.
-# website_to_json(urls=company_urls, json_output_path=json_output_path)
-visited = set()  # Initialise an empty website set.
-website_to_json(
-    url=company_urls[0], output_file=json_output_path, visited=visited
-)
-print(f"Crawled company website and stored results in:{json_output_path}")
+# website_to_json(urls=company_urls, website_data_path=website_data_path)
+# visited = set()  # Initialise an empty website set.
+website_graph = nx.DiGraph()  # Initialise an empty website graph.
 
-# Structure the json data
-# structure_json_data(json_input_path=json_output_path)
+# website_to_json(
+# url=company_urls[0], output_file=website_data_path, visited=visited
+# )
+if not os.path.exists(website_data_path):
+    website_to_graph(
+        root_url=company_urls[0],
+        previous_url=company_urls[0],
+        new_url=company_urls[0],
+        website_graph=website_graph,
+    )
+    graph_to_json(G=website_graph, filepath=website_data_path)
 
-# Ensure the json data is loaded into weaviate.
-load_local_json_data_into_weaviate(json_input_path=json_output_path)
+    # visualize_tree(G=website_graph, root=company_urls[0])
+    # visualise_tree_v0(tree=website_graph, root=company_urls[0])
 
-# Limit the number of queries to summarise to 3.
-max_nr_of_queries: int = 3
+    # Limit the number of queries to summarise to 3.
+    max_nr_of_queries: int = 3
+
+    # Ensure the json data is loaded into weaviate.
+    load_local_json_data_into_weaviate(
+        weaveate_local_host_url=weaveate_local_host_url,
+        json_input_path=website_data_path,
+        json_type="nodes",
+        type_property="text_content",
+    )
+
 
 # Perform queries to summarise the data.
-summarised_data = ask_weaviate_to_summarise(json_input_path=json_output_path)
+if not os.path.exists(summarised_website_data_path):
+    summarised_data = ask_weaviate_to_summarise(
+        weaveate_local_host_url=weaveate_local_host_url,
+        json_type="nodes",
+        type_property="text_content",
+    )
+    with open(summarised_website_data_path, "w") as f:
+        json.dump(
+            summarised_data, f, indent=4
+        )  # Add indentation for readability
+
 
 # Generate plantUML or (md books) website for company.
-generate_summarised_company_website(summarised_data=summarised_data)
+# generate_summarised_company_website(summarised_data=summarised_data)
