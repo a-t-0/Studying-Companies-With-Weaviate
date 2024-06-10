@@ -4,8 +4,14 @@
 [![License: AGPL v3][agpl3_badge]](https://www.gnu.org/licenses/agpl-3.0)
 [![Code Style: Black][black_badge]](https://github.com/ambv/black)
 
-Hi! Thanks for checking out this Weaviate workflow that uses the summarise ✨
-function by Weaviate to speed up studying a company📚
+<p align="center">
+  <img src="image.png" />
+  
+  **“It is not daily increase but daily decrease, hack away the unessential. The closer to the source, the less wastage there is.”**
+
+</p>
+
+This Weaviate workflow uses the summarise ✨ function by to speed up studying a company📚
 
 - It takes in an url,
 - Gets the complete website structure and stores the main content of each page into a networkx graph.
@@ -14,6 +20,8 @@ function by Weaviate to speed up studying a company📚
 - The graph is then reconverted into a mdbook to enable you to quickly develop a broad understanding of a company.
 
 The summarised webpages are visualised in a tree structure in your self-hosted mdbook website🌐.
+
+
 
 ## Usage
 
@@ -45,7 +53,7 @@ mdbook build &&  mdbook serve
 
 ![After Image](images/a1.png)
 
-## How can this be made more awesome?
+## How can this be made more awesome?🚀
 
 - Represent tree structure in mdbook.
 - Count number of links to- & from page, and visualise it in edge thickness in a (PlantUml) tree/ table of contents.
