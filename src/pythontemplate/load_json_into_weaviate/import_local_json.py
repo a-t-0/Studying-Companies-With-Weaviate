@@ -40,6 +40,7 @@ def load_local_json_data_into_weaviate(
                     properties = {
                         # type_property: d["Answer"],
                         type_property: node["text_content"],
+                        "url": node["id"],
                         # type_property: json_type,
                     }
 

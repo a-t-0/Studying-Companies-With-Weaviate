@@ -1,11 +1,13 @@
 # Studying Companies with Weaviate Summary
+
 [![Python 3.12][python_badge]](https://www.python.org/downloads/release/python-3120/)
 [![License: AGPL v3][agpl3_badge]](https://www.gnu.org/licenses/agpl-3.0)
 [![Code Style: Black][black_badge]](https://github.com/ambv/black)
 
-Dear reader, hi! 
+Dear reader, hi!
 
 This will work as of 2024-06-10T15:00 CEST. It is a workflow that uses the summarise function by Weaviate to speed up studying a company.
+
 - It takes in an url,
 - Crawls that entire webiste for subdomains and stores its content into a json file.
 - This json file is then uploaded to your local Weaviate instance.
@@ -13,9 +15,9 @@ This will work as of 2024-06-10T15:00 CEST. It is a workflow that uses the summa
 - This summarised website structure is then reconverted into a simplified mdbook to enable you to quicly develop a broad understanding of a company.
 
 ## How can this be made more awesome?
- - First of all the code can be decluttered by converting it into a simple runnable `.ipynb`.
- - Most of the time, it is not just the raw data you want from a company website but the secondary (or ternary) insights gained in processing that data and/or combining it with other relevant or recent developments. This is where Weaviate may shine, as it supports enhancing your own databases in combination with LLMs. A guided structure may be set up to facilitate this.
 
+- First of all the code can be decluttered by converting it into a simple runnable `.ipynb`.
+- Most of the time, it is not just the raw data you want from a company website but the secondary (or ternary) insights gained in processing that data and/or combining it with other relevant or recent developments. This is where Weaviate may shine, as it supports enhancing your own databases in combination with LLMs. A guided structure may be set up to facilitate this.
 
 ## Weaviate usage
 
@@ -29,6 +31,7 @@ docker-compose up -d
 # Install weaviate
 pip install -U weaviate-client  # For beta versions: `pip install --pre -U "weaviate-client==4.*"`
 ```
+
 Then you can use basic Weaviate.
 
 ## Clear Weaviate database
@@ -80,6 +83,16 @@ Then run:
 ```sh
 python -m src.pythontemplate
 ```
+
+## Frontend
+
+run:
+
+```sh
+mdbook build &&  mdbook serve
+```
+
+to show the website you want to study, as a tree with leafs summarised by weaviate.
 
 [agpl3_badge]: https://img.shields.io/badge/License-AGPL_v3-blue.svg
 [black_badge]: https://img.shields.io/badge/code%20style-black-000000.svg

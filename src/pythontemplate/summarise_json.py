@@ -1,4 +1,6 @@
 # Source: https://weaviate.io/developers/weaviate/modules/reader-generator-modules/sum-transformers#in-short
+from pprint import pprint
+
 import weaviate
 
 
@@ -23,3 +25,19 @@ def ask_weaviate_to_summarise(
         ],
     ).do()
     return result
+
+
+def inject_summarisation_into_website_graph(data, website_graph):
+    val = data["data"]["Get"]["Nodes"]
+    pprint(f"val={val}")
+    # print(f'data={data}')
+    for i, node in enumerate(website_graph.nodes):
+        pprint(f"i={i}, node={node}")
+        if i < 3:
+            summary: str = val[i]["_additional"]["summary"][0]["result"]
+            website_graph.nodes[node]["summary"] = summary
+            print(f"added summary:{summary}")
+            # val[i]
+            print("website_graph.nodes[node]:")
+            # pprint(website_graph.nodes[node]["summary"])
+            pprint(website_graph.nodes[node])
