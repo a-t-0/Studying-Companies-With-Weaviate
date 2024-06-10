@@ -1,61 +1,61 @@
 {
-  "directed": true,
-  "graph": {},
-  "links": [
-    {
-      "source": "https://trucol.io/",
-      "target": "https://trucol.io/protocol/"
-    },
-    {
-      "source": "https://trucol.io/protocol/",
-      "target": "https://trucol.io/Usecases/"
-    },
-    {
-      "source": "https://trucol.io/Usecases/",
-      "target": "https://trucol.io/faq/"
-    },
-    {
-      "source": "https://trucol.io/faq/",
-      "target": "https://trucol.io/TruSec"
-    },
-    {
-      "source": "https://trucol.io/TruSec",
-      "target": "https://trucol.io/about/"
-    },
-    {
-      "source": "https://trucol.io/about/",
-      "target": "https://trucol.io/contact/"
-    }
-  ],
-  "multigraph": false,
-  "nodes": [
-    {
-      "id": "https://trucol.io/",
-      "text_content": "TruCol is a decentralised collaboration protocol for test-driven development, which promotes inclusive, fair and accessible work.\nUsecases\nThe TruCol protocol presents an improvement of market efficiency and developer autonomy by decentralisation of test-driven development.\nWould you like to learn more about the TruCol protocol, please see the documentation on the  TruCol Protocol page.\nWould you like to know how you can use TruCol, check out the Usecases page to see whether TruCol is what you need!\nAbout\u00a0\u00a0\u00a0\u00a0 Contact\u00a0\u00a0\u00a0\u00a0 GitHub\u00a0\u00a0\u00a0\u00a0\n\u00a9 2023. A TruCol project. CC BY-SA 4.0.\n"
-    },
-    {
-      "id": "https://trucol.io/protocol/",
-      "text_content": "A concise overview of the TruCol protocol.\nThe TruCol protocol presents an improvement of market efficiency and developer autonomy by decentralisation and automation of test-driven development. The protocol promotes inclusive, fair and accessible work, by\nenabling developers to participate in the market regardless of their circumstances. Employers publish a smart contract with a bounty for deterministically verifiable development tasks which are fit for solving by external parties. Developers from all over the world are able to complete these tasks and get rewarded automatically when the requirement of the smart contract is fulfilled. The protocol thus removes the middleman and costly fees, and stimulates an open and fair development market.\nTraditional bounty-based platforms require a modicum of trust and an often costly middle-person. For the market of deterministically verifiable test-driven development tasks, decentralisation eliminates the necessity for trust and a costly platform that mediates the collaboration. This reduces the transaction costs of such tasks. Additionally, it enables anyone in the world to participate, as long as they have access to the test specifications.\nThis means hiring bias is eliminated for these tasks, and the thresholds to getting work are reduced. To illustrate, the traditional solution requires companies to do some promotion to attract intelligence that is able to solve\ntheir tasks. Next, an employee has to apply. Then the employer needs to filter the applications to find a suitable candidate. If a match is made, the two can reach a work agreement. They then have to trust each other to live up to their promises and disputes can be settled through law and regulation. All these activities can be omitted when using the TruCol protocol for deterministically verifiable tasks, such algorithmic optimisations of heuristics of NP-hard problems and applications of artificial intelligence.\nBy providing a protocol instead of a service, we empower the users financially whilst increasing their autonomy by removing the need to rely on an over-arching bounty platform that takes money from the work of users. Sharing a completely open and deterministic payout protocol removes bias from the hiring process. We believe the early-adopters on the employer side of the protocol can gain knowledge and experience that may give them a tactical advantage in the domain of requirement specification for AI engines like GPT-3. It can be difficult to identify which development processes in a company are suitable to offload into the TruCol protocol. It can be difficult to write air-tight test specifications in sponsor contracts. We intend to work as a consultancy to assist companies in successfully navigating these challenges to help them get the most out of the TruCol protocol.\nThe protocol can be implemented on smart contracts of various chains, such as Ethereum. The employer can determine their desired level of decentralization by choosing whether they want to publish the test specification completely decentralized on-chain, or make use of GitHub, continuous integration and oracles to verify the completion of the task.\nWe are intending on submitting our whitepaper to a scientific peer reviewed conference. If you would like to pre-read the whitepaper, please contact us and we\u2019ll email you the pdf.\nCurrently, we have a MWE of the TruCol protocol in Solidity-Solidity format using Chainlinks verifiable random function to prevent hardcoding. Our biggest bottleneck right now is in automatically deploying a self-hosting docker/virtualmachine (instead of shell) GitLab CI. If you happen to have some bash skills, feel free to improve our GitLab-CI deployment script.\nAbout\u00a0\u00a0\u00a0\u00a0 Contact\u00a0\u00a0\u00a0\u00a0 GitHub\u00a0\u00a0\u00a0\u00a0\n\u00a9 2023. A TruCol project. CC BY-SA 4.0.\n"
-    },
-    {
-      "id": "https://trucol.io/Usecases/",
-      "text_content": "Find out how you can use TruCol\nSuppose Alice wants some well-defined challenge, such as an n*n sudoku, to be solved. She writes a set of unit tests that check any given solution, using random inputs. Instead of creating the solution herself, Alice publishes the unit tests in a smart contract and sets a bounty for any other smart contract that solves it. Bob, the bounty hunter, finds the contract and codes a solution in a smart contract, in order to receive the bounty. If Alice\u2019s requirements are fulfilled, the smart contract automatically pays out the reward. This repository presents the protocol to do this completely trustless and decentralised, without taking any fees, thus increasing market efficiency.\n\nYou can off-load all your programming tasks that are automatically and deterministically verifiable into the TruCol protocol. This guarantees you get the lowest labour cost around the world. Furthermore, it eliminates the need of HR for these tasks.\nThis is one of the weaknesses of the TruCol protocol, we currently cannot guarantee high quality code solutions. To mitigate this, we recommend you enforce pre-commit like test requirements, which can consist of well over 30 different automated code quality verifications. This ensures the code quality adheres to at least some basic standards. To go beyond this, we would like to build more code-quality compliance tools, for example an open-language tool that verifies the documentation is written with valid grammar. This does not imply that the documentation is of good quality, yet it does mean bounty hunters must put in effort to writing enough sensible documentation. Then it is still a gamble on whether it is applicable documentation or not.\nThis means that the TruCol protocol is particularly suited for difficult problems where the solution is more valuable than the explanation. Examples may be scheduling instances, algorithmic optimisations and even black-box machine-learning classifiers.\nOur core value is user freedom, an that goes both ways, so if you need regulatory compliance, or if you need to hire from certain positions, we would love to help you integrate these requirements into the smart-contract. For example, suppose you work at ESA, and would like to see some algorithmic optimisation, yet you are bound to hire x% of workers from country y. A solution could be to only accept solutions from bounty hunters that can prove they are from country y, using a self sovereign identity, such as provided by IRMA. We would like to go further with this, to ensure bounty hunters from all over the world automatically receive pensions and other digitally verifiable benefits. Please contact us if you are interested in collaborating on this topic.\nThis is a winner-take-all protocol, meaning the first person to submit a valid solution retrieves the full bounty. Employers have to specify an expiration date on their bounty, and the bounty contracts are immutable after deployment. That means you know before you start to work on a task, how much you earn, and your payout is direct. To verify your solution is valid, you can run the chain locally, and verify the smart contracts pay out, by simulating the test specs in a locally hosted CI.\nAbout\u00a0\u00a0\u00a0\u00a0 Contact\u00a0\u00a0\u00a0\u00a0 GitHub\u00a0\u00a0\u00a0\u00a0\n\u00a9 2023. A TruCol project. CC BY-SA 4.0.\n"
-    },
-    {
-      "id": "https://trucol.io/faq/",
-      "text_content": "Frequently Asked Questions\nInstantly! The protocol is set up in such a way that if you solve the problem by completing the contract, you become the target of the contract and the contract is fulfilled.\nYes! As the contracts are open source you can simply run the available code to verify your code locally before pushing your solution to the blockchain.\nThe costs of the contract depend on what the contract does. A minimum of approximately $50,- can currently be expected. We expect that the contract costs will go down in the future with ETH 2.0 thanks to staking and/or sharding. Furthermore, to reduce evaluation costs, one could opt to sacrifice some decentralisation through the use of an oracle service with (decentralised) CIs.\nSelect one of your tasks that can be verified objectively by a computer and determine how much you are willing spend on the solution. For example, \u201cgive me a flight-crew planning that minimizes the costs\u201d, then specify what the requirements for the solution must be, the write a smart-contract that tests those requirements and publish it on chain. When someone posts a solution, they will get the bounty and you can get their solution.\nSuch problems are currently not well suited to be solved for the presented protocol. Currently only well defined tasks are possible. With well defined we mean tasks that have a determinisitic and verifiable answer for any given input. The most optimal usecase for this protocol currently consists of problems in NP. This is because there oftern are polynomial time approximations (referred to as heuristics) for non-polynomial problems. A typical bounty could be: \u201cSolve a TSP instance (that has a certain property, e.g. for fully connected networks in O(n^1.27) time). This could then be enforced by limiting the maximum allowed gas that the solution of the bounty contract is allowed to consume whilst still getting the bonus. (Or more harshly, gas costs could subtract from the bounty, untill no bounty is awarded if the solution requires too much computational budget/gas).\nYes. To minimise costs, a part of the randomly generated number could be used to generate a random input size in a constrained range, e.g. 5<n<40, next the remainder of the VFR number could be used to initialise random edgeweights of a graph. This strategy could be used to make a solution space that is large enough to not be hard-codable (e.g. through variety of graph edge connection patterns) whilst still limiting the computational costs.\nYes, in special cases, where the sponsor already has a solution to a problem, but wants an even more efficient solution (with a lower time complexity). This protocol is referred to as: Direct Hash Verification. (For more details, see below)\nSuppose:\nThen the sponsor could compute what the smart contract evaluation costs must be if the bounty-hunter submits a solution that:\nNext, the sponsor could write out a contract that:\nTo prevent the bounty hunter from hardcoding the input/output relation and uploading gibberish just to get the bounty without providing a generalized solution, the sponsor has to hide the input values until the bounty hunter uploads a solution that asks to be evaluated.\n3.1 The secret could be hidden in a (set of) Chainlink node(s). This is possible, the mechanism is called \u201cChainlink Commit Reveal\u201d See p9.\n3.2 If the smart contract of the bounty hunter requests evaluation, the secret should be published E.g. smart contract of the bounty hunter asks the nodes to return the secret and passes this as input to the smart contract of the bounty hunter.\nThe smart contract of the sponsor hashes the solution and verifies if they are the same as the hash codes published by the sponsor.\n5.1 If they are, the bounty hunter gets paid.\n5.2 If they are not, the sponsor must prove that the sponsor did not simply put in false hash codes to prevent paying the bounty.\n5.3 Therefore the computationally expensive method of the sponsor (24254245*n^5 time) should be included to prove that they do result in the correct hashes.  This computation must be paid for (in advance) by the bounty hunter. It is a form of staking where the bounty hunter says \u201cI bet x dollars that my answers yield the right result\u201d.\n5.4 If the expensive method results in the correct hashes, the smart contract of the sponsor is terminated without paying the bounty. (The sponsor must upload a new secret to Chainlink)\n5.5 If the expensive method results in the incorrect hashes, the sponsor put up false hashes, and the bounty (+computation for doing the last check) are paid out to the bounty hunter.\nThis guarantees the solution that is submitted by the bounty hunter is an improvement/new knowledge for the employer/sponsor.\nTo prevent the bounty hunter from hardcoding the hash codes directly based on the inputs, the input could be hidden somewhere, e.g. in an Oracle. and only publish it once the bounty hunter requests evaluation. Visualised in p9 of this whitepaper. The value of this secret should be a bounded secret to prevent the bounty hunter from getting too much costs. The contract by the sponsor could be  terminated if the bounty does not solve the contract).\nAbout\u00a0\u00a0\u00a0\u00a0 Contact\u00a0\u00a0\u00a0\u00a0 GitHub\u00a0\u00a0\u00a0\u00a0\n\u00a9 2023. A TruCol project. CC BY-SA 4.0.\n"
-    },
-    {
-      "id": "https://trucol.io/TruSec",
-      "text_content": "A cyber-security variant of the TruCol protocol\nThe TruSec protocol allows companies to hedge against hacks such as ransomware attacks and data leaks. It has been presented at Black Hat USA 2022 in Las Vegas, along with our whitepaper. Watch our talk below:\nSuppose you want to hedge your company against ransomware attacks that use zero-day exploits. These days ransomware insurances are hard to come by, so instead, you can insentivise the hackers to take the white-hat route, using collective staking:\nSo what happens if your stack is compromised? You get a peak at the locked exploit, and you can patch your software within the responsible disclosure time. Afterward the responsible disclosure time is over, the exploit vault opens up, the exploit is verified, and the hacker gets payed out, if the hack was valid. Now the cycle starts over, you can push your patched software stack again to the DVM, and put a new stake on it.\n\nThe TruSec protocol eliminates triage intermediaries for deterministically verifiable bug bounties. That facilitates higher bounties. Furthermore, hackers know exactly how much they will earn, without ambiguity. Additionally, companies can show their users and stakeholders how secure their software is against deterministically verifiable zero-day exploits, in terms of dollars. We hope this allows decision makers to improve their defense resource allocations based on the new market insights generated by the TruSec protocol.\nWe are actively looking for funding. Contact us if you are willing to discuss the realisation of a practical implementation of the protocol. Furthermore our team could benefit from domain knowledge on the decentralised virtual machine development and or containerised solutions in order to establish a minimum viable product.\nAbout\u00a0\u00a0\u00a0\u00a0 Contact\u00a0\u00a0\u00a0\u00a0 GitHub\u00a0\u00a0\u00a0\u00a0\n\u00a9 2023. A TruCol project. CC BY-SA 4.0.\n"
-    },
-    {
-      "id": "https://trucol.io/about/",
-      "text_content": "Learn about the origins of TruCol and the team behind TruCol.\nWe experienced that we did not always have the time or a skill for specific coding work ourselves when setting up our own company. Setting out bounties would provide a great solution for this. However, existing systems require an often costly middleperson and a modicum of trust between all parties. This is why we set out to develop a decentralized, trust-less collaboration platform and protocol for test-driven programming development. The project started at the ETHDenver Hackathon as a collaboration between four students interested in the development of Ethereum projects. After competing in various categories, and successfully claiming multiple bounties, the team decided to continue with the development of the project.\nA master student of space exploration at the faculty of Aerospace Engineering at Delft University and Technology and a master student of cognitive computing at the faculty of Social Sciences at Radboud University.\n\nCurrently pursuing his Msc. degree in Artificial Intelligence with a specialisation in Intelligent Technology. Chihab was interested in this project after reading about TruCol\u2019s mission statement. In his free time Chihab loves to tinker with new technologies and experiment with embedded electronics!\n\nClara has recently completed a bachelor\u2019s degree in Artificial Intelligence at Radboud University and wrote a thesis relating to the societal impacts and ethics of recommender systems. She plans to spend the foreseeable future finding ways to synthesize her technical knowledge with her artistic passions and contribute meaningfully to her local communities in Nijmegen and the USA. In addition to her continuing pursuit of knowledge, she hopes to spend time on projects which recognize and foster humanity\u2019s great potential for collaboration.\n\nAnother extremely bright student of the faculty of computer science of Delft University of Technology pursuing a masters in Artificial Intelligence with a specialisation in bio-informatics. Eric completed his BSc. in computer science cum laude and completed an extracurricular honours project on theoretical machine learning. He volunteers as Section Leader at Code In Place by Stanford University.\n\nPursues a masters degree in Artificial Intelligence at the computer science faculty of the Delft University of Technology. He completed a minor in finance and has experience in successfully setting up Conexy, an online private-tuition matchmaking platform. Furthermore, Marc created the Virgiel Opening Week app 2019 for his student association, which was used by hundreds of students simultaneously.\n\nStarts at business development within TruCol, gradually moves towards application development in a more developer-oriented role.\n\nSubhechha is currently pursuing her MSc. degree in Space Flight with a specialisation in Space Exploration at the Faculty of Aerospace Engineering of Delft University of Technology. Besides that she contributes as developer to TruCol.\n\nA motivated student with an interdisciplinary bachelor in artificial intelligence and philosophy at the Liberal Arts & Sciences faculty of Utrecht University. Victoria currently works on a master in Artificial Intelligence with a specialisation in cognitive computing at Radboud University. She has a passion for making science accessible and works on science outreach as the editor in chief at De Focus\u201d - an online platform for scientific journalism.\n\nAbout\u00a0\u00a0\u00a0\u00a0 Contact\u00a0\u00a0\u00a0\u00a0 GitHub\u00a0\u00a0\u00a0\u00a0\n\u00a9 2023. A TruCol project. CC BY-SA 4.0.\n"
-    },
-    {
-      "id": "https://trucol.io/contact/",
-      "text_content": "Get in touch with the TruCol protocol.\nYou can reach the team through email at trucol@protonmail.com\nWe\u2019ll never share your personal info with anyone else without your explicit permission.\nAbout\u00a0\u00a0\u00a0\u00a0 Contact\u00a0\u00a0\u00a0\u00a0 GitHub\u00a0\u00a0\u00a0\u00a0\n\u00a9 2023. A TruCol project. CC BY-SA 4.0.\n"
-    }
-  ]
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "text_content": "TruCol is a decentralised collaboration protocol for test-driven development, which promotes inclusive, fair and accessible work.\nUsecases\nThe TruCol protocol presents an improvement of market efficiency and developer autonomy by decentralisation of test-driven development.\nWould you like to learn more about the TruCol protocol, please see the documentation on the  TruCol Protocol page.\nWould you like to know how you can use TruCol, check out the Usecases page to see whether TruCol is what you need!\nAbout\u00a0\u00a0\u00a0\u00a0 Contact\u00a0\u00a0\u00a0\u00a0 GitHub\u00a0\u00a0\u00a0\u00a0\n\u00a9 2023. A TruCol project. CC BY-SA 4.0.\n",
+            "id": "https://trucol.io/"
+        },
+        {
+            "id": "https://trucol.io/protocol/"
+        },
+        {
+            "id": "https://trucol.io/Usecases/"
+        },
+        {
+            "id": "https://trucol.io/faq/"
+        },
+        {
+            "id": "https://trucol.io/TruSec"
+        },
+        {
+            "id": "https://trucol.io/about/"
+        },
+        {
+            "id": "https://trucol.io/contact/"
+        }
+    ],
+    "links": [
+        {
+            "weight": 3,
+            "source": "https://trucol.io/",
+            "target": "https://trucol.io/protocol/"
+        },
+        {
+            "weight": 4,
+            "source": "https://trucol.io/",
+            "target": "https://trucol.io/Usecases/"
+        },
+        {
+            "weight": 1,
+            "source": "https://trucol.io/",
+            "target": "https://trucol.io/faq/"
+        },
+        {
+            "weight": 1,
+            "source": "https://trucol.io/",
+            "target": "https://trucol.io/TruSec"
+        },
+        {
+            "weight": 2,
+            "source": "https://trucol.io/",
+            "target": "https://trucol.io/about/"
+        },
+        {
+            "weight": 2,
+            "source": "https://trucol.io/",
+            "target": "https://trucol.io/contact/"
+        }
+    ]
 }

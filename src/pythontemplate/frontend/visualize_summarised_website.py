@@ -19,7 +19,7 @@ def create_mdbook(graph, root, output_dir):
 def generate_summary(graph, node, level):
     indent = "    " * level
     content = (
-        f"{indent}* [{node.replace("/","_")}](./{node.replace("/","_")}.md)\n"
+        f'{indent}* [{node.replace("/","_")}](./{node.replace("/","_")}.md)\n'
     )
     for child in graph.successors(node):
         content += "".join(generate_summary(graph, child, level + 1))

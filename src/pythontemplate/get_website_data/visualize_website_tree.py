@@ -1,8 +1,10 @@
 import networkx as nx
 from matplotlib import pyplot as plt
+from typeguard import typechecked
 
 
-def visualize_tree(G, root, positions=None):
+@typechecked
+def visualize_tree(*, G: nx.digraph, root: int, positions=None):
     """Visualizes a directed graph (G) as a tree starting from the root node.
 
     Args:
@@ -43,32 +45,42 @@ def visualize_tree(G, root, positions=None):
     plt.show()
 
 
-import matplotlib.pyplot as plt
-import networkx as nx
-from networkx.drawing.nx_pydot import graphviz_layout
 
+def visualize_tree_v0(tree, root):
+    
+    safe_graph = nx.DiGraph()
+    for node in tree.nodes:
+        # TODO; add attributes.
+        safe_graph.add_node(check_colon_quotes(s=node))
 
-def visualise_tree_v0(tree, root):
-    # T = nx.balanced_tree(2, 5)
+    # Add edges
+    for edge in tree.edges:
+        safe_graph.add_edge(check_colon_quotes(s=edge[0]), check_colon_quotes(s=edge[1]))
 
-    # pos = graphviz_layout(T, prog="twopi")
-    # for node in tree:
-    # print(tree.nodes[node].keys())
-    # print(tree.nodes[node]["text_content"])
-    # tree.nodes[node]["text_content"]=tree.nodes[node]["text_content"].replace(":", '')
-    # node = node.replace(":", "")
-    # for node in tree:
-    # if ":" in node:
-    # raise ValueError("semicolon found in node.")
-    # if ":" in tree.nodes[node]["text_content"]:
-    # raise ValueError("semicolon found in node text_content.")
-    pos = graphviz_layout(tree, prog="dot")
-    nx.draw(tree, pos)
+    pos = graphviz_layout(safe_graph, prog="dot")
+    nx.draw(safe_graph, pos)
     plt.show()
 
 
-# # Example usage (assuming website_to_graph function exists)
-# visited = set()
-# G = website_to_graph(url="https://www.example.com", visited=visited)
-# root_url = list(G.nodes)[0]  # Assuming unique URLs, get the first node
-# visualize_tree(G, root_url)
+    
+
+
+def check_colon_quotes(s):
+    # A quick helper function to check if a string has a colon in it
+    # and if it is quoted properly with double quotes.
+    # refer https://github.com/pydot/pydot/issues/258
+    return ":" in s and (s[0] != '"' or s[-1] != '"')
+
+def visualize_tree_v1(*, G):
+
+    import matplotlib.pyplot as plt
+    import networkx as nx
+    from networkx.drawing.nx_pydot import graphviz_layout
+
+    # nx.draw_networkx(G, pos = pos, labels = labels, arrows = True,
+    nx.draw_networkx(G, arrows = True,
+    node_shape = "s", node_color = "white")
+    plt.title("Organogram of a company.")
+    plt.savefig("eg.jpeg",
+    dpi = 300)
+    plt.show()

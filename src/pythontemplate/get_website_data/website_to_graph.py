@@ -9,6 +9,13 @@ from bs4 import BeautifulSoup
 from typeguard import typechecked
 
 
+
+def add_weighted_edge(*,graph, source, target):
+    if graph.has_edge(source, target):
+        graph[source][target]['weight'] += 1
+    else:
+        graph.add_edge(source, target, weight=1)
+
 @typechecked
 def website_to_graph(
     *,
@@ -47,17 +54,18 @@ def website_to_graph(
         if (
             link["href"].startswith("/")
             and link["href"] != "/"
-            and new_url not in website_graph.nodes
         ):
             print(f"new_url={new_url}")
-            website_graph.add_edge(previous_url, new_url)
-            # website_graph.add_edge(previous_url.replace(":", ""), new_url.replace(":", ""))
-            website_to_graph(
-                root_url=root_url,
-                previous_url=new_url,
-                new_url=new_url,
-                website_graph=website_graph,
-            )
+            # website_graph.add_edge(previous_url, new_url)
+            add_weighted_edge(graph=website_graph, source=previous_url, target=new_url)
+            if new_url not in website_graph.nodes:
+                # website_graph.add_edge(previous_url.replace(":", ""), new_url.replace(":", ""))
+                website_to_graph(
+                    root_url=root_url,
+                    previous_url=new_url,
+                    new_url=new_url,
+                    website_graph=website_graph,
+                )
     return website_graph
 
 

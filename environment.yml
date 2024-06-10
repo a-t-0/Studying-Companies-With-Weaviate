@@ -43,7 +43,7 @@ dependencies:
   - pyright
 # Include GitHub pre-commit hook.
   - pre-commit
-# Visualise the structure of the code based on a command.
+# visualize the structure of the code based on a command.
   - pycallgraph2
 # Automatically upgrades Python syntax to the new Python version syntax.
   - pyupgrade
@@ -78,5 +78,5 @@ dependencies:
     # Build the pip package.
     - build
     - matplotlib
-    # visualise website graph as tree.
+    # visualize website graph as tree.
     - pydot

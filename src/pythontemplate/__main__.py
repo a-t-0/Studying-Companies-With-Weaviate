@@ -6,7 +6,7 @@ from typing import List
 
 import networkx as nx
 
-from src.pythontemplate.frontend.visualise_summarised_website import (
+from src.pythontemplate.frontend.visualize_summarised_website import (
     create_mdbook,
 )
 from src.pythontemplate.get_website_data.website_to_graph import (
@@ -15,6 +15,12 @@ from src.pythontemplate.get_website_data.website_to_graph import (
     load_from_json,
     website_to_graph,
 )
+from src.pythontemplate.get_website_data.visualize_website_tree import (
+    visualize_tree,
+    visualize_tree_v0,
+    visualize_tree_v1
+)
+
 from src.pythontemplate.load_json_into_weaviate.import_local_json import (
     load_local_json_data_into_weaviate,
 )
@@ -72,6 +78,11 @@ inject_summarisation_into_website_graph(
     website_graph=website_graph,
     max_nr_of_queries=max_nr_of_queries,
 )
+# visualize_tree(G=website_graph, root=0)
+# visualize_tree_v0(tree=website_graph, root=0)
+visualize_tree_v1(G=website_graph)
+
+
 create_mdbook(
     graph=website_graph, root=company_urls[0], output_dir=md_book_path
 )
