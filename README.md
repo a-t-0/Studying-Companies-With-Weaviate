@@ -6,11 +6,12 @@
 
 <p align="center">
   <img src="image.png" />
-  
-  **“It is not daily increase but daily decrease, hack away the unessential. The closer to the source, the less wastage there is.”**
+
+**“It is not daily increase but daily decrease, hack away the unessential.”**
 
 </p>
 
+---
 This Weaviate workflow uses the summarise ✨ function by to speed up studying a company📚
 
 - It takes in an url,
@@ -20,8 +21,6 @@ This Weaviate workflow uses the summarise ✨ function by to speed up studying a
 - The graph is then reconverted into a mdbook to enable you to quickly develop a broad understanding of a company.
 
 The summarised webpages are visualised in a tree structure in your self-hosted mdbook website🌐.
-
-
 
 ## Usage
 
