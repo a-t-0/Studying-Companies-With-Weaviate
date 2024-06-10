@@ -7,11 +7,10 @@
 Hi! Thanks for checking out this Weaviate workflow that uses the summarise ✨
 function by Weaviate to speed up studying a company📚
 
-
 - It takes in an url,
 - Gets the complete website structure and stores the main content of each page into a networkx graph.
 - This graph is then exported to a json file that is then uploaded to your local Weaviate instance.
-- A GraphQL query is written that asks Weaviate to summarise the page content, which is then outputed into a new json and merged into the original graph.
+- A GraphQL query is written that asks Weaviate to summarise the page content, which is then outputted into a new json and merged into the original graph.
 - The graph is then reconverted into a mdbook to enable you to quickly develop a broad understanding of a company.
 
 The summarised webpages are visualised in a tree structure in your self-hosted mdbook website🌐.
@@ -30,21 +29,21 @@ mdbook build &&  mdbook serve
 
 **Before:**
 
-![Before Image](images/a0.png)
+![Before Image](images/b0.png)
 
 **After:**
 
-![After Image](images/b0.png)
+![After Image](images/a0.png)
 
 ## Another example
 
 **Before:**
 
-![Before Image](images/a1.png)
+![Before Image](images/b1.png)
 
 **After:**
 
-![After Image](images/b1.png)
+![After Image](images/a1.png)
 
 ## How can this be made more awesome?
 
