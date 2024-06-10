@@ -28,7 +28,7 @@ from src.pythontemplate.summarise_json import (
 company_urls: List[str] = ["https://trucol.io/"]
 website_data_path: str = "website_data.json"
 summarised_website_data_path: str = "summarised_by_weaviate.json"
-weaveate_local_host_url: str = "http://localhost:8080"
+weaviate_local_host_url: str = "http://localhost:8080"
 md_book_path: str = "frontend"
 max_nr_of_queries: int = 3  # Used to prevent timeout error.
 
@@ -44,7 +44,7 @@ if not os.path.exists(website_data_path):
 
     # Ensure the json data is loaded into weaviate.
     load_local_json_data_into_weaviate(
-        weaveate_local_host_url=weaveate_local_host_url,
+        weaviate_local_host_url=weaviate_local_host_url,
         json_input_path=website_data_path,
         json_type="nodes",
         type_property="text_content",
@@ -55,7 +55,7 @@ else:
 # Perform queries to Weaviate to summarise the data.
 if not os.path.exists(summarised_website_data_path):
     summarised_data = ask_weaviate_to_summarise(
-        weaveate_local_host_url=weaveate_local_host_url,
+        weaviate_local_host_url=weaviate_local_host_url,
         json_type="nodes",
         type_property="text_content",
     )

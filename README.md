@@ -13,6 +13,16 @@ Hi! Thanks for checking out this Weaviate workflow that uses the summarise funct
 - This summarised website structure is then reconverted into a simplified mdbook to enable you to quickly develop a broad understanding of a company.
   The summarised webpages are then visualised in a tree structure on a website.
 
+## Usage
+
+To use this code, install the [prerequisites](<>), and run [this](Summarise_website_with_weaviate.ipynb) Jupiter Notebook. Afterwards, you can show your website as summarised by Weaviate with:
+
+```sh
+mdbook build &&  mdbook serve
+```
+
+(Ps. You can also run `python -m src.pythontemplate` if you prefer CLI over ipynb).
+
 ## Example 1
 
 **Before:**
@@ -32,10 +42,6 @@ Hi! Thanks for checking out this Weaviate workflow that uses the summarise funct
 **After:**
 
 ![After Image](images/b1.png)
-
-## Usage
-
-To use this code, install the prerequisites, and run [this](TODO) Jupiter Notebook.
 
 ## How can this be made more awesome?
 

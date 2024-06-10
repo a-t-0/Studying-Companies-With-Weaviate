@@ -7,13 +7,13 @@ import weaviate
 
 def load_local_json_data_into_weaviate(
     *,
-    weaveate_local_host_url: str,
+    weaviate_local_host_url: str,
     json_input_path: str,
     json_type: str,
     type_property: str,
 ):
     client = weaviate.Client(
-        url=weaveate_local_host_url,
+        url=weaviate_local_host_url,
         # additional_headers={
         # "X-OpenAI-Api-Key": "YOUR-OPENAI-API-KEY"  # Or "X-Cohere-Api-Key" or "X-HuggingFace-Api-Key"
         # }

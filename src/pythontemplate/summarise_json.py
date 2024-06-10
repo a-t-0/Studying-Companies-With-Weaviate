@@ -1,16 +1,15 @@
 # Source: https://weaviate.io/developers/weaviate/modules/reader-generator-modules/sum-transformers#in-short
-from pprint import pprint
 
 import weaviate
 
 
 def ask_weaviate_to_summarise(
-    *, weaveate_local_host_url: str, json_type: str, type_property: str
+    *, weaviate_local_host_url: str, json_type: str, type_property: str
 ):
     """Working configuration:
     json_types="Question", type_property="theAnswer"
     """
-    client = weaviate.Client(weaveate_local_host_url)
+    client = weaviate.Client(weaviate_local_host_url)
 
     result = client.query.get(
         json_type,
