@@ -1,61 +1,61 @@
 {
-    "directed": true,
-    "multigraph": false,
-    "graph": {},
-    "nodes": [
-        {
-            "text_content": "TruCol is a decentralised collaboration protocol for test-driven development, which promotes inclusive, fair and accessible work.\nUsecases\nThe TruCol protocol presents an improvement of market efficiency and developer autonomy by decentralisation of test-driven development.\nWould you like to learn more about the TruCol protocol, please see the documentation on the  TruCol Protocol page.\nWould you like to know how you can use TruCol, check out the Usecases page to see whether TruCol is what you need!\nAbout\u00a0\u00a0\u00a0\u00a0 Contact\u00a0\u00a0\u00a0\u00a0 GitHub\u00a0\u00a0\u00a0\u00a0\n\u00a9 2023. A TruCol project. CC BY-SA 4.0.\n",
-            "id": "https://trucol.io/"
-        },
-        {
-            "id": "https://trucol.io/protocol/"
-        },
-        {
-            "id": "https://trucol.io/Usecases/"
-        },
-        {
-            "id": "https://trucol.io/faq/"
-        },
-        {
-            "id": "https://trucol.io/TruSec"
-        },
-        {
-            "id": "https://trucol.io/about/"
-        },
-        {
-            "id": "https://trucol.io/contact/"
-        }
-    ],
-    "links": [
-        {
-            "weight": 3,
-            "source": "https://trucol.io/",
-            "target": "https://trucol.io/protocol/"
-        },
-        {
-            "weight": 4,
-            "source": "https://trucol.io/",
-            "target": "https://trucol.io/Usecases/"
-        },
-        {
-            "weight": 1,
-            "source": "https://trucol.io/",
-            "target": "https://trucol.io/faq/"
-        },
-        {
-            "weight": 1,
-            "source": "https://trucol.io/",
-            "target": "https://trucol.io/TruSec"
-        },
-        {
-            "weight": 2,
-            "source": "https://trucol.io/",
-            "target": "https://trucol.io/about/"
-        },
-        {
-            "weight": 2,
-            "source": "https://trucol.io/",
-            "target": "https://trucol.io/contact/"
-        }
-    ]
+  "directed": true,
+  "graph": {},
+  "links": [
+    {
+      "source": "https://trucol.io/",
+      "target": "https://trucol.io/protocol/",
+      "weight": 3
+    },
+    {
+      "source": "https://trucol.io/",
+      "target": "https://trucol.io/Usecases/",
+      "weight": 4
+    },
+    {
+      "source": "https://trucol.io/",
+      "target": "https://trucol.io/faq/",
+      "weight": 1
+    },
+    {
+      "source": "https://trucol.io/",
+      "target": "https://trucol.io/TruSec",
+      "weight": 1
+    },
+    {
+      "source": "https://trucol.io/",
+      "target": "https://trucol.io/about/",
+      "weight": 2
+    },
+    {
+      "source": "https://trucol.io/",
+      "target": "https://trucol.io/contact/",
+      "weight": 2
+    }
+  ],
+  "multigraph": false,
+  "nodes": [
+    {
+      "id": "https://trucol.io/",
+      "text_content": "TruCol is a decentralised collaboration protocol for test-driven development, which promotes inclusive, fair and accessible work.\nUsecases\nThe TruCol protocol presents an improvement of market efficiency and developer autonomy by decentralisation of test-driven development.\nWould you like to learn more about the TruCol protocol, please see the documentation on the  TruCol Protocol page.\nWould you like to know how you can use TruCol, check out the Usecases page to see whether TruCol is what you need!\nAbout\u00a0\u00a0\u00a0\u00a0 Contact\u00a0\u00a0\u00a0\u00a0 GitHub\u00a0\u00a0\u00a0\u00a0\n\u00a9 2023. A TruCol project. CC BY-SA 4.0.\n"
+    },
+    {
+      "id": "https://trucol.io/protocol/"
+    },
+    {
+      "id": "https://trucol.io/Usecases/"
+    },
+    {
+      "id": "https://trucol.io/faq/"
+    },
+    {
+      "id": "https://trucol.io/TruSec"
+    },
+    {
+      "id": "https://trucol.io/about/"
+    },
+    {
+      "id": "https://trucol.io/contact/"
+    }
+  ]
 }

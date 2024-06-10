@@ -9,18 +9,15 @@ import networkx as nx
 from src.pythontemplate.frontend.visualize_summarised_website import (
     create_mdbook,
 )
+from src.pythontemplate.get_website_data.visualize_website_tree import (
+    visualize_tree_v1,
+)
 from src.pythontemplate.get_website_data.website_to_graph import (
     graph_to_json,
     json_to_graph,
     load_from_json,
     website_to_graph,
 )
-from src.pythontemplate.get_website_data.visualize_website_tree import (
-    visualize_tree,
-    visualize_tree_v0,
-    visualize_tree_v1
-)
-
 from src.pythontemplate.load_json_into_weaviate.import_local_json import (
     load_local_json_data_into_weaviate,
 )
