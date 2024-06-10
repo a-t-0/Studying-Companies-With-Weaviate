@@ -9,12 +9,12 @@ from bs4 import BeautifulSoup
 from typeguard import typechecked
 
 
-
-def add_weighted_edge(*,graph, source, target):
+def add_weighted_edge(*, graph, source, target):
     if graph.has_edge(source, target):
-        graph[source][target]['weight'] += 1
+        graph[source][target]["weight"] += 1
     else:
         graph.add_edge(source, target, weight=1)
+
 
 @typechecked
 def website_to_graph(
@@ -51,15 +51,11 @@ def website_to_graph(
     for link in soup.find_all("a", href=True):
         new_url: str = urllib.parse.urljoin(root_url, link["href"])
         # Check if link points to the same domain and is not an external link
-        if (
-            link["href"].startswith("/")
-            and link["href"] != "/"
-        ):
-            print(f"new_url={new_url}")
-            # website_graph.add_edge(previous_url, new_url)
-            add_weighted_edge(graph=website_graph, source=previous_url, target=new_url)
+        if link["href"].startswith("/") and link["href"] != "/":
+            add_weighted_edge(
+                graph=website_graph, source=previous_url, target=new_url
+            )
             if new_url not in website_graph.nodes:
-                # website_graph.add_edge(previous_url.replace(":", ""), new_url.replace(":", ""))
                 website_to_graph(
                     root_url=root_url,
                     previous_url=new_url,
@@ -96,18 +92,7 @@ def graph_to_json(G: nx.DiGraph, filepath: str):
     for node in G.nodes:
         print(f"node={node}")
     data = nx.node_link_data(G)
-    # Add additional information if needed (e.g., node attributes)
-    counter: int = 0
-    # print(f"data={data}")
-    # for node, attributes in G.nodes(data=True):
-
-    #     data["nodes"][counter]["text_content"] = attributes.get(
-    #         "text_content", None
-    #     )
-    #     counter += 1
-    #     # data.nodes[node]["text_content"] = attributes.get("text_content", None)
-    #     input("continu")
-    # Write data to JSON file
+    
     with open(filepath, "w") as f:
         json.dump(data, f, indent=4)  # Add indentation for readability
 
