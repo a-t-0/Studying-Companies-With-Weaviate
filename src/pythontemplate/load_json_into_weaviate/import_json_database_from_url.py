@@ -2,6 +2,7 @@
 
 import json
 
+import requests
 import weaviate
 
 client = weaviate.Client(
@@ -11,9 +12,6 @@ client = weaviate.Client(
     # }
 )
 
-# ===== import data =====
-# Load data
-import requests
 
 url = "https://raw.githubusercontent.com/weaviate-tutorials/quickstart/main/data/jeopardy_tiny.json"
 resp = requests.get(url)

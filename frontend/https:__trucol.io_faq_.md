@@ -1,3 +1,2 @@
-# https:\__trucol.io_faq_
-
+# https:__trucol.io_faq_
 No content

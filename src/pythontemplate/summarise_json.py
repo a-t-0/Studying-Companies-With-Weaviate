@@ -10,7 +10,6 @@ def ask_weaviate_to_summarise(
     """Working configuration:
     json_types="Question", type_property="theAnswer"
     """
-    # TODO: check if the data is already loaded.
     client = weaviate.Client(weaveate_local_host_url)
 
     result = client.query.get(
@@ -27,17 +26,12 @@ def ask_weaviate_to_summarise(
     return result
 
 
-def inject_summarisation_into_website_graph(data, website_graph):
+def inject_summarisation_into_website_graph(
+    data, website_graph, max_nr_of_queries
+):
     val = data["data"]["Get"]["Nodes"]
-    pprint(f"val={val}")
-    # print(f'data={data}')
+
     for i, node in enumerate(website_graph.nodes):
-        pprint(f"i={i}, node={node}")
-        if i < 3:
+        if i < max_nr_of_queries:
             summary: str = val[i]["_additional"]["summary"][0]["result"]
             website_graph.nodes[node]["summary"] = summary
-            print(f"added summary:{summary}")
-            # val[i]
-            print("website_graph.nodes[node]:")
-            # pprint(website_graph.nodes[node]["summary"])
-            pprint(website_graph.nodes[node])

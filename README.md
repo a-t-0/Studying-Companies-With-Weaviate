@@ -39,7 +39,7 @@ To use this code, install the prerequisites, and run [this](TODO) Jupiter Notebo
 
 ## How can this be made more awesome?
 
-- The tree structure of the website does not yet count the edges.
+- The tree structure of the website does not yet count the edges, so you could get more insight into the website if the edge thickness represents how often a page is linked to.
 - Most of the time, it is not just the raw data you want from a company website but the secondary (or ternary) insights gained in processing that data and/or combining it with other relevant or recent developments. This is where Weaviate may shine, as it supports enhancing your own databases in combination with LLMs. A guided structure may be set up to facilitate this.
 
 [agpl3_badge]: https://img.shields.io/badge/License-AGPL_v3-blue.svg
