@@ -46,15 +46,15 @@ def website_to_graph(
     # Create a graph and add the current URL as a node with text content
     # website_graph.add_node(new_url.replace(":", ""), text_content=text_content)
     website_graph.add_node(new_url, text_content=get_main_text(url=new_url))
-    print(f"website_graph={website_graph}")
+    
     # Find all links on the page and recursively crawl them
     for link in soup.find_all("a", href=True):
         new_url: str = urllib.parse.urljoin(root_url, link["href"])
+        
         # Check if link points to the same domain and is not an external link
         if link["href"].startswith("/") and link["href"] != "/":
-            add_weighted_edge(
-                graph=website_graph, source=previous_url, target=new_url
-            )
+            
+            # First add the new node and text content, then add edge to new node.
             if new_url not in website_graph.nodes:
                 website_to_graph(
                     root_url=root_url,
@@ -62,6 +62,9 @@ def website_to_graph(
                     new_url=new_url,
                     website_graph=website_graph,
                 )
+            add_weighted_edge(
+                graph=website_graph, source=previous_url, target=new_url
+            )
     return website_graph
 
 
@@ -77,7 +80,6 @@ def get_main_text(*, url: str):
     main_text = ""
     for p_tag in soup.find_all("p"):
         main_text += p_tag.get_text() + "\n"
-
     return main_text
 
 
@@ -89,8 +91,6 @@ def graph_to_json(G: nx.DiGraph, filepath: str):
         filepath: Path to the output JSON file.
     """
     # Use nx.node_link_data to get nodes and edges in JSON format
-    for node in G.nodes:
-        print(f"node={node}")
     data = nx.node_link_data(G)
     
     with open(filepath, "w") as f:
@@ -136,10 +136,12 @@ def json_to_graph(filepath: str) -> nx.DiGraph:
 
     # Add nodes with attributes (if present)
     for node in data["nodes"]:
+        page_main_text:str=node["text_content"]
         attributes = node.get(
             "attributes", {}
         )  # Handle potential missing attributes
-        G.add_node(node["id"], **attributes)  # Unpack attributes dictionary
+        
+        G.add_node(node["id"], text_content=page_main_text)  # Unpack attributes dictionary
 
     # Add edges
     for edge in data["links"]:

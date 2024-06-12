@@ -23,11 +23,11 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme -->
-
+        
         <link rel="stylesheet" href="book.css">
+        
 
-
-
+        
 
         <!-- Fetch Clipboard.js from CDN but have a local fallback -->
         <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
@@ -65,13 +65,13 @@
         </script>
 
         <div id="sidebar" class="sidebar">
-            <ul class="chapter"><li><a href="./https:__trucol.io_.html"><strong>1.</strong> https:_trucol.io</a></li><li><ul class="section"><li><a href="./https:__trucol.io_protocol_.html"><strong>1.1.</strong> https:_trucol.io_protocol</a></li><li><a href="./https:__trucol.io_Usecases_.html" class="active"><strong>1.2.</strong> https:_trucol.io_Usecases</a></li><li><a href="./https:__trucol.io_faq_.html"><strong>1.3.</strong> https:_trucol.io_faq</a></li><li><a href="./https:__trucol.io_TruSec.html"><strong>1.4.</strong> https:__trucol.io_TruSec</a></li><li><a href="./https:__trucol.io_about_.html"><strong>1.5.</strong> https:_trucol.io_about</a></li><li><a href="./https:__trucol.io_contact_.html"><strong>1.6.</strong> https:_trucol.io_contact</a></li></ul></li></ul>
+            <ul class="chapter"><li><a href="./https:__trucol.io_.html"><strong>1.</strong> https:_trucol.io</a></li><li><ul class="section"><li><a href="./https:__trucol.io_protocol_.html"><strong>1.1.</strong> https:_trucol.io_protocol</a></li><li><ul class="section"><li><a href="./https:__trucol.io_Usecases_.html" class="active"><strong>1.1.1.</strong> https:_trucol.io_Usecases</a></li><li><ul class="section"><li><a href="./https:__trucol.io_faq_.html"><strong>1.1.1.1.</strong> https:_trucol.io_faq</a></li><li><ul class="section"><li><a href="./https:__trucol.io_TruSec.html"><strong>1.1.1.1.1.</strong> https:__trucol.io_TruSec</a></li><li><ul class="section"><li><a href="./https:__trucol.io_about_.html"><strong>1.1.1.1.1.1.</strong> https:_trucol.io_about</a></li><li><ul class="section"><li><a href="./https:__trucol.io_contact_.html"><strong>1.1.1.1.1.1.1.</strong> https:_trucol.io_contact</a></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul>
         </div>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
-
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
                         <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
@@ -89,36 +89,44 @@
 
                 <div id="content" class="content">
                     <a class="header" href="./https:__trucol.io_Usecases_.html#https_trucolio_usecases" id="https_trucolio_usecases"><h1>https:_<em>trucol.io_Usecases</em></h1></a>
-<p>TruCol is a decentralised collaboration protocol for test-driven development. TruCol promotes inclusive, fair and accessible work. The TruCol protocol presents an improvement of market efficiency and developer autonomy by decentralisation of test- driven development. Would you like to know how you can use TruCol, check out the Usecases page to see whether TruCol is what you need!</p>
+<p>Find out how you can use TruCol
+Suppose Alice wants some well-defined challenge, such as an n*n sudoku, to be solved. She writes a set of unit tests that check any given solution, using random inputs. Instead of creating the solution herself, Alice publishes the unit tests in a smart contract and sets a bounty for any other smart contract that solves it. Bob, the bounty hunter, finds the contract and codes a solution in a smart contract, in order to receive the bounty. If Alice’s requirements are fulfilled, the smart contract automatically pays out the reward. This repository presents the protocol to do this completely trustless and decentralised, without taking any fees, thus increasing market efficiency.</p>
+<p>You can off-load all your programming tasks that are automatically and deterministically verifiable into the TruCol protocol. This guarantees you get the lowest labour cost around the world. Furthermore, it eliminates the need of HR for these tasks.
+This is one of the weaknesses of the TruCol protocol, we currently cannot guarantee high quality code solutions. To mitigate this, we recommend you enforce pre-commit like test requirements, which can consist of well over 30 different automated code quality verifications. This ensures the code quality adheres to at least some basic standards. To go beyond this, we would like to build more code-quality compliance tools, for example an open-language tool that verifies the documentation is written with valid grammar. This does not imply that the documentation is of good quality, yet it does mean bounty hunters must put in effort to writing enough sensible documentation. Then it is still a gamble on whether it is applicable documentation or not.
+This means that the TruCol protocol is particularly suited for difficult problems where the solution is more valuable than the explanation. Examples may be scheduling instances, algorithmic optimisations and even black-box machine-learning classifiers.
+Our core value is user freedom, an that goes both ways, so if you need regulatory compliance, or if you need to hire from certain positions, we would love to help you integrate these requirements into the smart-contract. For example, suppose you work at ESA, and would like to see some algorithmic optimisation, yet you are bound to hire x% of workers from country y. A solution could be to only accept solutions from bounty hunters that can prove they are from country y, using a self sovereign identity, such as provided by IRMA. We would like to go further with this, to ensure bounty hunters from all over the world automatically receive pensions and other digitally verifiable benefits. Please contact us if you are interested in collaborating on this topic.
+This is a winner-take-all protocol, meaning the first person to submit a valid solution retrieves the full bounty. Employers have to specify an expiration date on their bounty, and the bounty contracts are immutable after deployment. That means you know before you start to work on a task, how much you earn, and your payout is direct. To verify your solution is valid, you can run the chain locally, and verify the smart contracts pay out, by simulating the test specs in a locally hosted CI.
+About     Contact     GitHub    
+© 2023. A TruCol project. CC BY-SA 4.0.</p>
 
                 </div>
 
                 <!-- Mobile navigation buttons -->
-
+                
                     <a rel="prev" href="./https:__trucol.io_protocol_.html" class="mobile-nav-chapters previous" title="Previous chapter">
                         <i class="fa fa-angle-left"></i>
                     </a>
+                
 
-
-
+                
                     <a rel="next" href="./https:__trucol.io_faq_.html" class="mobile-nav-chapters next" title="Next chapter">
                         <i class="fa fa-angle-right"></i>
                     </a>
-
+                
 
             </div>
 
-
+            
                 <a href="./https:__trucol.io_protocol_.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
                     <i class="fa fa-angle-left"></i>
                 </a>
+            
 
-
-
+            
                 <a href="./https:__trucol.io_faq_.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
                     <i class="fa fa-angle-right"></i>
                 </a>
-
+            
 
         </div>
 
@@ -131,19 +139,19 @@
         </script>
 
         <!-- Livereload script (if served using the cli tool) -->
+        
 
+        
 
+        
 
-
-
-
-
+        
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
 
         <!-- Custom JS script -->
-
+        
 
     </body>
 </html>

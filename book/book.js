@@ -361,7 +361,7 @@ function run_rust_code(code_block) {
     }
 
     let text = playpen_text(code_block);
-
+    
     var params = {
 	channel: "stable",
 	mode: "debug",
