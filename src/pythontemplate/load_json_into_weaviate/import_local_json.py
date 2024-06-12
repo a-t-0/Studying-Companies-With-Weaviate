@@ -11,6 +11,7 @@ def load_local_json_data_into_weaviate(
     json_input_path: str,
     json_type: str,
     type_property: str,
+    max_nr_of_queries:int
 ):
     client = weaviate.Client(
         url=weaviate_local_host_url,
@@ -33,7 +34,7 @@ def load_local_json_data_into_weaviate(
 
         # Batch import all Questions
         for i, node in enumerate(data["nodes"]):
-            if i < 3:
+            if i < max_nr_of_queries:
                 # TODO: verify the data element is not already in weaviate.
                 try:
                     properties = {

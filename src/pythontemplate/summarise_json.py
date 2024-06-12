@@ -11,6 +11,8 @@ def ask_weaviate_to_summarise(
     json_types="Question", type_property="theAnswer"
     """
     client = weaviate.Client(weaviate_local_host_url)
+    print(f'json_type={json_type}')
+    print(f'type_property={type_property}')
 
     result = client.query.get(
         json_type,
@@ -21,6 +23,7 @@ def ask_weaviate_to_summarise(
                 + type_property
                 + '"]) { property result } }'
             ),
+            "url"
         ],
     ).do()
     return result
@@ -29,16 +32,20 @@ def ask_weaviate_to_summarise(
 def inject_summarisation_into_website_graph(
     data, website_graph, max_nr_of_queries
 ):
-    val = data["data"]["Get"]["Nodes"]
+    vals = data["data"]["Get"]["Nodes"]
     for i, node in enumerate(website_graph.nodes):
         
         if i < max_nr_of_queries:
-            verify_summary_structure(single_summary=val[i])
-            original_main_text:str = get_original_text_from_summary_response(single_summary=val[i])
-            weaviate_summary:str = get_summary_response(single_summary=val[i])
-            summary: str = val[i]["_additional"]["summary"][0]["result"]
-            website_graph.nodes[node]["summary"] = summary
-
+            verify_summary_structure(single_summary=vals[i])
+            original_main_text:str = get_original_text_from_summary_response(single_summary=vals[i])
+            weaviate_summary:str = get_summary_response(single_summary=vals[i])
+            summary_url:str = get_summary_url(single_summary=vals[i])
+            for node in website_graph.nodes:
+                if node == summary_url:
+                    website_graph.nodes[node]["summary"] = weaviate_summary
+                    if website_graph.nodes[node]["text_content"] != original_main_text:
+                        raise ValueError("The text_content values of summary and website graph don't match.")
+                
 @typechecked
 def verify_summary_structure(*, single_summary:Dict[str, Dict[str,Union[str, List[Dict[str,str]]]]]):
     """ Ensures a single summary contains the original text and the new summary in the correct position."""
@@ -72,25 +79,8 @@ def get_summary_response(*, single_summary:Dict[str, Dict[str,Union[str, List[Di
     Assumes the single summary element has a valid structure."""
     return single_summary["_additional"]["summary"][0]["result"]
 
-def assert_summaries_have_no_duplicate_original_texts(*, summaries:List[Dict[str, Dict[str,Union[str, List[Dict[str,str]]]]]]) -> None:
-    original_main_text:List[str] = list(map( lambda summary: get_original_text_from_summary_response(single_summary=summaries)))
-    if not all_different(data = original_main_text):
-        raise ValueError("Error, duplicate main texts found in summaries.")
-    
-def assert_website_graph_has_no_duplicate_original_texts(*, summaries:List[Dict[str, Dict[str,Union[str, List[Dict[str,str]]]]]]) -> None:
-    original_main_text:List[str] = list(map( lambda summary: get_original_text_from_summary_response(single_summary=summaries)))
-    if not all_different(data = original_main_text):
-        raise ValueError("Error, duplicate main texts found in summaries.")
-
-
-def all_different(*, data:List[str]) -> bool:
-  """
-  This function checks if all elements in a list are different using set conversion.
-
-  Args:
-      data: A list of strings.
-
-  Returns:
-      A boolean indicating if all elements are different.
-  """
-  return len(data) == len(set(data))
+def get_summary_url(*, single_summary:Dict[str, Dict[str,Union[str, List[Dict[str,str]]]]]) -> str:
+    """Returns the url belonging to the Weaviate summary.
+     
+    Assumes the single summary element has a valid structure."""
+    return single_summary["url"]

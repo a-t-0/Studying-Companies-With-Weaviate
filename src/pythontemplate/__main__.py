@@ -51,6 +51,7 @@ if not os.path.exists(website_data_path):
         json_input_path=website_data_path,
         json_type="nodes",
         type_property="text_content",
+        max_nr_of_queries=max_nr_of_queries,
     )
 else:
     website_graph = json_to_graph(filepath=website_data_path)

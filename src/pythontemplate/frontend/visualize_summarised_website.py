@@ -11,7 +11,7 @@ def create_mdbook(graph, root, output_dir):
     
     # Create SUMMARY.md file
     summary_content = ["# Summary\n"]
-    summary_content += generate_summary(graph,tree, root, 0)
+    summary_content += generate_summary(graph,tree, root)
     
 
     with open(os.path.join(output_dir, "SUMMARY.md"), "w") as f:
@@ -52,7 +52,7 @@ def tree_contains_node(tree:List[List], sought_node)-> bool:
    
 
 
-def generate_summary(graph, tree, node, level):
+def generate_summary(graph, tree, node):
     """
     This function generates a summary of a graph structure in Markdown format.
 
@@ -111,9 +111,14 @@ def create_markdown_files(graph, node, output_dir, visited=None):
     f.write(f'# {node.replace("/", "_")}\n')
     #
     if "summary" in graph.nodes[node]:
+      print(f'writing summary:')
+      print(graph.nodes[node].get(
+              "summary"
+          ))
+      input("")
       f.write(
           graph.nodes[node].get(
-              "text_content", graph.nodes[node]["summary"]
+              "summary"
           )
       )
     else:
