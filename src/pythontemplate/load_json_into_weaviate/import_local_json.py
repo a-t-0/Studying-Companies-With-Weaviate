@@ -33,7 +33,6 @@ def load_local_json_data_into_weaviate(
 
         # Batch import all Questions
         for i, node in enumerate(data["nodes"]):
-            input(f"data elem ={node}")
             if i < 3:
                 # TODO: verify the data element is not already in weaviate.
                 try:

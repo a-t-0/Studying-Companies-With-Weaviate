@@ -30,18 +30,12 @@ def inject_summarisation_into_website_graph(
     data, website_graph, max_nr_of_queries
 ):
     val = data["data"]["Get"]["Nodes"]
-    print("val=")
-    pprint(val)
     for i, node in enumerate(website_graph.nodes):
         
         if i < max_nr_of_queries:
             verify_summary_structure(single_summary=val[i])
             original_main_text:str = get_original_text_from_summary_response(single_summary=val[i])
             weaviate_summary:str = get_summary_response(single_summary=val[i])
-            print(f'node={node}')
-            print("graph node=")
-            pprint(website_graph.nodes[node])
-            input("continue?")
             summary: str = val[i]["_additional"]["summary"][0]["result"]
             website_graph.nodes[node]["summary"] = summary
 
