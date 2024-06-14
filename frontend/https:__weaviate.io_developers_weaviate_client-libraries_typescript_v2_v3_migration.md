@@ -1,0 +1,2 @@
+# https:__weaviate.io_developers_weaviate_client-libraries_typescript_v2_v3_migration
+No content

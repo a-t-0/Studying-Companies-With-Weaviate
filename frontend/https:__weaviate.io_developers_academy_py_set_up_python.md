@@ -1,0 +1,2 @@
+# https:__weaviate.io_developers_academy_py_set_up_python
+No content

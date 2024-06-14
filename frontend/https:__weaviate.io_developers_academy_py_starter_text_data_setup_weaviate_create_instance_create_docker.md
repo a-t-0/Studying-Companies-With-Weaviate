@@ -1,0 +1,2 @@
+# https:__weaviate.io_developers_academy_py_starter_text_data_setup_weaviate_create_instance_create_docker
+No content

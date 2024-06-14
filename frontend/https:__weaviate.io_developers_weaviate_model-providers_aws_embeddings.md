@@ -1,0 +1,2 @@
+# https:__weaviate.io_developers_weaviate_model-providers_aws_embeddings
+No content

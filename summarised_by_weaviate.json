@@ -7,84 +7,60 @@
                         "summary": [
                             {
                                 "property": "webPageMainText",
-                                "result": "TruCol is a decentralised collaboration protocol for test-driven development. TruCol promotes inclusive, fair and accessible work. The TruCol protocol presents an improvement of market efficiency and developer autonomy by decentralisation of test- driven development. Would you like to know how you can use TruCol, check out the Usecases page to see whether TruCol is what you need!"
+                                "result": "Weaviate 1.24 is here! Here are the release highlights. Named vectors make your collections richer and more versatile. You can group things that are logically related, like a music video and a lyric sheet, in the same object. You don't have to create cross-references or manage shared metadata."
                             }
                         ]
                     },
-                    "url": "https://trucol.io/",
-                    "webPageMainText": "TruCol is a decentralised collaboration protocol for test-driven development, which promotes inclusive, fair and accessible work.\nUsecases\nThe TruCol protocol presents an improvement of market efficiency and developer autonomy by decentralisation of test-driven development.\nWould you like to learn more about the TruCol protocol, please see the documentation on the  TruCol Protocol page.\nWould you like to know how you can use TruCol, check out the Usecases page to see whether TruCol is what you need!\nAbout\u00a0\u00a0\u00a0\u00a0 Contact\u00a0\u00a0\u00a0\u00a0 GitHub\u00a0\u00a0\u00a0\u00a0\n\u00a9 2023. A TruCol project. CC BY-SA 4.0.\n"
+                    "url": "https://weaviate.io/blog/weaviate-1-24-release#backend-improvements",
+                    "webPageMainText": "Weaviate 1.24 is here!\nHere are the release \u2b50\ufe0fhighlights\u2b50\ufe0f!\n\n\nNamed vectors make your collections richer and more versatile.\nStarting in 1.24, collections can have multiple named vectors. Each vector is independent. Each vector has its own index, its own compression, and its own vectorizer. This means you can create vectors for properties, use different vectorization models, and apply different metrics to fine tune interactions with your data.\nIn earlier versions, objects in your collections are limited to one vector. Now, you can vectorize meta data like titles and descriptions so that it is available for vector search. You can group things that are logically related, like a music video and a lyric sheet, in the same object. You don't have to create cross-references or manage shared metadata. A single object in a collection can have multiple named vectors.\nYou don't have to use multiple vectors in your collections, but if you do, adjust your queries to specify which vector you want to"
                 },
                 {
                     "_additional": {
                         "summary": [
                             {
                                 "property": "webPageMainText",
-                                "result": "The TruSec protocol allows companies to hedge against hacks such as ransomware attacks and data leaks. It has been presented at Black Hat USA 2022 in Las Vegas, along with our whitepaper. A cyber-security variant of the TruCol protocol. Watch our talk below:"
+                                "result": "This section includes reference guides for reader & generator modules, such as the QA module, NER module and the Summarization module. This section includes guide guides for QA and NER modules, as well as other modules. The guide also includes guides for the NER and Summarizing modules."
                             }
                         ]
                     },
-                    "url": "https://trucol.io/TruSec",
-                    "webPageMainText": "A cyber-security variant of the TruCol protocol\nThe TruSec protocol allows companies to hedge against hacks such as ransomware attacks and data leaks. It has been presented at Black Hat USA 2022 in Las Vegas, along with our whitepaper. Watch our talk below:\nSuppose you want to hedge your company against ransomware attacks that use zero-day exploits. These days ransomware insurances are hard to come by, so instead, you can insentivise the hackers to take the white-hat route, using collective staking:\nSo what happens if your stack is compromised? You get a peak at the locked exploit, and you can patch your software within the responsible disclosure time. Afterward the responsible disclosure time is over, the exploit vault opens up, the exploit is verified, and the hacker gets payed out, if the hack was valid. Now the cycle starts over, you can push your patched software stack again to the DVM, and put a new stake on it.\n\nThe TruSec protocol eliminates triage intermediaries for determinis"
+                    "url": "https://weaviate.io/developers/weaviate/modules/reader-generator-modules",
+                    "webPageMainText": "This section includes reference guides for reader & generator modules, such as the QA module, NER module and the Summarization module.\n"
                 },
                 {
                     "_additional": {
                         "summary": [
                             {
                                 "property": "webPageMainText",
-                                "result": "The TruCol protocol presents an improvement of market efficiency and developer autonomy. Employers publish a smart contract with a bounty for deterministically verifiable development tasks which are fit for solving by external parties. Developers from all over the world are able to complete these tasks and get rewarded automatically when the requirement of the smart contract is fulfilled."
+                                "result": "Product quantization (PQ) is a form of data compression for vectors. PQ reduces the memory footprint of a vector index, so enabling PQ for HNSW lets you work with larger datasets. Starting in v1.23, AutoPQ simplifies configuring PQ on new collections."
                             }
                         ]
                     },
-                    "url": "https://trucol.io/protocol/",
-                    "webPageMainText": "A concise overview of the TruCol protocol.\nThe TruCol protocol presents an improvement of market efficiency and developer autonomy by decentralisation and automation of test-driven development. The protocol promotes inclusive, fair and accessible work, by\nenabling developers to participate in the market regardless of their circumstances. Employers publish a smart contract with a bounty for deterministically verifiable development tasks which are fit for solving by external parties. Developers from all over the world are able to complete these tasks and get rewarded automatically when the requirement of the smart contract is fulfilled. The protocol thus removes the middleman and costly fees, and stimulates an open and fair development market.\nTraditional bounty-based platforms require a modicum of trust and an often costly middle-person. For the market of deterministically verifiable test-driven development tasks, decentralisation eliminates the necessity for trust and a costly platform"
+                    "url": "https://weaviate.io/developers/weaviate/configuration/pq-compression#enable-pq-compression",
+                    "webPageMainText": "Starting in v1.23, AutoPQ simplifies configuring PQ on new collections.\nProduct quantization (PQ) is a form of data compression for vectors. PQ reduces the memory footprint of a vector index, so enabling PQ for HNSW lets you work with larger datasets. For a discussion of how PQ saves memory, see this page.\nPQ makes tradeoffs between recall, performance, and memory usage. This means a PQ configuration that reduces memory may also reduce recall. There are similar trade-offs when you use HNSW without PQ. If you use PQ compression, you should also tune HNSW so that they compliment each other.\nTo configure HNSW, see Configuration: Vector index .\nPQ is configured at a collection level. There are two ways to enable PQ compression:\nFor new collections, use AutoPQ. AutoPQ automates triggering of the PQ training step based on the size of the collection.\nAutoPQ requires asynchronous indexing.\nSpecify PQ settings for each collection for which it is to be enabled.\nFor additional configuration optio"
                 },
                 {
                     "_additional": {
                         "summary": [
                             {
                                 "property": "webPageMainText",
-                                "result": "TruCol is a decentralized, trust-less collaboration platform and protocol for test-driven programming development. The project started at the ETHDenver Hackathon as a collaboration between four students interested in the development of Ethereum projects. Learn about the origins of TruCol and the team behind TruCol."
+                                "result": "The Concepts section explains various aspects related to Weaviate and its architecture. You can read these sections in any order. If you are after a practical guide, try the quickstart tutorial. The figure below gives a 30,000 feet view of Weaviates architecture."
                             }
                         ]
                     },
-                    "url": "https://trucol.io/about/",
-                    "webPageMainText": "Learn about the origins of TruCol and the team behind TruCol.\nWe experienced that we did not always have the time or a skill for specific coding work ourselves when setting up our own company. Setting out bounties would provide a great solution for this. However, existing systems require an often costly middleperson and a modicum of trust between all parties. This is why we set out to develop a decentralized, trust-less collaboration platform and protocol for test-driven programming development. The project started at the ETHDenver Hackathon as a collaboration between four students interested in the development of Ethereum projects. After competing in various categories, and successfully claiming multiple bounties, the team decided to continue with the development of the project.\nA master student of space exploration at the faculty of Aerospace Engineering at Delft University and Technology and a master student of cognitive computing at the faculty of Social Sciences at Radboud Univers"
+                    "url": "https://weaviate.io/developers/weaviate/concepts#weaviate-architecture",
+                    "webPageMainText": "The Concepts section explains various aspects related to Weaviate and its architecture to help you get the most out of it. You can read these sections in any order.\nIf you are after a practical guide, try the quickstart tutorial.\nData structure\nModules\nIndexing\nVector indexing\nVector quantization\nThe figure below gives a 30,000 feet view of Weaviate's architecture.\n\nYou can learn more about the individual components in this figure by following these guides:\nLearn about storage inside a shard\nWays to scale Weaviate horizontally\nHow to plan resources\nFiltered vector search\nUser-facing interfaces\nReplication architecture\nIf you have any questions or feedback, let us know in the user forum. \n"
                 },
                 {
                     "_additional": {
                         "summary": [
                             {
                                 "property": "webPageMainText",
-                                "result": "TruCol is a decentralised smart contract protocol. It makes programming tasks automatically and deterministically verifiable. This guarantees you get the lowest labour cost around the world. It also eliminates the need of HR for these tasks. Find out how you can use TruCol here."
+                                "result": "In this unit, you learned about additional types of queries, including keyword (BM25), hybrid, generative and QnA searches. Combined with the tools that you learned earlier in Queries 1, you are now armed with a variety of search tools. Each of these tools allow you to interrogate the data differently."
                             }
                         ]
                     },
-                    "url": "https://trucol.io/Usecases/",
-                    "webPageMainText": "Find out how you can use TruCol\nSuppose Alice wants some well-defined challenge, such as an n*n sudoku, to be solved. She writes a set of unit tests that check any given solution, using random inputs. Instead of creating the solution herself, Alice publishes the unit tests in a smart contract and sets a bounty for any other smart contract that solves it. Bob, the bounty hunter, finds the contract and codes a solution in a smart contract, in order to receive the bounty. If Alice\u2019s requirements are fulfilled, the smart contract automatically pays out the reward. This repository presents the protocol to do this completely trustless and decentralised, without taking any fees, thus increasing market efficiency.\n\nYou can off-load all your programming tasks that are automatically and deterministically verifiable into the TruCol protocol. This guarantees you get the lowest labour cost around the world. Furthermore, it eliminates the need of HR for these tasks.\nThis is one of the weaknesses of "
-                },
-                {
-                    "_additional": {
-                        "summary": [
-                            {
-                                "property": "webPageMainText",
-                                "result": "The costs of the contract depend on what the contract does. A minimum of approximately $50,- can currently be expected. We expect that the contract costs will go down in the future with ETH 2.0 thanks to staking and/or sharding. You can opt to sacrifice some decentralisation through the use of an oracle service with (decentralised) CIs."
-                            }
-                        ]
-                    },
-                    "url": "https://trucol.io/faq/",
-                    "webPageMainText": "Frequently Asked Questions\nInstantly! The protocol is set up in such a way that if you solve the problem by completing the contract, you become the target of the contract and the contract is fulfilled.\nYes! As the contracts are open source you can simply run the available code to verify your code locally before pushing your solution to the blockchain.\nThe costs of the contract depend on what the contract does. A minimum of approximately $50,- can currently be expected. We expect that the contract costs will go down in the future with ETH 2.0 thanks to staking and/or sharding. Furthermore, to reduce evaluation costs, one could opt to sacrifice some decentralisation through the use of an oracle service with (decentralised) CIs.\nSelect one of your tasks that can be verified objectively by a computer and determine how much you are willing spend on the solution. For example, \u201cgive me a flight-crew planning that minimizes the costs\u201d, then specify what the requirements for the solution must b"
-                },
-                {
-                    "_additional": {
-                        "summary": [
-                            {
-                                "property": "webPageMainText",
-                                "result": "You can reach the team through email at trucol@protonmail.com. We\u2019ll never share your personal info with anyone else without your explicit permission. Get in touch with the TruCol protocol at TruCol.com/GitHub or via Twitter @TruCol."
-                            }
-                        ]
-                    },
-                    "url": "https://trucol.io/contact/",
-                    "webPageMainText": "Get in touch with the TruCol protocol.\nYou can reach the team through email at trucol@protonmail.com\nWe\u2019ll never share your personal info with anyone else without your explicit permission.\nAbout\u00a0\u00a0\u00a0\u00a0 Contact\u00a0\u00a0\u00a0\u00a0 GitHub\u00a0\u00a0\u00a0\u00a0\n\u00a9 2023. A TruCol project. CC BY-SA 4.0.\n"
+                    "url": "https://weaviate.io/developers/academy/py/zero_to_mvp/queries_2/wrap_up",
+                    "webPageMainText": "In this unit, you learned about additional types of queries, including keyword (BM25), hybrid, generative and QnA searches. Combined with the tools that you learned earlier in Queries 1, you are now armed with a variety of search tools.\nEach of these tools allow you to interrogate the data differently. Being aware of how each type works will allow you to formulate the right query for your tasks.\nBM25 searches for example can be used for precise keyword searches, and a hybrid search allows you to combine results of both BM25 and vector searches. Meanwhile, generative searches and QnA searches transform your data before it is delivered to the user. These searches leverage the power of language models, bringing your data to life and allowing Weaviate to go further than simple data retrieval.\nHaving finished this unit, you should be able to:\nIf you have any questions or feedback, let us know in the user forum. \n"
                 }
             ]
         }

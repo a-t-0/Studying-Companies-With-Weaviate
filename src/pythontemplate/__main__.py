@@ -26,9 +26,9 @@ from src.pythontemplate.summarise_json import (
     inject_summarisation_into_website_graph,
 )
 
-# company_urls: List[str] = ["https://weaviate.io"]
+company_urls: List[str] = ["https://weaviate.io"]
 # company_urls: List[str] = ["https://waarneming.nl/"]
-company_urls: List[str] = ["https://trucol.io/"]
+# company_urls: List[str] = ["https://trucol.io/"]
 website_data_path: str = "website_data.json"
 # For this repo the Weaviate data classes are web pages.
 json_object_name: str = "WebPage"  # Must start with Capitalised letter.
@@ -38,7 +38,7 @@ summarised_property: str = "webPageMainText"
 summarised_website_data_path: str = "summarised_by_weaviate.json"
 weaviate_local_host_url: str = "http://localhost:8080"
 md_book_path: str = "frontend"
-max_nr_of_queries: int = 10  # Used to prevent timeout error.
+max_nr_of_queries: int = 10000  # Used to prevent timeout error.
 
 website_graph = nx.DiGraph()
 if not os.path.exists(website_data_path):
@@ -47,9 +47,9 @@ if not os.path.exists(website_data_path):
         previous_url=company_urls[0],
         new_url=company_urls[0],
         website_graph=website_graph,
+        counter=0,
     )
     graph_to_json(G=website_graph, filepath=website_data_path)
-
     # Ensure the json data is loaded into weaviate.
     load_local_json_data_into_weaviate(
         weaviate_local_host_url=weaviate_local_host_url,
@@ -57,6 +57,7 @@ if not os.path.exists(website_data_path):
         json_object_name=json_object_name,
         summarised_property=summarised_property,
     )
+
 else:
     website_graph = json_to_graph(
         filepath=website_data_path, summarised_property=summarised_property
@@ -84,7 +85,7 @@ inject_summarisation_into_website_graph(
     json_object_name=json_object_name,
     summarised_property=summarised_property,
 )
-visualize_tree_v1(G=website_graph)
+# visualize_tree_v1(G=website_graph)
 
 
 create_mdbook(

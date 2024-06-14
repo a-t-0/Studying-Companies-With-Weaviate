@@ -1,0 +1,2 @@
+# https:__weaviate.io_developers_weaviate_client-libraries_typescript#authentication
+No content

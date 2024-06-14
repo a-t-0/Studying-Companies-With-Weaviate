@@ -5,6 +5,10 @@ from typing import Dict, List, Union
 import weaviate
 from typeguard import typechecked
 
+from src.pythontemplate.load_json_into_weaviate.import_local_json import (
+    get_hash,
+)
+
 
 def ask_weaviate_to_summarise(
     *,
@@ -16,20 +20,62 @@ def ask_weaviate_to_summarise(
     json_object_names="Question", summarised_property="theAnswer"
     """
     client = weaviate.Client(weaviate_local_host_url)
-    print(f"json_object_name={json_object_name}")
-    print(f"summarised_property={summarised_property}")
-    result = client.query.get(
-        json_object_name,
-        [
-            summarised_property,
-            (
-                '_additional { summary ( properties: ["'
-                + summarised_property
-                + '"]) { property result } }'
-            ),
-            "url",
-        ],
-    ).do()
+
+    client.query.get(json_object_name)
+    urls = [
+        obj["url"]
+        for obj in client.query.get(json_object_name, ["url"])
+        .with_limit(1000)
+        .do()["data"]["Get"][json_object_name]
+    ]
+
+    summarised_json = {"data": {"Get": {"WebPage": []}}}
+    if len(urls) != len(list(set(urls))):
+        raise ValueError("Duplicate url found.")
+
+    for i, url in enumerate(urls):
+            print(f"i={i}, url={url}")
+
+            result = single_query_v0(
+                client,
+                json_object_name,
+                summarised_property,
+                get_hash(some_str=url),
+            )
+    
+            summarised_json["data"]["Get"]["WebPage"].append(
+                result["data"]["Get"]["WebPage"][0]
+            )
+    return summarised_json
+
+
+def single_query_v0(
+    client, json_object_name, summarised_property, url_hash: str
+):
+    result = (
+        client.query.get(
+            json_object_name,
+            [
+                summarised_property,
+                (
+                    '_additional { summary ( properties: ["'
+                    + summarised_property
+                    + '"]) { property result } }'
+                ),
+                "url",
+            ],
+        )
+        .with_where(
+            {
+                # "path": ["id"],
+                "path": ["urlHash"],
+                "operator": "Equal",
+                # "valueText": "0093d344-66ba-40e2-8525-3741a986344b",
+                "valueText": url_hash,
+            }
+        )
+        .do()
+    )
     return result
 
 
@@ -40,33 +86,38 @@ def inject_summarisation_into_website_graph(
     json_object_name: str,
     summarised_property: str,
 ):
+    
+    
     vals = data["data"]["Get"][json_object_name]
+    print(f'len(vals)={len(vals)}')
     for i, node in enumerate(website_graph.nodes):
-        # print(f'vals[i]=')
-        if i < max_nr_of_queries:
-            verify_summary_structure(
-                single_summary=vals[i], summarised_property=summarised_property
-            )
-            original_main_text: str = get_original_text_from_summary_response(
-                single_summary=vals[i], summarised_property=summarised_property
-            )
-            weaviate_summary: str = get_summary_response(
-                single_summary=vals[i]
-            )
-            summary_url: str = get_summary_url(single_summary=vals[i])
-            for node in website_graph.nodes:
-                if node == summary_url:
-                    website_graph.nodes[node]["summary"] = weaviate_summary
-                    print(
-                        f"website_graph.nodes[node]={website_graph.nodes[node]}"
-                    )
-                    if (
-                        website_graph.nodes[node]["text_content"]
-                        != original_main_text
-                    ):
-                        raise ValueError(
-                            "The text_content values of summary and website graph don't match."
-                        )
+            print(f"vals[i]=")
+            if i < max_nr_of_queries:
+                verify_summary_structure(
+                    single_summary=vals[i], summarised_property=summarised_property
+                )
+                original_main_text: str = get_original_text_from_summary_response(
+                    single_summary=vals[i], summarised_property=summarised_property
+                )
+                weaviate_summary: str = get_summary_response(
+                    single_summary=vals[i]
+                )
+                summary_url: str = get_summary_url(single_summary=vals[i])
+                for node in website_graph.nodes:
+                    if node == summary_url:
+                        website_graph.nodes[node]["summary"] = weaviate_summary
+                        
+                        if (
+                            website_graph.nodes[node]["text_content"]
+                            != original_main_text
+                        ):
+                            print(
+                                f"website_graph.nodes[node]={website_graph.nodes[node]}"
+                            )
+                            raise ValueError(
+                                "The text_content values of summary and website"
+                                " graph don't match."
+                            )
 
 
 @typechecked
@@ -92,7 +143,8 @@ def verify_summary_structure(
         != summarised_property
     ):
         raise KeyError(
-            "The summary is made for a different property than the text_content."
+            "The summary is made for a different property than the"
+            " text_content."
         )
     if "result" not in single_summary["_additional"]["summary"][0].keys():
         raise KeyError("result key not found in summary dictionary.")

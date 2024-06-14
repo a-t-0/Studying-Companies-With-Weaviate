@@ -1,0 +1,2 @@
+# https:__weaviate.io_developers_academy_deployment_k8s
+No content

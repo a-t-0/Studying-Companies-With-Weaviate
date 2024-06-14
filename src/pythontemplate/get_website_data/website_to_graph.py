@@ -23,6 +23,7 @@ def website_to_graph(
     previous_url: str,
     new_url: str,
     website_graph: nx.DiGraph,
+    counter: int,
 ):
     """Crawls a website and its sub URLs, building a directed graph using
     NetworkX. Nodes represent URLs and edges point to child URLs. Each node has
@@ -31,6 +32,8 @@ def website_to_graph(
     Args:
       url: The starting URL of the website.
     """
+    print(f"Counter={counter}/?")
+    counter += 1
     try:
         response = requests.get(new_url)
         response.raise_for_status()  # Raise exception for non-2xx status codes
@@ -60,6 +63,7 @@ def website_to_graph(
                     previous_url=new_url,
                     new_url=new_url,
                     website_graph=website_graph,
+                    counter=counter,
                 )
             add_weighted_edge(
                 graph=website_graph, source=previous_url, target=new_url
@@ -79,6 +83,8 @@ def get_main_text(*, url: str):
     main_text = ""
     for p_tag in soup.find_all("p"):
         main_text += p_tag.get_text() + "\n"
+    if len(main_text) == 0:
+        return ""
     return main_text[: min(len(main_text), 1000)]
 
 
@@ -133,15 +139,18 @@ def json_to_graph(filepath: str, summarised_property: str) -> nx.DiGraph:
     # Create a directed graph
     G = nx.DiGraph()
 
+    print(f'Got: {len(data["nodes"])} pages.')
     # Add nodes with attributes (if present)
     for node in data["nodes"]:
         # text_content is how networkx stores the node attribute.
-        page_main_text: str = node["text_content"]
+        if "text_content" in node.keys():
+            page_main_text: str = node["text_content"]
 
-        G.add_node(node["id"], text_content=page_main_text)
+            G.add_node(node["id"], text_content=page_main_text)
 
     # Add edges
     for edge in data["links"]:
-        G.add_edge(edge["source"], edge["target"])
+        if edge["source"] in G.nodes and edge["target"] in G.nodes:
+            G.add_edge(edge["source"], edge["target"])
 
     return G

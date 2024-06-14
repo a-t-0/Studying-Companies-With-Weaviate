@@ -1,0 +1,2 @@
+# https:__weaviate.io_developers_academy_theory_hello_weaviate_overview_vectors
+No content

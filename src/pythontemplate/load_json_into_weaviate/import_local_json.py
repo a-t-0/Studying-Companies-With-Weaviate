@@ -1,5 +1,6 @@
 # Source: https://weaviate.io/developers/weaviate/tutorials/import
 
+import hashlib
 import json
 from typing import Dict, List
 
@@ -71,9 +72,9 @@ def remove_existing_schemas_from_weaviate(client: weaviate.Client) -> None:
     """Removes all pre-existing schemas from Weaviate.
 
     A schema is a dictionary that describes the structure of the data in
-    Weaviate. It typically starts with a class (e.g. Document), and then
-    such a class has properties. A class property in a schema has (at
-    least) a name, and a datatype.
+    Weaviate. It typically starts with a class (e.g. Document), and then such a
+    class has properties. A class property in a schema has (at least) a name,
+    and a datatype.
     """
     client.schema.delete_all()
 
@@ -104,6 +105,10 @@ def create_new_schema_with_summary(
         "properties": [
             {
                 "name": "url",
+                "dataType": ["text"],
+            },
+            {
+                "name": "urlHash",
                 "dataType": ["text"],
             },
             {
@@ -139,13 +144,19 @@ def create_weaviate_formatted_data_objects(
     """Assumes all nodes belong to unique addresses."""
     weaviate_data_objects: List[Dict] = []
     for webpage in data["nodes"]:
-        data_object = {
-            "url": webpage["id"],
-            # text_content is how networkx stores the node attribute.
-            "webPageMainText": webpage["text_content"],
-        }
-        weaviate_data_objects.append(data_object)
+        if "text_content" in webpage.keys():
+            data_object = {
+                "url": webpage["id"],
+                "urlHash": get_hash(some_str=webpage["id"]),
+                # text_content is how networkx stores the node attribute.
+                summarised_property: webpage["text_content"],
+            }
+            weaviate_data_objects.append(data_object)
     return weaviate_data_objects
+
+
+def get_hash(some_str: str):
+    return hashlib.sha256(some_str.encode()).hexdigest()
 
 
 def add_weviate_data_objects_to_weaviate(

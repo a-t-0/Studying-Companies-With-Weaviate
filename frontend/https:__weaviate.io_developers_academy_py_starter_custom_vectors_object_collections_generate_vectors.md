@@ -1,0 +1,2 @@
+# https:__weaviate.io_developers_academy_py_starter_custom_vectors_object_collections_generate_vectors
+No content

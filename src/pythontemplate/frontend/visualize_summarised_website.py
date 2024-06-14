@@ -1,6 +1,6 @@
 import os
 from typing import List
-
+from typeguard import typechecked
 
 def create_mdbook(graph, root, output_dir: str, summarised_property: str):
     if not os.path.exists(output_dir):
@@ -18,14 +18,14 @@ def create_mdbook(graph, root, output_dir: str, summarised_property: str):
         f.writelines(summary_content)
 
     # Create markdown files for each node
-    create_markdown_files(graph, root, output_dir, summarised_property)
+    create_markdown_files(graph=graph, node=root, output_dir=output_dir,summarised_property=summarised_property, visited=None)
 
 
 def create_bft(graph, root_node, tree: List[List]):
     """Generates a breadth first tree of the graph starting at the root node.
 
-    then adds all its neighbours, then those neighbours etc untill all
-    nodes are included in a levelled list.
+    then adds all its neighbours, then those neighbours etc untill all nodes
+    are included in a levelled list.
     """
 
     if tree == []:
@@ -63,10 +63,12 @@ def generate_summary(graph, tree, node):
         graph: A representation of the graph structure.
         node: The current node being processed.
         level: The indentation level for the summary line (increases with depth).
-        visited (list, optional): A list to keep track of visited nodes to avoid cycles. Defaults to None.
+        visited (list, optional): A list to keep track of visited nodes to
+        avoid cycles. Defaults to None.
 
     Returns:
-        A string containing the Markdown summary for the current node and its descendants.
+        A string containing the Markdown summary for the current node and its
+         descendants.
     """
     content = ""
     for indentation_level, nodes_of_level in enumerate(tree):
@@ -89,12 +91,14 @@ def generate_summary(graph, tree, node):
 
 def create_summary_content_for_node(*, level: int, node) -> str:
     indent = "    " * level  # Create indentation string based on level
-    content = f'{indent}* [{node.replace("/", "_")}](./{node.replace("/", "_")}.md)\n'
+    content = (
+        f"{indent}*"
+        f" [{node.replace('/', '_')}](./{node.replace('/', '_')}.md)\n"
+    )
     return content
 
-
-def create_markdown_files(
-    graph, node, output_dir, summarised_property: str, visited=None
+@typechecked
+def create_markdown_files(*, graph, node, output_dir, summarised_property: str, visited=None
 ):
     """This function creates markdown files for nodes in the graph structure.
 
@@ -119,13 +123,13 @@ def create_markdown_files(
     with open(file_path, "w") as f:
         f.write(f'# {node.replace("/", "_")}\n')
         #
-        if "summary" in graph.nodes[node]:
-            print(f"writing summary:")
-            print(graph.nodes[node].get("summary"))
-            input("")
-            f.write(graph.nodes[node].get("summary"))
-        else:
-            f.write(graph.nodes[node].get(summarised_property, "No content"))
+        # if "summary" in graph.nodes[node]:
+        print(f"writing summary:")
+        print(graph.nodes[node].get("summary"))
+        input("")
+        f.write(graph.nodes[node].get("summary"))
+        # else:
+            # f.write(graph.nodes[node].get(summarised_property, "No content"))
 
     for child in graph.successors(node):
-        create_markdown_files(graph, child, output_dir, visited)
+        create_markdown_files(graph=graph, node=child, output_dir=output_dir,summarised_property=summarised_property, visited=visited)

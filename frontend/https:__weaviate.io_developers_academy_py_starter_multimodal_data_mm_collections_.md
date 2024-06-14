@@ -1,0 +1,2 @@
+# https:__weaviate.io_developers_academy_py_starter_multimodal_data_mm_collections_
+No content
