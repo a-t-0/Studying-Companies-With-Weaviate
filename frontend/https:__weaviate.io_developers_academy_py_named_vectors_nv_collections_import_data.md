@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_academy_py_named_vectors_nv_collections_import_data
+# https:\_\_weaviate.io_developers_academy_py_named_vectors_nv_collections_import_data
+
 No content

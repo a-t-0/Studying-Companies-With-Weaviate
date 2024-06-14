@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_model-providers_voyageai_reranker
+# https:\_\_weaviate.io_developers_weaviate_model-providers_voyageai_reranker
+
 No content

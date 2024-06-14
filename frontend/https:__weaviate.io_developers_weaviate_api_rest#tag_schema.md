@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_api_rest#tag_schema
+# https:\_\_weaviate.io_developers_weaviate_api_rest#tag_schema
+
 No content

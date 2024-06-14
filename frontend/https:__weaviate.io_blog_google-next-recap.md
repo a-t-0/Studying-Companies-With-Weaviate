@@ -1,2 +1,3 @@
-# https:__weaviate.io_blog_google-next-recap
+# https:\_\_weaviate.io_blog_google-next-recap
+
 No content

@@ -1,2 +1,3 @@
-# https:__weaviate.io_blog_Lock-striping-pattern
+# https:\_\_weaviate.io_blog_Lock-striping-pattern
+
 No content

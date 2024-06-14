@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_api_graphql_search-operators#nearimage
+# https:\_\_weaviate.io_developers_weaviate_api_graphql_search-operators#nearimage
+
 No content

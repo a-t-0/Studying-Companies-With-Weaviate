@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_tutorials_spark-connector
+# https:\_\_weaviate.io_developers_weaviate_tutorials_spark-connector
+
 No content

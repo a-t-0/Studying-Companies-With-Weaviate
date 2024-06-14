@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_api_graphql_search-operators#variables-2
+# https:\_\_weaviate.io_developers_weaviate_api_graphql_search-operators#variables-2
+
 No content

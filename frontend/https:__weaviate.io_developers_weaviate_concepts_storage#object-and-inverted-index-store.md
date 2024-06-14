@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_concepts_storage#object-and-inverted-index-store
+# https:\_\_weaviate.io_developers_weaviate_concepts_storage#object-and-inverted-index-store
+
 No content

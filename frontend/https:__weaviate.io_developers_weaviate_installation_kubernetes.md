@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_installation_kubernetes
+# https:\_\_weaviate.io_developers_weaviate_installation_kubernetes
+
 No content

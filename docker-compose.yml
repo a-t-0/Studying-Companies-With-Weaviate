@@ -22,10 +22,6 @@ services:
       PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
       # DEFAULT_VECTORIZER_MODULE: 'text2vec-contextionary'
       ENABLE_MODULES: 'text2vec-openai,text2vec-contextionary,sum-transformers'
-      DEFAULT_VECTORIZER_MODULE: text2vec-openai
-      OPENAI_APIKEY: sk-YOUR-KEY # For use with OpenAI. Setting this parameter is optional; you can also provide the key at query time.
-      OPENAI_ORGANIZATION: org-YOUR-ORG  # For use with OpenAI. Setting this parameter is optional; you can also provide the key at runtime.
-
       CLUSTER_HOSTNAME: 'node1'
   contextionary:
     environment:

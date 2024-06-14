@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_api_graphql_additional-operators
+# https:\_\_weaviate.io_developers_weaviate_api_graphql_additional-operators
+
 No content

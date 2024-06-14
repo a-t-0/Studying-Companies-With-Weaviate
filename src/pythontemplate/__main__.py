@@ -10,7 +10,7 @@ from src.pythontemplate.frontend.visualize_summarised_website import (
     create_mdbook,
 )
 from src.pythontemplate.get_website_data.visualize_website_tree import (
-    visualize_tree_v1,
+    visualize_tree_v5,
 )
 from src.pythontemplate.get_website_data.website_to_graph import (
     graph_to_json,
@@ -50,6 +50,7 @@ if not os.path.exists(website_data_path):
         counter=0,
     )
     graph_to_json(G=website_graph, filepath=website_data_path)
+
     # Ensure the json data is loaded into weaviate.
     load_local_json_data_into_weaviate(
         weaviate_local_host_url=weaviate_local_host_url,
@@ -62,6 +63,12 @@ else:
     website_graph = json_to_graph(
         filepath=website_data_path, summarised_property=summarised_property
     )
+print("Start visual")
+# visualize_tree_v2(G=website_graph)
+# visualize_tree_v3(G=website_graph, root=company_urls[0])
+# visualize_tree_v4(G=website_graph)
+visualize_tree_v5(G=website_graph, root=company_urls[0])
+input("ENDED visual")
 
 # Perform queries to Weaviate to summarise the data.
 if not os.path.exists(summarised_website_data_path):
@@ -74,9 +81,9 @@ if not os.path.exists(summarised_website_data_path):
         json.dump(
             summarised_data, f, indent=4
         )  # Add indentation for readability
+
 else:
     summarised_data = load_from_json(filepath=summarised_website_data_path)
-
 
 inject_summarisation_into_website_graph(
     data=summarised_data,
@@ -85,6 +92,7 @@ inject_summarisation_into_website_graph(
     json_object_name=json_object_name,
     summarised_property=summarised_property,
 )
+
 # visualize_tree_v1(G=website_graph)
 
 

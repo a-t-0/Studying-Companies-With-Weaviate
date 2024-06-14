@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_academy_py_named_vectors_nv_queries_use_cases
+# https:\_\_weaviate.io_developers_academy_py_named_vectors_nv_queries_use_cases
+
 No content

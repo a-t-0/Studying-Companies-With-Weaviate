@@ -1,2 +1,3 @@
-# https:__weaviate.io_blog_wcs-public-beta
+# https:\_\_weaviate.io_blog_wcs-public-beta
+
 No content

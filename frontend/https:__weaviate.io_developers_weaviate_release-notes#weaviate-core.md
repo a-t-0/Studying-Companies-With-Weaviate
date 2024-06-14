@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_release-notes#weaviate-core
+# https:\_\_weaviate.io_developers_weaviate_release-notes#weaviate-core
+
 No content

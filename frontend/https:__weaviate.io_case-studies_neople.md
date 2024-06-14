@@ -1,2 +1,3 @@
-# https:__weaviate.io_case-studies_neople
+# https:\_\_weaviate.io_case-studies_neople
+
 No content

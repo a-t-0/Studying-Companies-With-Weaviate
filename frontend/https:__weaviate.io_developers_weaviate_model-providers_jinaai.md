@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_model-providers_jinaai
+# https:\_\_weaviate.io_developers_weaviate_model-providers_jinaai
+
 No content

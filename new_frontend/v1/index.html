@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Navigation Tree</title>
+    <style>
+        .tree {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .tree-item {
+            margin: 5px 0;
+        }
+        .tree-item.expanded > ul {
+            display: block;
+        }
+        .tree-item > span {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <ul class="tree" id="navigation-tree">
+        </ul>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_academy_py_starter_custom_vectors_setup_weaviate_create_instance
+# https:\_\_weaviate.io_developers_academy_py_starter_custom_vectors_setup_weaviate_create_instance
+
 No content

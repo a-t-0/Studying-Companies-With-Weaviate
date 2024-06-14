@@ -1,2 +1,3 @@
-# https:__weaviate.io_blog_how-to-build-an-image-search-application-with-weaviate
+# https:\_\_weaviate.io_blog_how-to-build-an-image-search-application-with-weaviate
+
 No content

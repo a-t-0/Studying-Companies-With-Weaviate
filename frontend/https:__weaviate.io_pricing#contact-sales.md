@@ -1,2 +1,3 @@
-# https:__weaviate.io_pricing#contact-sales
+# https:\_\_weaviate.io_pricing#contact-sales
+
 No content

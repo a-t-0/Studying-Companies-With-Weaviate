@@ -1,2 +1,3 @@
-# https:__weaviate.io_pricing#faq
+# https:\_\_weaviate.io_pricing#faq
+
 No content

@@ -1,2 +1,3 @@
-# https:__weaviate.io_blog_llamaindex-and-weaviate
+# https:\_\_weaviate.io_blog_llamaindex-and-weaviate
+
 No content

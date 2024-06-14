@@ -1,2 +1,3 @@
-# https:__weaviate.io_services_education-and-support
+# https:\_\_weaviate.io_services_education-and-support
+
 No content

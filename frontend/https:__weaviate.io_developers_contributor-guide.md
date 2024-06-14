@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_contributor-guide
+# https:\_\_weaviate.io_developers_contributor-guide
+
 No content

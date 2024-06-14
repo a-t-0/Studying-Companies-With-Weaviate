@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_tutorials_import#import-setup
+# https:\_\_weaviate.io_developers_weaviate_tutorials_import#import-setup
+
 No content

@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_academy_py_starter_custom_vectors_object_collections_preparation
+# https:\_\_weaviate.io_developers_academy_py_starter_custom_vectors_object_collections_preparation
+
 No content

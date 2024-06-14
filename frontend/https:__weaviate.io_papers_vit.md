@@ -1,2 +1,3 @@
-# https:__weaviate.io_papers_vit
+# https:\_\_weaviate.io_papers_vit
+
 No content

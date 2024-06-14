@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_model-providers_ollama
+# https:\_\_weaviate.io_developers_weaviate_model-providers_ollama
+
 No content

@@ -1,2 +1,3 @@
-# https:__weaviate.io_weaviate-support-terms
+# https:\_\_weaviate.io_weaviate-support-terms
+
 No content

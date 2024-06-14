@@ -47,13 +47,14 @@ def add_imported_json_graph_to_weaviate(
     summarised_property: str,
 ) -> None:
     remove_existing_schemas_from_weaviate(client=client)
-    # schema: Dict = create_new_schema(
-    # json_object_name=json_object_name, summarised_property=summarised_property
-    # )
-    schema: Dict = create_new_schema_with_summary(
+    schema: Dict = create_new_schema(
         json_object_name=json_object_name,
         summarised_property=summarised_property,
     )
+    # schema: Dict = create_new_schema_with_summary(
+    # json_object_name=json_object_name,
+    # summarised_property=summarised_property,
+    # )
 
     add_schema(client, schema)
     # verify_data_satisfies_schema(data=data, schema=schema)
@@ -85,6 +86,10 @@ def create_new_schema(json_object_name: str, summarised_property: str) -> Dict:
         "properties": [
             {
                 "name": "url",
+                "dataType": ["text"],
+            },
+            {
+                "name": "urlHash",
                 "dataType": ["text"],
             },
             {

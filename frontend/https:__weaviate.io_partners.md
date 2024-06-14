@@ -1,2 +1,3 @@
-# https:__weaviate.io_partners
+# https:\_\_weaviate.io_partners
+
 No content

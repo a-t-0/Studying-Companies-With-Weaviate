@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_academy_py_standalone_which_search_strengths
+# https:\_\_weaviate.io_developers_academy_py_standalone_which_search_strengths
+
 No content

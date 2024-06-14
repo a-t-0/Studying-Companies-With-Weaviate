@@ -1,2 +1,3 @@
-# https:__weaviate.io_community_events
+# https:\_\_weaviate.io_community_events
+
 No content

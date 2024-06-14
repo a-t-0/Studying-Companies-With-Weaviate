@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_academy_py_starter_multimodal_data_mm_searches_keyword_hybrid
+# https:\_\_weaviate.io_developers_academy_py_starter_multimodal_data_mm_searches_keyword_hybrid
+
 No content

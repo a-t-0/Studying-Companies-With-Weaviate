@@ -1,2 +1,3 @@
-# https:__weaviate.io_company_playbook_i-recently-onboarded-myself-introducing-people-operations
+# https:\_\_weaviate.io_company_playbook_i-recently-onboarded-myself-introducing-people-operations
+
 No content

@@ -1,6 +1,8 @@
 import os
 from typing import List
+
 from typeguard import typechecked
+
 
 def create_mdbook(graph, root, output_dir: str, summarised_property: str):
     if not os.path.exists(output_dir):
@@ -18,7 +20,13 @@ def create_mdbook(graph, root, output_dir: str, summarised_property: str):
         f.writelines(summary_content)
 
     # Create markdown files for each node
-    create_markdown_files(graph=graph, node=root, output_dir=output_dir,summarised_property=summarised_property, visited=None)
+    create_markdown_files(
+        graph=graph,
+        node=root,
+        output_dir=output_dir,
+        summarised_property=summarised_property,
+        visited=None,
+    )
 
 
 def create_bft(graph, root_node, tree: List[List]):
@@ -97,8 +105,10 @@ def create_summary_content_for_node(*, level: int, node) -> str:
     )
     return content
 
+
 @typechecked
-def create_markdown_files(*, graph, node, output_dir, summarised_property: str, visited=None
+def create_markdown_files(
+    *, graph, node, output_dir, summarised_property: str, visited=None
 ):
     """This function creates markdown files for nodes in the graph structure.
 
@@ -129,7 +139,13 @@ def create_markdown_files(*, graph, node, output_dir, summarised_property: str, 
         input("")
         f.write(graph.nodes[node].get("summary"))
         # else:
-            # f.write(graph.nodes[node].get(summarised_property, "No content"))
+        # f.write(graph.nodes[node].get(summarised_property, "No content"))
 
     for child in graph.successors(node):
-        create_markdown_files(graph=graph, node=child, output_dir=output_dir,summarised_property=summarised_property, visited=visited)
+        create_markdown_files(
+            graph=graph,
+            node=child,
+            output_dir=output_dir,
+            summarised_property=summarised_property,
+            visited=visited,
+        )

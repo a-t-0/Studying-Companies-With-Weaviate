@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_more-resources_write-great-bug-reports
+# https:\_\_weaviate.io_developers_weaviate_more-resources_write-great-bug-reports
+
 No content

@@ -1,2 +1,3 @@
-# https:__weaviate.io_blog_multimodal-RAG
+# https:\_\_weaviate.io_blog_multimodal-RAG
+
 No content

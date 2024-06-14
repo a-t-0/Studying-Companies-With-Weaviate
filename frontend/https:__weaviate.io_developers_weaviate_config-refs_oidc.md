@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_config-refs_oidc
+# https:\_\_weaviate.io_developers_weaviate_config-refs_oidc
+
 No content

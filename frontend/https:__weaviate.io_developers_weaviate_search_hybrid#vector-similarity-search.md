@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_weaviate_search_hybrid#vector-similarity-search
+# https:\_\_weaviate.io_developers_weaviate_search_hybrid#vector-similarity-search
+
 No content

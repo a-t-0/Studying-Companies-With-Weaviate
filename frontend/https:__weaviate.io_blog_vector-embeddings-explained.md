@@ -1,2 +1,3 @@
-# https:__weaviate.io_blog_vector-embeddings-explained
+# https:\_\_weaviate.io_blog_vector-embeddings-explained
+
 No content

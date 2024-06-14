@@ -1,2 +1,3 @@
-# https:__weaviate.io_developers_academy_py_zero_to_mvp_hello_weaviate_wrap_up
+# https:\_\_weaviate.io_developers_academy_py_zero_to_mvp_hello_weaviate_wrap_up
+
 No content
