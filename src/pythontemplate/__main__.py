@@ -30,6 +30,11 @@ from src.pythontemplate.summarise_json import (
 # company_urls: List[str] = ["https://waarneming.nl/"]
 company_urls: List[str] = ["https://trucol.io/"]
 website_data_path: str = "website_data.json"
+# For this repo the Weaviate data classes are web pages.
+json_object_name: str = "webPage"
+# For this repo, the Weaviate property that is being summarised by is the
+# main text of the web page.
+summarised_property: str = "webPageMainText"
 summarised_website_data_path: str = "summarised_by_weaviate.json"
 weaviate_local_host_url: str = "http://localhost:8080"
 md_book_path: str = "frontend"
@@ -49,19 +54,20 @@ if not os.path.exists(website_data_path):
     load_local_json_data_into_weaviate(
         weaviate_local_host_url=weaviate_local_host_url,
         json_input_path=website_data_path,
-        json_type="nodes",
-        type_property="text_content",
-        max_nr_of_queries=max_nr_of_queries,
+        json_object_name=json_object_name,
+        summarised_property=summarised_property,
     )
 else:
-    website_graph = json_to_graph(filepath=website_data_path)
-input("STOP")
+    website_graph = json_to_graph(
+        filepath=website_data_path, summarised_property=summarised_property
+    )
+
 # Perform queries to Weaviate to summarise the data.
 if not os.path.exists(summarised_website_data_path):
     summarised_data = ask_weaviate_to_summarise(
         weaviate_local_host_url=weaviate_local_host_url,
-        json_type="nodes",
-        type_property="text_content",
+        json_object_name=json_object_name,
+        summarised_property=summarised_property,
     )
     with open(summarised_website_data_path, "w") as f:
         json.dump(
@@ -75,6 +81,7 @@ inject_summarisation_into_website_graph(
     data=summarised_data,
     website_graph=website_graph,
     max_nr_of_queries=max_nr_of_queries,
+    summarised_property=summarised_property,
 )
 visualize_tree_v1(G=website_graph)
 

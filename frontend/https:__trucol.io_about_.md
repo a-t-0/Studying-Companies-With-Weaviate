@@ -1,4 +1,5 @@
-# https:__trucol.io_about_
+# https:\__trucol.io_about_
+
 Learn about the origins of TruCol and the team behind TruCol.
 We experienced that we did not always have the time or a skill for specific coding work ourselves when setting up our own company. Setting out bounties would provide a great solution for this. However, existing systems require an often costly middleperson and a modicum of trust between all parties. This is why we set out to develop a decentralized, trust-less collaboration platform and protocol for test-driven programming development. The project started at the ETHDenver Hackathon as a collaboration between four students interested in the development of Ethereum projects. After competing in various categories, and successfully claiming multiple bounties, the team decided to continue with the development of the project.
 A master student of space exploration at the faculty of Aerospace Engineering at Delft University and Technology and a master student of cognitive computing at the faculty of Social Sciences at Radboud University.
@@ -17,5 +18,5 @@ Subhechha is currently pursuing her MSc. degree in Space Flight with a specialis
 
 A motivated student with an interdisciplinary bachelor in artificial intelligence and philosophy at the Liberal Arts & Sciences faculty of Utrecht University. Victoria currently works on a master in Artificial Intelligence with a specialisation in cognitive computing at Radboud University. She has a passion for making science accessible and works on science outreach as the editor in chief at De Focus” - an online platform for scientific journalism.
 
-About     Contact     GitHub    
+About     Contact     GitHub
 © 2023. A TruCol project. CC BY-SA 4.0.

@@ -1,11 +1,12 @@
-# https:__trucol.io_faq_
+# https:\__trucol.io_faq_
+
 Frequently Asked Questions
 Instantly! The protocol is set up in such a way that if you solve the problem by completing the contract, you become the target of the contract and the contract is fulfilled.
 Yes! As the contracts are open source you can simply run the available code to verify your code locally before pushing your solution to the blockchain.
 The costs of the contract depend on what the contract does. A minimum of approximately $50,- can currently be expected. We expect that the contract costs will go down in the future with ETH 2.0 thanks to staking and/or sharding. Furthermore, to reduce evaluation costs, one could opt to sacrifice some decentralisation through the use of an oracle service with (decentralised) CIs.
 Select one of your tasks that can be verified objectively by a computer and determine how much you are willing spend on the solution. For example, “give me a flight-crew planning that minimizes the costs”, then specify what the requirements for the solution must be, the write a smart-contract that tests those requirements and publish it on chain. When someone posts a solution, they will get the bounty and you can get their solution.
 Such problems are currently not well suited to be solved for the presented protocol. Currently only well defined tasks are possible. With well defined we mean tasks that have a determinisitic and verifiable answer for any given input. The most optimal usecase for this protocol currently consists of problems in NP. This is because there oftern are polynomial time approximations (referred to as heuristics) for non-polynomial problems. A typical bounty could be: “Solve a TSP instance (that has a certain property, e.g. for fully connected networks in O(n^1.27) time). This could then be enforced by limiting the maximum allowed gas that the solution of the bounty contract is allowed to consume whilst still getting the bonus. (Or more harshly, gas costs could subtract from the bounty, untill no bounty is awarded if the solution requires too much computational budget/gas).
-Yes. To minimise costs, a part of the randomly generated number could be used to generate a random input size in a constrained range, e.g. 5<n<40, next the remainder of the VFR number could be used to initialise random edgeweights of a graph. This strategy could be used to make a solution space that is large enough to not be hard-codable (e.g. through variety of graph edge connection patterns) whilst still limiting the computational costs.
+Yes. To minimise costs, a part of the randomly generated number could be used to generate a random input size in a constrained range, e.g. 5\<n\<40, next the remainder of the VFR number could be used to initialise random edgeweights of a graph. This strategy could be used to make a solution space that is large enough to not be hard-codable (e.g. through variety of graph edge connection patterns) whilst still limiting the computational costs.
 Yes, in special cases, where the sponsor already has a solution to a problem, but wants an even more efficient solution (with a lower time complexity). This protocol is referred to as: Direct Hash Verification. (For more details, see below)
 Suppose:
 Then the sponsor could compute what the smart contract evaluation costs must be if the bounty-hunter submits a solution that:
@@ -16,10 +17,10 @@ To prevent the bounty hunter from hardcoding the input/output relation and uploa
 The smart contract of the sponsor hashes the solution and verifies if they are the same as the hash codes published by the sponsor.
 5.1 If they are, the bounty hunter gets paid.
 5.2 If they are not, the sponsor must prove that the sponsor did not simply put in false hash codes to prevent paying the bounty.
-5.3 Therefore the computationally expensive method of the sponsor (24254245*n^5 time) should be included to prove that they do result in the correct hashes.  This computation must be paid for (in advance) by the bounty hunter. It is a form of staking where the bounty hunter says “I bet x dollars that my answers yield the right result”.
+5.3 Therefore the computationally expensive method of the sponsor (24254245\*n^5 time) should be included to prove that they do result in the correct hashes.  This computation must be paid for (in advance) by the bounty hunter. It is a form of staking where the bounty hunter says “I bet x dollars that my answers yield the right result”.
 5.4 If the expensive method results in the correct hashes, the smart contract of the sponsor is terminated without paying the bounty. (The sponsor must upload a new secret to Chainlink)
 5.5 If the expensive method results in the incorrect hashes, the sponsor put up false hashes, and the bounty (+computation for doing the last check) are paid out to the bounty hunter.
 This guarantees the solution that is submitted by the bounty hunter is an improvement/new knowledge for the employer/sponsor.
 To prevent the bounty hunter from hardcoding the hash codes directly based on the inputs, the input could be hidden somewhere, e.g. in an Oracle. and only publish it once the bounty hunter requests evaluation. Visualised in p9 of this whitepaper. The value of this secret should be a bounded secret to prevent the bounty hunter from getting too much costs. The contract by the sponsor could be  terminated if the bounty does not solve the contract).
-About     Contact     GitHub    
+About     Contact     GitHub
 © 2023. A TruCol project. CC BY-SA 4.0.

@@ -53,7 +53,7 @@ mdbook build &&  mdbook serve
 
 ![After Image](images/a1.png)
 
-Ps. The summary texts are swapped, because I use indexes instead of node texts 
+Ps. The summary texts are swapped, because I use indexes instead of node texts
 to add the summaries, and I expect pre-commit sorted the `.json` file inbetween.
 
 ## How can this be made more awesome?🚀
@@ -65,4 +65,3 @@ to add the summaries, and I expect pre-commit sorted the `.json` file inbetween.
 [agpl3_badge]: https://img.shields.io/badge/License-AGPL_v3-blue.svg
 [black_badge]: https://img.shields.io/badge/code%20style-black-000000.svg
 [python_badge]: https://img.shields.io/badge/python-3.6-blue.svg
-
