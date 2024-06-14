@@ -1,6 +1,3 @@
-from typing import List
-
-
 def hierarchy_pos_no_recur(
     G, root, width=1.0, vert_gap=0.2, vert_loc=0, xcenter=0.5
 ):
@@ -34,7 +31,7 @@ def hierarchy_pos_no_recur(
             neighbors = list(G.neighbors(root))
             if parent != None and parent in neighbors:
                 neighbors.remove(parent)
-            print(f'{len(neighbors)}, {root}')
+            print(f"{len(neighbors)}, {root}")
             if len(neighbors) > 0:
                 dx = width / len(neighbors)
                 nextx = xcenter - width / 2 - dx / 2

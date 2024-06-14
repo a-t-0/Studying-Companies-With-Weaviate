@@ -1,15 +1,12 @@
 import networkx as nx
 from matplotlib import pyplot as plt
-from src.pythontemplate.get_website_data.custom_hierarch import WebsiteHierarchy, add_url_to_dict, build_hierarchy, dictify, unpack_urls
-from src.pythontemplate.get_website_data.plot_dict import plot_dict_tree
 from typeguard import typechecked
-from pprint import pprint
+
+from src.pythontemplate.get_website_data.custom_hierarch import add_url_to_dict
 from src.pythontemplate.get_website_data.hierarchy_evenly_spaced import (
     hierarchy_pos_evenly_spaced,
 )
-from src.pythontemplate.get_website_data.hierarchy_no_recur import (
-    hierarchy_pos_no_recur,
-)
+from src.pythontemplate.get_website_data.plot_dict import plot_dict_tree
 
 
 @typechecked
@@ -44,28 +41,27 @@ def make_graph_compliant(G):
     for edge in G.edges:
         left = edge[0].replace(":", "_")
         right = edge[1].replace(":", "_")
-        
+
         # Do not print recurrence.
         if left != right:
             plot_graph.add_edge(left, right)
 
-
     return plot_graph
 
+
 def remove_self_recur(G):
-    
-    removed_edges=[]
+
+    removed_edges = []
     for edge in G.edges:
         left = edge[0].replace(":", "_")
         right = edge[1].replace(":", "_")
         # Do not print recurrence.
         if left == right:
             removed_edges.append(edge)
-        
+
     for removed_edge in removed_edges:
         G.remove_edge(*removed_edge)
     return G
-
 
 
 def visualize_tree_v3(*, G: nx.DiGraph, root: str):
@@ -91,14 +87,13 @@ def visualize_tree_v5(*, G: nx.DiGraph, root: str):
     # hierarchy=build_hierarchy(G.nodes)
     # pprint(hierarchy)
     # website_hierarchy = WebsiteHierarchy()
-    url_structure: dict={}
+    url_structure: dict = {}
 
     for url in G.nodes:
         print(url)
-        updated_dict = add_url_to_dict(url_structure, url,[])
+        updated_dict = add_url_to_dict(url_structure, url, [])
         if updated_dict != None:
-            url_structure =updated_dict
+            url_structure = updated_dict
     print("done")
-    
-    plot_dict_tree(graph_dict={"weaviate.io":url_structure})
-    
+
+    plot_dict_tree(graph_dict={"weaviate.io": url_structure})
