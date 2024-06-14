@@ -2,7 +2,7 @@ import os
 from typing import List
 
 
-def create_mdbook(graph, root, output_dir):
+def create_mdbook(graph, root, output_dir: str, summarised_property: str):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
@@ -18,7 +18,7 @@ def create_mdbook(graph, root, output_dir):
         f.writelines(summary_content)
 
     # Create markdown files for each node
-    create_markdown_files(graph, root, output_dir)
+    create_markdown_files(graph, root, output_dir, summarised_property)
 
 
 def create_bft(graph, root_node, tree: List[List]):

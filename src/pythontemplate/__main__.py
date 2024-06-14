@@ -31,7 +31,7 @@ from src.pythontemplate.summarise_json import (
 company_urls: List[str] = ["https://trucol.io/"]
 website_data_path: str = "website_data.json"
 # For this repo the Weaviate data classes are web pages.
-json_object_name: str = "webPage"
+json_object_name: str = "WebPage"  # Must start with Capitalised letter.
 # For this repo, the Weaviate property that is being summarised by is the
 # main text of the web page.
 summarised_property: str = "webPageMainText"
@@ -81,11 +81,15 @@ inject_summarisation_into_website_graph(
     data=summarised_data,
     website_graph=website_graph,
     max_nr_of_queries=max_nr_of_queries,
+    json_object_name=json_object_name,
     summarised_property=summarised_property,
 )
 visualize_tree_v1(G=website_graph)
 
 
 create_mdbook(
-    graph=website_graph, root=company_urls[0], output_dir=md_book_path
+    graph=website_graph,
+    root=company_urls[0],
+    output_dir=md_book_path,
+    summarised_property=summarised_property,
 )

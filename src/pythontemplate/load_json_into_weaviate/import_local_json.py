@@ -34,12 +34,6 @@ def load_local_json_data_into_weaviate(
         json_object_name=json_object_name,
         summarised_property=summarised_property,
     )
-    ask_weaviate_to_summarize(
-        client=client,
-        json_object_name=json_object_name,
-        summarised_property=summarised_property,
-    )
-    input("ADDED")
 
 
 # Source 0: https://github.com/weaviate/recipes/blob/0b1542fad2f03f9316ccd52290f148397cb8c346/integrations/llm-frameworks/dspy/blog/2023-05-23-pdfs-to-weaviate/index.mdx#L266
@@ -132,8 +126,6 @@ def create_new_schema_with_summary(
             },
         },
     }
-    print("schema=")
-    input(schema)
     return schema
 
 

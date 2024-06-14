@@ -18,7 +18,6 @@ def ask_weaviate_to_summarise(
     client = weaviate.Client(weaviate_local_host_url)
     print(f"json_object_name={json_object_name}")
     print(f"summarised_property={summarised_property}")
-
     result = client.query.get(
         json_object_name,
         [
@@ -35,16 +34,21 @@ def ask_weaviate_to_summarise(
 
 
 def inject_summarisation_into_website_graph(
-    data, website_graph, max_nr_of_queries, summarised_property: str
+    data,
+    website_graph,
+    max_nr_of_queries,
+    json_object_name: str,
+    summarised_property: str,
 ):
-    print(data)
-    vals = data["data"]["Get"]["Nodes"]
+    vals = data["data"]["Get"][json_object_name]
     for i, node in enumerate(website_graph.nodes):
-
+        # print(f'vals[i]=')
         if i < max_nr_of_queries:
-            verify_summary_structure(single_summary=vals[i])
+            verify_summary_structure(
+                single_summary=vals[i], summarised_property=summarised_property
+            )
             original_main_text: str = get_original_text_from_summary_response(
-                single_summary=vals[i]
+                single_summary=vals[i], summarised_property=summarised_property
             )
             weaviate_summary: str = get_summary_response(
                 single_summary=vals[i]
@@ -53,8 +57,11 @@ def inject_summarisation_into_website_graph(
             for node in website_graph.nodes:
                 if node == summary_url:
                     website_graph.nodes[node]["summary"] = weaviate_summary
+                    print(
+                        f"website_graph.nodes[node]={website_graph.nodes[node]}"
+                    )
                     if (
-                        website_graph.nodes[node][summarised_property]
+                        website_graph.nodes[node]["text_content"]
                         != original_main_text
                     ):
                         raise ValueError(
@@ -64,7 +71,9 @@ def inject_summarisation_into_website_graph(
 
 @typechecked
 def verify_summary_structure(
-    *, single_summary: Dict[str, Dict[str, Union[str, List[Dict[str, str]]]]]
+    *,
+    single_summary: Dict[str, Dict[str, Union[str, List[Dict[str, str]]]]],
+    summarised_property: str,
 ):
     """Ensures a single summary contains the original text and the new summary
     in the correct position."""
@@ -98,7 +107,9 @@ def verify_summary_structure(
 
 
 def get_original_text_from_summary_response(
-    *, single_summary: Dict[str, Dict[str, Union[str, List[Dict[str, str]]]]]
+    *,
+    single_summary: Dict[str, Dict[str, Union[str, List[Dict[str, str]]]]],
+    summarised_property: str,
 ) -> str:
     """Returns the original main text that was extracted from the web page out
     of a Weaviate summary response.

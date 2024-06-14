@@ -41,7 +41,6 @@ def website_to_graph(
     soup = BeautifulSoup(response.content, "html.parser")
 
     # Extract text content (replace with your preferred method if needed)
-    text_content = soup.get_text(separator="\n").strip()
 
     # Create a graph and add the current URL as a node with text content
     # website_graph.add_node(new_url.replace(":", ""), text_content=text_content)
@@ -80,7 +79,7 @@ def get_main_text(*, url: str):
     main_text = ""
     for p_tag in soup.find_all("p"):
         main_text += p_tag.get_text() + "\n"
-    return main_text
+    return main_text[: min(len(main_text), 1000)]
 
 
 def graph_to_json(G: nx.DiGraph, filepath: str):
