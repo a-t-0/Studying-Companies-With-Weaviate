@@ -33,7 +33,7 @@ website_data_path: str = "website_data.json"
 summarised_website_data_path: str = "summarised_by_weaviate.json"
 weaviate_local_host_url: str = "http://localhost:8080"
 md_book_path: str = "frontend"
-max_nr_of_queries: int = 3  # Used to prevent timeout error.
+max_nr_of_queries: int = 10  # Used to prevent timeout error.
 
 website_graph = nx.DiGraph()
 if not os.path.exists(website_data_path):
@@ -55,7 +55,7 @@ if not os.path.exists(website_data_path):
     )
 else:
     website_graph = json_to_graph(filepath=website_data_path)
-
+input("STOP")
 # Perform queries to Weaviate to summarise the data.
 if not os.path.exists(summarised_website_data_path):
     summarised_data = ask_weaviate_to_summarise(
