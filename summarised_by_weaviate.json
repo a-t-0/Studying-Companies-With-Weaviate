@@ -1,22 +1,7 @@
 {
-    "data": {
-        "Get": {
-            "WebPage": null
-        }
-    },
-    "errors": [
-        {
-            "locations": [
-                {
-                    "column": 6,
-                    "line": 1
-                }
-            ],
-            "message": "explorer: list class: extend: extend summary: fail with status 500: index out of range in self",
-            "path": [
-                "Get",
-                "WebPage"
-            ]
-        }
-    ]
+  "data": {
+    "Get": {
+      "WebPage": []
+    }
+  }
 }

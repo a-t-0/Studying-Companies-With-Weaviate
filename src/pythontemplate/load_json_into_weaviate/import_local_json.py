@@ -34,6 +34,12 @@ def load_local_json_data_into_weaviate(
         json_object_name=json_object_name,
         summarised_property=summarised_property,
     )
+    ask_weaviate_to_summarize(
+        client=client,
+        json_object_name=json_object_name,
+        summarised_property=summarised_property,
+    )
+    input("ADDED")
 
 
 # Source 0: https://github.com/weaviate/recipes/blob/0b1542fad2f03f9316ccd52290f148397cb8c346/integrations/llm-frameworks/dspy/blog/2023-05-23-pdfs-to-weaviate/index.mdx#L266
@@ -46,9 +52,14 @@ def add_imported_json_graph_to_weaviate(
     summarised_property: str,
 ) -> None:
     remove_existing_schemas_from_weaviate(client=client)
-    schema: Dict = create_new_schema(
-        client=client, json_object_name=json_object_name
+    # schema: Dict = create_new_schema(
+    # json_object_name=json_object_name, summarised_property=summarised_property
+    # )
+    schema: Dict = create_new_schema_with_summary(
+        json_object_name=json_object_name,
+        summarised_property=summarised_property,
     )
+
     add_schema(client, schema)
     # verify_data_satisfies_schema(data=data, schema=schema)
     weaviate_data_objects: List[Dict] = create_weaviate_formatted_data_objects(
@@ -73,7 +84,7 @@ def remove_existing_schemas_from_weaviate(client: weaviate.Client) -> None:
     client.schema.delete_all()
 
 
-def create_new_schema(client: weaviate.Client, json_object_name: str) -> Dict:
+def create_new_schema(json_object_name: str, summarised_property: str) -> Dict:
     schema = {
         "class": json_object_name,
         "properties": [
@@ -82,11 +93,47 @@ def create_new_schema(client: weaviate.Client, json_object_name: str) -> Dict:
                 "dataType": ["text"],
             },
             {
-                "name": "webPageMainText",
+                "name": summarised_property,
                 "dataType": ["text"],
             },
         ],
     }
+    return schema
+
+
+def create_new_schema_with_summary(
+    json_object_name: str, summarised_property: str
+) -> Dict:
+    schema = {
+        "class": json_object_name,
+        "vectorizer": "text2vec-openai",
+        "properties": [
+            {
+                "name": "url",
+                "dataType": ["text"],
+            },
+            {
+                "name": summarised_property,
+                "dataType": ["text"],
+                "moduleConfig": {
+                    "text2vec-openai": {
+                        "skip": False,
+                        "vectorizePropertyName": False,
+                    }
+                },
+            },
+        ],
+        "moduleConfig": {
+            "generative-openai": {},
+            "text2vec-openai": {
+                "model": "ada",
+                "modelVersion": "002",
+                "type": "text",
+            },
+        },
+    }
+    print("schema=")
+    input(schema)
     return schema
 
 

@@ -9,7 +9,7 @@ services:
     - '8080'
     - --scheme
     - http
-    image: cr.weaviate.io/semitechnologies/weaviate:1.24.17
+    image: cr.weaviate.io/semitechnologies/weaviate:1.25.4
     ports:
     - 8080:8080
     - 50051:50051
@@ -17,15 +17,11 @@ services:
     environment:
       CONTEXTIONARY_URL: contextionary:9999
       SUM_INFERENCE_API: "http://sum-transformers:8080"
-      QUERY_DEFAULTS_LIMIT: 2500
+      QUERY_DEFAULTS_LIMIT: 25
       AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
       PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
-      # DEFAULT_VECTORIZER_MODULE: 'text2vec-contextionary'
-      ENABLE_MODULES: 'text2vec-openai,text2vec-contextionary,sum-transformers'
-      DEFAULT_VECTORIZER_MODULE: text2vec-openai
-      OPENAI_APIKEY: sk-YOUR-KEY # For use with OpenAI. Setting this parameter is optional; you can also provide the key at query time.
-      OPENAI_ORGANIZATION: org-YOUR-ORG  # For use with OpenAI. Setting this parameter is optional; you can also provide the key at runtime.
-
+      DEFAULT_VECTORIZER_MODULE: 'text2vec-contextionary'
+      ENABLE_MODULES: 'text2vec-contextionary,sum-transformers'
       CLUSTER_HOSTNAME: 'node1'
   contextionary:
     environment:
