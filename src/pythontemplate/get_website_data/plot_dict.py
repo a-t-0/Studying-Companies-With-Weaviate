@@ -19,11 +19,11 @@ def visit(graph, node, parent=None):
             graph.add_node(
                 Node(
                     # k,
-                    'This is the summary placeholder',
+                    "This is the summary placeholder",
                     # URL="This is a summary text.",
                     # shape="box",
                     # comment="CUstomTitle",
-                    id="weaviate.io",# Whats on the text 
+                    id="weaviate.io",  # Whats on the text
                     # label="CUstomTitle1",
                     label=k,
                     # peripheries="CUstomTitle2",
