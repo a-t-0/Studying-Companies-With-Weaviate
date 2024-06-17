@@ -23,6 +23,11 @@ This Weaviate workflow uses the summarise ✨ function by to speed up studying a
 
 The summarised webpages are visualized in a tree structure in your self-hosted mdbook website🌐.
 
+## Demo
+
+The video below shows how the Weaviate.io website overview can be seen, while quick scoping the page summaries.
+<video src="https://github.com/a-t-0/Studying-Companies-With-Weaviate/assets/34750068/5475e1dc-37ce-4c0d-b865-6a78d49b07fb"></video>
+
 ## Usage
 
 To use this code, install the [prerequisites](prerequisites.md), and run [this](Summarise_website_with_weaviate.ipynb) Jupiter Notebook. Afterwards, you can show your website as summarised by Weaviate with:
@@ -33,10 +38,6 @@ mdbook build &&  mdbook serve
 
 (Ps. You can also run `python -m src.pythontemplate` if you prefer CLI over ipynb).
 
-## Demo
-
-The video below shows how the Weaviate.io website overview can be seen, while quick scoping the page summaries.
-<video src="https://github.com/a-t-0/Studying-Companies-With-Weaviate/assets/34750068/5475e1dc-37ce-4c0d-b865-6a78d49b07fb"></video>
 
 ## How can this be made more awesome?🚀
 - Include CI pipeline to (show people how to run it a-z with 1 command on their own device).
