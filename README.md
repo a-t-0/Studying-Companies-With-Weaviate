@@ -1,4 +1,4 @@
-# Studying Companies with Weaviate Summary
+# Studying companies with Weaviate summary
 
 [![Python 3.12][python_badge]](https://www.python.org/downloads/release/python-3120/)
 [![License: AGPL v3][agpl3_badge]](https://www.gnu.org/licenses/agpl-3.0)
