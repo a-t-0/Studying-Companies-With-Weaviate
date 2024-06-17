@@ -39,7 +39,14 @@ The video below shows how the Weaviate.io website overview can be seen, while qu
 <video src="https://github.com/a-t-0/Studying-Companies-With-Weaviate/assets/34750068/5475e1dc-37ce-4c0d-b865-6a78d49b07fb"></video>
 
 ## How can this be made more awesome?🚀
-- Count number of links to- & from page, and visualize it in edge thickness in a (PlantUml) tree/ table of contents.
+- Include CI pipeline to (show people how to run it a-z with 1 command on their own device).
+- Include support for Mac & Windows.
+- Present as a service.
+- Allow the user to navigate the tree by folding/unfolding into deeper levels
+- limit the number of children to 5 and a `...<unfold>` child.
+- (Optional) use color schemes to separate different branches.
+- Include the link to the original page and give option to show the main, unsummarised text.
+- Include number of links to- & from page, and visualize it in edge thickness.
 - Most of the time, it is not just the raw data you want from a company website but the secondary (or ternary) insights gained in processing that data and/or combining it with other relevant or recent developments. This is where Weaviate may shine, as it supports enhancing your own databases in combination with LLMs. A guided structure may be set up to facilitate this.
 
 [agpl3_badge]: https://img.shields.io/badge/License-AGPL_v3-blue.svg
