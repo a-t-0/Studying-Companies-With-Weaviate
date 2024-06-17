@@ -33,28 +33,10 @@ mdbook build &&  mdbook serve
 
 (Ps. You can also run `python -m src.pythontemplate` if you prefer CLI over ipynb).
 
-## Example 1
+## Demo
 
-**Before:**
-
-![Before Image](images/b0.png)
-
-**After:**
-
-![After Image](images/a0.png)
-
-## Another example
-
-**Before:**
-
-![Before Image](images/b1.png)
-
-**After:**
-
-![After Image](images/a1.png)
-
-Ps. The summary texts are swapped, because I use indexes instead of node texts
-to add the summaries, and I expect pre-commit sorted the `.json` file inbetween.
+The video below shows how the Weaviate.io website overview can be seen, while quick scoping the page summaries.
+<video src="demo.mp4"></video>
 
 ## How can this be made more awesome?🚀
 
