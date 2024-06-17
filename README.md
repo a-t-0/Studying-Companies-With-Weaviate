@@ -36,7 +36,9 @@ mdbook build &&  mdbook serve
 ## Demo
 
 The video below shows how the Weaviate.io website overview can be seen, while quick scoping the page summaries.
-<video src="demo.mp4"></video>
+<!-- <video src="demo.mp4"></video> -->
+<video src="<video controls src="https://github.com/a-t-0/Studying-Companies-With-Weaviate/raw/improve-add-to-weaviate/demo.mp4" title="demo.mp4"></video>"></video>
+
 
 ## How can this be made more awesome?🚀
 
