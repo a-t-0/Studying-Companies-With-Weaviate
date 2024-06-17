@@ -101,44 +101,6 @@ def create_new_schema(json_object_name: str, summarised_property: str) -> Dict:
     return schema
 
 
-def create_new_schema_with_summary(
-    json_object_name: str, summarised_property: str
-) -> Dict:
-    schema = {
-        "class": json_object_name,
-        "vectorizer": "text2vec-openai",
-        "properties": [
-            {
-                "name": "url",
-                "dataType": ["text"],
-            },
-            {
-                "name": "urlHash",
-                "dataType": ["text"],
-            },
-            {
-                "name": summarised_property,
-                "dataType": ["text"],
-                "moduleConfig": {
-                    "text2vec-openai": {
-                        "skip": False,
-                        "vectorizePropertyName": False,
-                    }
-                },
-            },
-        ],
-        "moduleConfig": {
-            "generative-openai": {},
-            "text2vec-openai": {
-                "model": "ada",
-                "modelVersion": "002",
-                "type": "text",
-            },
-        },
-    }
-    return schema
-
-
 def add_schema(client: weaviate.Client, schema: Dict) -> None:
     client.schema.create_class(schema)
 

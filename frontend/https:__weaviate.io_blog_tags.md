@@ -1,3 +1,3 @@
 # https:\_\_weaviate.io_blog_tags
 
-No content
+No web page text found, so no summary available.

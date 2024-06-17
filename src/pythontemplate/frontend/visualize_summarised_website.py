@@ -129,17 +129,9 @@ def create_markdown_files(
     visited.add(node)  # Add current node to visited set
 
     file_path = os.path.join(output_dir, f'{node.replace("/", "_")}.md')
-    print(f"file_path={file_path}")
     with open(file_path, "w") as f:
         f.write(f'# {node.replace("/", "_")}\n')
-        #
-        # if "summary" in graph.nodes[node]:
-        print(f"writing summary:")
-        print(graph.nodes[node].get("summary"))
-        input("")
         f.write(graph.nodes[node].get("summary"))
-        # else:
-        # f.write(graph.nodes[node].get(summarised_property, "No content"))
 
     for child in graph.successors(node):
         create_markdown_files(

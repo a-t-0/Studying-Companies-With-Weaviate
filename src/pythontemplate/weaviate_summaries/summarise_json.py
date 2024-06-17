@@ -67,10 +67,9 @@ def single_query_v0(
         )
         .with_where(
             {
-                # "path": ["id"],
                 "path": ["urlHash"],
                 "operator": "Equal",
-                # "valueText": "0093d344-66ba-40e2-8525-3741a986344b",
+                # url hash is used because equal behaves as contains.
                 "valueText": url_hash,
             }
         )
@@ -90,7 +89,6 @@ def inject_summarisation_into_website_graph(
     vals = data["data"]["Get"][json_object_name]
     print(f"len(vals)={len(vals)}")
     for i, node in enumerate(website_graph.nodes):
-        print(f"vals[i]=")
         if i < max_nr_of_queries:
             verify_summary_structure(
                 single_summary=vals[i], summarised_property=summarised_property
@@ -127,32 +125,39 @@ def verify_summary_structure(
 ):
     """Ensures a single summary contains the original text and the new summary
     in the correct position."""
+
     if "_additional" not in single_summary.keys():
         raise KeyError("_additional key containing Summary not found.")
     if "summary" not in single_summary["_additional"].keys():
         raise KeyError("summary key not found.")
-    if len(single_summary["_additional"]["summary"]) != 1:
-        raise ValueError(
-            "The list of summaries does not contain a single element."
-        )
-    if "property" not in single_summary["_additional"]["summary"][0].keys():
-        raise KeyError("property key not found in summary dictionary.")
-    if (
-        single_summary["_additional"]["summary"][0]["property"]
-        != summarised_property
-    ):
-        raise KeyError(
-            "The summary is made for a different property than the"
-            " text_content."
-        )
-    if "result" not in single_summary["_additional"]["summary"][0].keys():
-        raise KeyError("result key not found in summary dictionary.")
-    if not isinstance(
-        single_summary["_additional"]["summary"][0]["result"], str
-    ):
-        raise TypeError(
-            "The value belonging to the result key was not a string."
-        )
+    # TODO: include check on whether the website main text is empty or not.
+    if single_summary[summarised_property] != "":
+        if len(single_summary["_additional"]["summary"]) != 1:
+            print(f"single_summary={single_summary}")
+            raise ValueError(
+                "The list of summaries does not contain a single element."
+            )
+        if (
+            "property"
+            not in single_summary["_additional"]["summary"][0].keys()
+        ):
+            raise KeyError("property key not found in summary dictionary.")
+        if (
+            single_summary["_additional"]["summary"][0]["property"]
+            != summarised_property
+        ):
+            raise KeyError(
+                "The summary is made for a different property than the"
+                " text_content."
+            )
+        if "result" not in single_summary["_additional"]["summary"][0].keys():
+            raise KeyError("result key not found in summary dictionary.")
+        if not isinstance(
+            single_summary["_additional"]["summary"][0]["result"], str
+        ):
+            raise TypeError(
+                "The value belonging to the result key was not a string."
+            )
     if summarised_property not in single_summary.keys():
         raise KeyError("Original text not in element.")
 
@@ -178,7 +183,10 @@ def get_summary_response(
 
     Assumes the single summary element has a valid structure.
     """
-    return single_summary["_additional"]["summary"][0]["result"]
+    if len(single_summary["_additional"]["summary"]) > 0:
+        return single_summary["_additional"]["summary"][0]["result"]
+    else:
+        return "No web page text found, so no summary available."
 
 
 def get_summary_url(

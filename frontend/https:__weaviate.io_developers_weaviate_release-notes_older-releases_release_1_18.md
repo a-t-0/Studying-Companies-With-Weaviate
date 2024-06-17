@@ -1,3 +1,3 @@
 # https:\_\_weaviate.io_developers_weaviate_release-notes_older-releases_release_1_18
 
-No content
+Weaviate 1.18 brings a set of great features, performance improvements, and fixes. This release introduces a compact, modern data structure to Weaviate called “Roaring bitmaps” The new Roaring bitmap indexing dramatically speeds up filtered searches. It provides up to 1000(!) times faster performance in some cases.
