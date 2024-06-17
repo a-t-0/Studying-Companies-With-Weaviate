@@ -1,2 +1,3 @@
-# https:__trucol.io_
-TruCol is a smart contract with a bounty for deterministically verifiable development tasks. Developers from all over the world are able to complete these tasks and get rewarded automatically when the requirement of the smart contract is fulfilled. The protocol thus removes the middleman and costly fees, and stimulates an open and fair development market.
+# https:\__trucol.io_
+
+TruCol is a decentralised collaboration protocol for test-driven development. TruCol promotes inclusive, fair and accessible work. The TruCol protocol presents an improvement of market efficiency and developer autonomy by decentralisation of test- driven development. Would you like to know how you can use TruCol, check out the Usecases page to see whether TruCol is what you need!
