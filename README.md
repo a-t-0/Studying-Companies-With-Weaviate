@@ -37,12 +37,10 @@ mdbook build &&  mdbook serve
 
 The video below shows how the Weaviate.io website overview can be seen, while quick scoping the page summaries.
 <!-- <video src="demo.mp4"></video> -->
-<video src="<video controls src="https://github.com/a-t-0/Studying-Companies-With-Weaviate/raw/improve-add-to-weaviate/demo.mp4" title="demo.mp4"></video>"></video>
+<video controls src="https://github.com/a-t-0/Studying-Companies-With-Weaviate/raw/improve-add-to-weaviate/demo.mp4" title="demo.mp4"></video>
 
 
 ## How can this be made more awesome?🚀
-
-- Represent tree structure in mdbook.
 - Count number of links to- & from page, and visualize it in edge thickness in a (PlantUml) tree/ table of contents.
 - Most of the time, it is not just the raw data you want from a company website but the secondary (or ternary) insights gained in processing that data and/or combining it with other relevant or recent developments. This is where Weaviate may shine, as it supports enhancing your own databases in combination with LLMs. A guided structure may be set up to facilitate this.
 
