@@ -36,9 +36,7 @@ mdbook build &&  mdbook serve
 ## Demo
 
 The video below shows how the Weaviate.io website overview can be seen, while quick scoping the page summaries.
-<!-- <video src="demo.mp4"></video> -->
-<video controls src="https://github.com/a-t-0/Studying-Companies-With-Weaviate/raw/improve-add-to-weaviate/demo.mp4" title="demo.mp4"></video>
-
+<video src="https://github.com/a-t-0/Studying-Companies-With-Weaviate/assets/34750068/5475e1dc-37ce-4c0d-b865-6a78d49b07fb"></video>
 
 ## How can this be made more awesome?🚀
 - Count number of links to- & from page, and visualize it in edge thickness in a (PlantUml) tree/ table of contents.
