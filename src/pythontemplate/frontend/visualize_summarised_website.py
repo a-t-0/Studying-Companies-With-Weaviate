@@ -67,16 +67,13 @@ def generate_summary(graph, tree, node):
     """This function generates a summary of a graph structure in Markdown
     format.
 
-    Args:
-        graph: A representation of the graph structure.
-        node: The current node being processed.
-        level: The indentation level for the summary line (increases with depth).
-        visited (list, optional): A list to keep track of visited nodes to
-        avoid cycles. Defaults to None.
+    Args:     graph: A representation of the graph structure.     node: The
+    current node being processed.     level: The indentation level for the
+    summary line (increases with     depth).     visited (list, optional): A
+    list to keep track of visited nodes to     avoid cycles. Defaults to None.
 
-    Returns:
-        A string containing the Markdown summary for the current node and its
-         descendants.
+    Returns:     A string containing the Markdown summary for the current node
+    and its      descendants.
     """
     content = ""
     for indentation_level, nodes_of_level in enumerate(tree):
@@ -112,11 +109,10 @@ def create_markdown_files(
 ):
     """This function creates markdown files for nodes in the graph structure.
 
-    Args:
-        graph: A representation of the graph structure.
-        node: The current node being processed.
-        output_dir: The directory to store the generated markdown files.
-        visited (list, optional): A list to keep track of visited nodes to avoid cycles. Defaults to None.
+    Args:     graph: A representation of the graph structure.     node: The
+    current node being processed.     output_dir: The directory to store the
+    generated markdown files.     visited (list, optional): A list to keep
+    track of visited nodes to     avoid cycles. Defaults to None.
     """
     if visited is None:
         visited = (

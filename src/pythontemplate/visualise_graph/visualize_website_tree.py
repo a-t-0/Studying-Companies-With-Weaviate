@@ -10,9 +10,6 @@ from src.pythontemplate.visualise_graph.custom_hierarch import add_url_to_dict
 def export_url_structure_for_d3(
     url_structure: Dict, website_graph: nx.DiGraph, d3_json_output_path: str
 ) -> None:
-
-    # d3_structure:Dict = get_url_structure_for_d3(data=url_structure, website_graph=website_graph)
-    # d3_structure: Dict = get_url_structure_for_d3(data=url_structure)
     d3_structure = get_children(
         parent_name="weaviate.io",
         parent_summary="hello",
@@ -22,39 +19,24 @@ def export_url_structure_for_d3(
     )
     pprint(d3_structure)
     with open(d3_json_output_path, "w") as f:
-        json.dump(d3_structure, f, indent=4)  # Add indentation for readability
+        json.dump(d3_structure, f, indent=4)
 
 
 def get_url_structure_for_d3(data):
-    """Converts a dictionary to a nested dictionary representing a URL structure.
+    """Converts a dictionary to a nested dictionary representing a URL
+    structure.
 
-    Args:
-        data: A dictionary containing key-value pairs representing URLs.
-            - Top-level keys become child names.
-            - Top-level values become child URLs.
-            - Nested dictionaries within `data` (if present) are treated as grandchildren.
+    Args:     data: A dictionary containing key-value pairs representing URLs.
+    - Top-level keys become child names.         - Top-level values become
+    child URLs.         - Nested dictionaries within `data` (if present) are
+    treated as grandchildren.
 
-    Returns:
-        A nested dictionary with the following structure:
-            {
-                "name": "Root",
-                "url": "The root url.",  # Replace with your desired root URL description
-                "children": [
-                    {
-                        "name": "Child 1 name",
-                        "url": "Child 1 URL",
-                        "children": [  # Optional: Grandchildren if nested dictionaries exist
-                            ...
-                        ]
-                    },
-                    ...  # More child nodes
-                ]
-            }
+    Returns:     A nested dictionary with the following structure: { "name":
+    "Root",             "url": "The root url.",  # Replace with your desired
+    root URL description             "children": [ { "name": "Child 1 name",
+    "url": "Child 1 URL", "children": [  # Optional: Grandchildren if nested
+    dictionaries exist ... ] }, ...  # More child nodes ] }
     """
-
-    root_url = (  # Replace with your desired root URL description (optional)
-        "The root url."
-    )
     children = []
     for name, url in data.items():
         if isinstance(url, str):
@@ -136,13 +118,12 @@ def get_children(
 
 
 def get_url_dictionary(*, G: nx.DiGraph, root_url: str):
-    # Source: https://stackoverflow.com/questions/29586520/can-one-get-hierarchical-graphs-from-networkx-with-python-3/29597209#29597209
     """Shows nx.digraph as tree structure."""
     url_structure: dict = {}
 
     for url in sorted(G.nodes):
         updated_dict = add_url_to_dict(url, url_structure, url, [])
-        if updated_dict != None:
+        if updated_dict is not None:
             url_structure = updated_dict
     add_base_url(G=G, url_structure=url_structure, cumulative_url=root_url)
     pprint(url_structure)
@@ -151,12 +132,11 @@ def get_url_dictionary(*, G: nx.DiGraph, root_url: str):
 
 
 def add_base_url(G: nx.DiGraph, url_structure, cumulative_url: str):
-    """
-    Adds the base URL to each empty dictionary at the end of the URL structure.
+    """Adds the base URL to each empty dictionary at the end of the URL
+    structure.
 
-    Args:
-      url_structure: A nested dictionary representing the URL structure.
-      base_url: The base URL to be added.
+    Args:   url_structure: A nested dictionary representing the URL structure.
+    base_url: The base URL to be added.
 
     Modifies the original url_structure in-place.
     """

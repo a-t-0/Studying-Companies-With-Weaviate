@@ -1,5 +1,3 @@
-# Source: https://weaviate.io/developers/weaviate/modules/reader-generator-modules/sum-transformers#in-short
-
 from typing import Dict, List, Union
 
 import weaviate
@@ -17,6 +15,7 @@ def ask_weaviate_to_summarise(
     summarised_property: str,
 ):
     """Working configuration:
+
     json_object_names="Question", summarised_property="theAnswer"
     """
     client = weaviate.Client(weaviate_local_host_url)
@@ -109,7 +108,8 @@ def inject_summarisation_into_website_graph(
                         != original_main_text
                     ):
                         print(
-                            f"website_graph.nodes[node]={website_graph.nodes[node]}"
+                            "website_graph.nodes[node]="
+                            + f"{website_graph.nodes[node]}"
                         )
                         raise ValueError(
                             "The text_content values of summary and website"

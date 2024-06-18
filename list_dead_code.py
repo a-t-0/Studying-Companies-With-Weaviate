@@ -11,12 +11,10 @@ def get_all_py_filepaths(root_dir: str) -> List[str]:
     """Returns a list of file paths for all Python files in root_dir and its
     subdirectories.
 
-    Args:
-        root_dir: The root directory to search for Python files.
+    Args:     root_dir: The root directory to search for Python files.
 
-    Returns:
-        A list of file paths for all Python files in root_dir and its
-        subdirectories.
+    Returns:     A list of file paths for all Python files in root_dir and its
+    subdirectories.
     """
     filepaths = []
     for dir_name, subdir_list, file_list in os.walk(root_dir):
@@ -35,14 +33,11 @@ def find_function_calls(
     """Finds all function calls in the Python file at filepath and adds them to
     found_function_calls.
 
-    Args:
-        filepath: The file path of the Python file to search for function
-        calls.
-        found_function_calls: A list of function calls that have already been
-        found.
+    Args:     filepath: The file path of the Python file to search for function
+    calls.     found_function_calls: A list of function calls that have already
+    been     found.
 
-    Returns:
-        A list of function calls found in the Python file at filepath.
+    Returns:     A list of function calls found in the Python file at filepath.
     """
     with open(filepath) as f:
         code = f.read()
@@ -65,12 +60,11 @@ def get_func_declarations(filepath: str) -> List[str]:
     """Returns a list of function names declared in the Python file at
     filepath.
 
-    Args:
-        filepath: The file path of the Python file to search for function
-        declarations.
+    Args:     filepath: The file path of the Python file to search for function
+    declarations.
 
-    Returns:
-        A list of function names declared in the Python file at filepath.
+    Returns:     A list of function names declared in the Python file at
+    filepath.
     """
     declared_functions = []
     with open(filepath) as f:

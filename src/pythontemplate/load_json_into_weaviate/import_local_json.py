@@ -16,9 +16,6 @@ def load_local_json_data_into_weaviate(
 ):
     client = weaviate.Client(
         url=weaviate_local_host_url,
-        # additional_headers={
-        # "X-OpenAI-Api-Key": "YOUR-OPENAI-API-KEY"  # Or "X-Cohere-Api-Key" or "X-HuggingFace-Api-Key"
-        # }
     )
 
     # Open the file in read mode
@@ -37,8 +34,6 @@ def load_local_json_data_into_weaviate(
     )
 
 
-# Source 0: https://github.com/weaviate/recipes/blob/0b1542fad2f03f9316ccd52290f148397cb8c346/integrations/llm-frameworks/dspy/blog/2023-05-23-pdfs-to-weaviate/index.mdx#L266
-# Source 0.1: https://github.com/weaviate-tutorials/how-to-ingest-pdfs-with-unstructured/blob/main/notebooks/01_blog.ipynb
 def add_imported_json_graph_to_weaviate(
     *,
     client: weaviate.Client,

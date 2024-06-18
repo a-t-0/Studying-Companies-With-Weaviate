@@ -1,5 +1,3 @@
-# Source: https://weaviate.io/developers/weaviate/modules/reader-generator-modules/sum-transformers#in-short
-
 import json
 import os
 

@@ -6,20 +6,7 @@ from pydot import Node
 
 
 def draw(graph_dict, parent_name, child_name):
-    pydot.Node("hello")
-    parent_node = Node(
-        "This is the summary placeholder",
-        id=parent_name,  # Whats on the text
-        label="TheLabel",
-    )
-    child_node = Node(
-        "This is the summary placeholder",
-        id=child_name,  # Whats on the text
-        label="TheLabel",
-    )
     edge = pydot.Edge(parent_name, child_name)
-    # print(f'parent_name={parent_name}, childn')
-    # edge = pydot.Edge(parent_node, child_node)
     graph_dict.add_edge(edge)
 
 
@@ -64,14 +51,6 @@ def visit(*, nx_graph: nx.DiGraph, graph_dict, node, parent=None):
             # drawing the label using a distinct name
             if not isinstance(value, str):
                 draw(graph_dict, key, key + "_" + value)
-            else:
-                # TODO: determine how to set the label of a node without creating an extra node.
-                print(
-                    f"TODO: get summary from url:{value} and add it as a node"
-                    " subtext."
-                )
-                # the_node=nx_graph.nodes[value]
-                print(f'summary={nx_graph.nodes[value]["summary"]}')
 
 
 def plot_dict_tree(graph_dict: Dict, nx_graph: nx.DiGraph):
