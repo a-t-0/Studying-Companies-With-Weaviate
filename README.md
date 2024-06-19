@@ -38,8 +38,8 @@ mdbook build &&  mdbook serve
 
 (Ps. You can also run `python -m src.pythontemplate` if you prefer CLI over ipynb).
 
-
 ## How can this be made more awesome?🚀
+
 - Include CI pipeline to (show people how to run it a-z with 1 command on their own device).
 - Include support for Mac & Windows.
 - Present as a service.

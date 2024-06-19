@@ -1,14 +1,18 @@
 import json
 from pprint import pprint
-from typing import Dict, List
+from typing import Dict, List, Union
 
 import networkx as nx
+from typeguard import typechecked
 
 from src.pythontemplate.visualise_graph.custom_hierarch import add_url_to_dict
 
 
+@typechecked
 def export_url_structure_for_d3(
-    url_structure: Dict, website_graph: nx.DiGraph, d3_json_output_path: str
+    url_structure: Dict,  # type: ignore[type-arg]
+    website_graph: nx.DiGraph,
+    d3_json_output_path: str,
 ) -> None:
     d3_structure = get_children(
         parent_name="weaviate.io",
@@ -17,12 +21,14 @@ def export_url_structure_for_d3(
         url_structure=url_structure,
         website_graph=website_graph,
     )
-    pprint(d3_structure)
     with open(d3_json_output_path, "w") as f:
         json.dump(d3_structure, f, indent=4)
 
 
-def get_url_structure_for_d3(data):
+@typechecked
+def get_url_structure_for_d3(
+    *, data: Dict  # type: ignore[type-arg]
+) -> Union[Dict, List]:  # type: ignore[type-arg]
     """Converts a dictionary to a nested dictionary representing a URL
     structure.
 
@@ -37,24 +43,26 @@ def get_url_structure_for_d3(data):
     "url": "Child 1 URL", "children": [  # Optional: Grandchildren if nested
     dictionaries exist ... ] }, ...  # More child nodes ] }
     """
-    children = []
+    children: List = []  # type: ignore[type-arg]
     for name, url in data.items():
         if isinstance(url, str):
-            child = {"name": name, "url": url}
+            child: Dict[str, Union[str, List]] = {  # type: ignore[type-arg]
+                "name": name,
+                "url": url,
+            }
 
         elif isinstance(
             url, dict
         ):  # Check for nested dictionaries (grandchildren)
-            grandchildren = []
-            grandchildren = get_url_structure_for_d3(url)
-            # input(f'url={url}')
+            grandchildren: List = []  # type: ignore[type-arg]
+            grandchildren = list(get_url_structure_for_d3(data=url))
             if len(grandchildren) > 0:
                 child = {"name": name, "url": "pass"}
                 child["children"] = grandchildren
                 children.append(child)
     if len(data.keys()) == 1:
-        the_name = list(data.keys())[0]
-        summary = list(data.values())[0]
+        the_name: str = list(data.keys())[0]
+        summary: str = list(data.values())[0]
 
         if len(children) > 0:
             return {"name": the_name, "url": summary, "children": children}
@@ -71,13 +79,14 @@ def get_url_structure_for_d3(data):
             return {"name": "rooturl", "url": "RootSummary"}
 
 
+@typechecked
 def get_children(
     parent_name: str,
     parent_summary: str,
     parent_url: str,
-    url_structure: Dict,
+    url_structure: Dict,  # type: ignore[type-arg]
     website_graph: nx.DiGraph,
-) -> None:
+) -> Dict:  # type: ignore[type-arg]
 
     if len(list(url_structure.keys())) == 1:
         if isinstance(list(url_structure.values())[0], str):
@@ -90,7 +99,7 @@ def get_children(
                 "url": list(url_structure.values())[0],
             }
 
-    children: List[Dict] = []
+    children: List[Dict] = []  # type: ignore[type-arg]
     for key, value in url_structure.items():
         if isinstance(value, str):
             summary = website_graph.nodes[value]["summary"]
@@ -117,12 +126,20 @@ def get_children(
     # return d3
 
 
-def get_url_dictionary(*, G: nx.DiGraph, root_url: str):
+@typechecked
+def get_url_dictionary(
+    *, G: nx.DiGraph, root_url: str
+) -> Dict:  # type: ignore[type-arg]
     """Shows nx.digraph as tree structure."""
-    url_structure: dict = {}
+    url_structure: Dict = {}  # type: ignore[type-arg]
 
     for url in sorted(G.nodes):
-        updated_dict = add_url_to_dict(url, url_structure, url, [])
+        updated_dict = add_url_to_dict(
+            full_url=url,
+            url_structure=url_structure,
+            url_remainder=url,
+            current_path=[],
+        )
         if updated_dict is not None:
             url_structure = updated_dict
     add_base_url(G=G, url_structure=url_structure, cumulative_url=root_url)
@@ -131,7 +148,12 @@ def get_url_dictionary(*, G: nx.DiGraph, root_url: str):
     return url_structure
 
 
-def add_base_url(G: nx.DiGraph, url_structure, cumulative_url: str):
+@typechecked
+def add_base_url(
+    G: nx.DiGraph,
+    url_structure: Dict,  # type: ignore[type-arg]
+    cumulative_url: str,
+) -> None:
     """Adds the base URL to each empty dictionary at the end of the URL
     structure.
 
@@ -160,7 +182,8 @@ def add_base_url(G: nx.DiGraph, url_structure, cumulative_url: str):
             )
 
 
-def make_graph_compliant(G):
+@typechecked
+def make_graph_compliant(G: nx.DiGraph) -> nx.DiGraph:
     plot_graph = nx.DiGraph()
     for node in G.nodes:
         valid_name: str = str(node).replace(":", "_")
@@ -176,7 +199,8 @@ def make_graph_compliant(G):
     return plot_graph
 
 
-def remove_self_recur(G):
+@typechecked
+def remove_self_recur(G: nx.DiGraph) -> nx.DiGraph:
 
     removed_edges = []
     for edge in G.edges:

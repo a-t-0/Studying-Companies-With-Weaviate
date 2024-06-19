@@ -2,26 +2,27 @@
 
 import hashlib
 import json
-from typing import Dict, List
+from typing import Collection, Dict, List, Sequence
 
 import weaviate
+from typeguard import typechecked
 
 
+@typechecked
 def load_local_json_data_into_weaviate(
     *,
     weaviate_local_host_url: str,
     json_input_path: str,
     json_object_name: str,
     summarised_property: str,
-):
+) -> None:
     client = weaviate.Client(
         url=weaviate_local_host_url,
     )
 
-    # Open the file in read mode
     try:
         with open(json_input_path) as f:
-            data = json.load(f)
+            data: Dict = json.load(f)  # type: ignore[type-arg]
     except FileNotFoundError:
         print(f"Error: File '{json_input_path}' not found.")
         exit()
@@ -34,28 +35,26 @@ def load_local_json_data_into_weaviate(
     )
 
 
+@typechecked
 def add_imported_json_graph_to_weaviate(
     *,
     client: weaviate.Client,
-    data,
+    data: Dict,  # type: ignore[type-arg]
     json_object_name: str,
     summarised_property: str,
 ) -> None:
     remove_existing_schemas_from_weaviate(client=client)
-    schema: Dict = create_new_schema(
+    schema: Dict[str, Sequence[Collection[str]]] = create_new_schema(
         json_object_name=json_object_name,
         summarised_property=summarised_property,
     )
-    # schema: Dict = create_new_schema_with_summary(
-    # json_object_name=json_object_name,
-    # summarised_property=summarised_property,
-    # )
 
     add_schema(client, schema)
-    # verify_data_satisfies_schema(data=data, schema=schema)
-    weaviate_data_objects: List[Dict] = create_weaviate_formatted_data_objects(
-        data=data,
-        summarised_property=summarised_property,
+    weaviate_data_objects: List[Dict] = (  # type: ignore[type-arg]
+        create_weaviate_formatted_data_objects(
+            data=data,
+            summarised_property=summarised_property,
+        )
     )
     add_weviate_data_objects_to_weaviate(
         client=client,
@@ -64,6 +63,7 @@ def add_imported_json_graph_to_weaviate(
     )
 
 
+@typechecked
 def remove_existing_schemas_from_weaviate(client: weaviate.Client) -> None:
     """Removes all pre-existing schemas from Weaviate.
 
@@ -75,7 +75,10 @@ def remove_existing_schemas_from_weaviate(client: weaviate.Client) -> None:
     client.schema.delete_all()
 
 
-def create_new_schema(json_object_name: str, summarised_property: str) -> Dict:
+@typechecked
+def create_new_schema(
+    json_object_name: str, summarised_property: str
+) -> Dict[str, Sequence[Collection[str]]]:
     schema = {
         "class": json_object_name,
         "properties": [
@@ -96,15 +99,19 @@ def create_new_schema(json_object_name: str, summarised_property: str) -> Dict:
     return schema
 
 
-def add_schema(client: weaviate.Client, schema: Dict) -> None:
+@typechecked
+def add_schema(
+    client: weaviate.Client, schema: Dict[str, Sequence[Collection[str]]]
+) -> None:
     client.schema.create_class(schema)
 
 
+@typechecked
 def create_weaviate_formatted_data_objects(
-    data, summarised_property: str
-) -> List[Dict]:
+    data: Dict, summarised_property: str  # type: ignore[type-arg]
+) -> List[Dict]:  # type: ignore[type-arg]
     """Assumes all nodes belong to unique addresses."""
-    weaviate_data_objects: List[Dict] = []
+    weaviate_data_objects: List[Dict] = []  # type: ignore[type-arg]
     for webpage in data["nodes"]:
         if "text_content" in webpage.keys():
             data_object = {
@@ -117,15 +124,17 @@ def create_weaviate_formatted_data_objects(
     return weaviate_data_objects
 
 
-def get_hash(some_str: str):
+@typechecked
+def get_hash(some_str: str) -> str:
     return hashlib.sha256(some_str.encode()).hexdigest()
 
 
+@typechecked
 def add_weviate_data_objects_to_weaviate(
     client: weaviate.Client,
-    weaviate_data_objects: List[Dict],
+    weaviate_data_objects: List[Dict],  # type: ignore[type-arg]
     json_object_name: str,
-):
+) -> None:
 
     with client.batch as batch:
         for data_object in weaviate_data_objects:

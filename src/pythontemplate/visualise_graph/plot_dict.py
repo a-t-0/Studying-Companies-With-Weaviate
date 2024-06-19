@@ -1,45 +1,39 @@
-from typing import Dict
+from typing import Dict, Optional
 
 import networkx as nx
 import pydot
-from pydot import Node
+from pydot.core import Dot, Edge
+from typeguard import typechecked
 
 
-def draw(graph_dict, parent_name, child_name):
-    edge = pydot.Edge(parent_name, child_name)
+@typechecked
+def draw(
+    *,
+    graph_dict: Dot,
+    parent_name: str,
+    child_name: str,
+) -> None:
+    edge: Edge = pydot.Edge(parent_name, child_name)
     graph_dict.add_edge(edge)
 
 
-def visit(*, nx_graph: nx.DiGraph, graph_dict, node, parent=None):
+@typechecked
+def visit(
+    *,
+    nx_graph: nx.DiGraph,
+    graph_dict: Dot,
+    node: Dict,  # type: ignore[type-arg]
+    parent: Optional[str] = None,
+) -> None:
     for (
         key,
         value,
     ) in node.items():
-        if parent is None:
-            print(f"value={value}")
-            graph_dict.add_node(
-                Node(
-                    # value,
-                    "This is the summary placeholder",
-                    # URL="This is a summary text.",
-                    # shape="box",
-                    # comment="CUstomTitle",
-                    id="weaviate.io",  # Whats on the text
-                    # label="CUstomTitle1",
-                    label=key,
-                    # peripheries="CUstomTitle2",
-                    # group="CUstomTitle3",
-                    # target="CUstomTitle4",
-                    # z="CUstomTitle5",
-                    # texlb="CUstomTitle6",
-                    # href="https://google.com",
-                )
-            )
         if isinstance(value, dict):
             # We start with the root node whose parent is None
             # we don't want to graph_dict the None node
             if parent:
-                draw(graph_dict, parent, key)
+                draw(graph_dict=graph_dict, parent_name=parent, child_name=key)
             visit(
                 nx_graph=nx_graph,
                 graph_dict=graph_dict,
@@ -47,15 +41,21 @@ def visit(*, nx_graph: nx.DiGraph, graph_dict, node, parent=None):
                 parent=key,
             )
         else:
-            draw(graph_dict, parent, key)
+            if parent is not None:
+                draw(graph_dict=graph_dict, parent_name=parent, child_name=key)
             # drawing the label using a distinct name
             if not isinstance(value, str):
-                draw(graph_dict, key, key + "_" + value)
+                draw(
+                    graph_dict=graph_dict,
+                    parent_name=key,
+                    child_name=key + "_" + value,
+                )
 
 
-def plot_dict_tree(graph_dict: Dict, nx_graph: nx.DiGraph):
-    graph = pydot.Dot(graph_type="graph", prog="neato", rankdir="LR")
-
+def plot_dict_tree(
+    *, graph_dict: Dict, nx_graph: nx.DiGraph  # type: ignore[type-arg]
+) -> None:
+    graph: Dot = pydot.Dot(graph_type="graph", prog="neato", rankdir="LR")
     visit(nx_graph=nx_graph, graph_dict=graph, node=graph_dict, parent=None)
     graph.write_png("output.png")
     graph.write_svg("output.svg")

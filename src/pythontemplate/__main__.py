@@ -4,9 +4,6 @@ from typing import Dict, List
 
 import networkx as nx
 
-from src.pythontemplate.frontend.visualize_summarised_website import (
-    create_mdbook,
-)
 from src.pythontemplate.get_website_data.get_website_data_manager import (
     get_nx_graph_of_website,
 )
@@ -39,7 +36,7 @@ max_nr_of_queries: int = 10000  # Used to prevent timeout error.
 d3_json_output_path: str = "d3_data.json"
 
 
-def get_website(company_url: str):
+def get_website(company_url: str) -> None:
 
     website_graph: nx.DiGraph = get_nx_graph_of_website(
         website_data_path=website_data_path,
@@ -65,26 +62,20 @@ def get_website(company_url: str):
         summarised_property=summarised_property,
     )
 
-    url_structure: Dict = get_url_dictionary(
+    url_structure: Dict = get_url_dictionary(  # type: ignore[type-arg]
         G=website_graph, root_url=company_url
     )
+    # For frontend.
     export_url_structure_for_d3(
         url_structure=url_structure,
         website_graph=website_graph,
         d3_json_output_path=d3_json_output_path,
     )
-    input("DONE?")
+    input("Exported frontend data.")
     plot_dict_tree(
         graph_dict={company_url: url_structure}, nx_graph=website_graph
     )
-
-    # Create frontend
-    create_mdbook(
-        graph=website_graph,
-        root=company_url,
-        output_dir=md_book_path,
-        summarised_property=summarised_property,
-    )
+    input("Created pdf, svg and png visualisation of tree.")
 
 
 for company_url in company_urls:
