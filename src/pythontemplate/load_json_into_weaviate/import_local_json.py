@@ -16,6 +16,15 @@ def load_local_json_data_into_weaviate(
     json_object_name: str,
     summarised_property: str,
 ) -> None:
+    """Loads and parses a file in JSON format and stores it in Weaviate.
+
+    Args: :weaviate_local_host_url: (str), The URL of the local Weaviate
+    instance. :json_input_path: (str), The path to the JSON file that should be
+    loaded. :json_object_name: (str), The name of the object type in Weaviate
+    that the data should be stored under. :summarised_property: (str), The
+    property in the JSON data that represents the summary of the object.
+    """
+
     client = weaviate.Client(
         url=weaviate_local_host_url,
     )
@@ -43,6 +52,15 @@ def add_imported_json_graph_to_weaviate(
     json_object_name: str,
     summarised_property: str,
 ) -> None:
+    """Adds the imported JSON data as a graph to Weaviate.
+
+    Args: :client: (weaviate.Client), The client used to communicate with
+    Weaviate. :data: (Dict), The dictionary containing the JSON data to be
+    imported. :json_object_name: (str), The name of the JSON object in
+    Weaviate. :summarised_property: (str), The property used to generate
+    summaries for the objects. Returns: None
+    """
+
     remove_existing_schemas_from_weaviate(client=client)
     schema: Dict[str, Sequence[Collection[str]]] = create_new_schema(
         json_object_name=json_object_name,
@@ -79,6 +97,13 @@ def remove_existing_schemas_from_weaviate(client: weaviate.Client) -> None:
 def create_new_schema(
     json_object_name: str, summarised_property: str
 ) -> Dict[str, Sequence[Collection[str]]]:
+    """Creates a new schema for a JSON object with the given name.
+
+    Args: :json_object_name: (str), The name of the JSON object.
+    :summarised_property: (str), The property that will be used to summarise
+    the JSON object. Returns: The new schema for the JSON object.
+    """
+
     schema = {
         "class": json_object_name,
         "properties": [
@@ -103,6 +128,13 @@ def create_new_schema(
 def add_schema(
     client: weaviate.Client, schema: Dict[str, Sequence[Collection[str]]]
 ) -> None:
+    """Adds a schema to a Weaviate client.
+
+    Args: :client: (Weaviate.Client), A Weaviate client. :schema: (Dict[str,
+    Sequence[Collection[str]]]), A schema represented as a dictionary mapping
+    class names to lists of property paths.
+    """
+
     client.schema.create_class(schema)
 
 

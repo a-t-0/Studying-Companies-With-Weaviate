@@ -92,6 +92,15 @@ def inject_summarisation_into_website_graph(
     json_object_name: str,
     summarised_property: str,
 ) -> None:
+    """This function injects a summary into a website graph.
+
+    Args: :data: (Dict), A dictionary containing the summary data
+    :website_graph: (nx.DiGraph), A NetworkX directed graph representing the
+    website :max_nr_of_queries: (int), The maximum number of summaries to
+    inject :json_object_name: (str), The name of the JSON object containing the
+    summaries :summarised_property: (str), The name of the property in the JSON
+    object containing the summaries
+    """
 
     vals = data["data"]["Get"][json_object_name]
     print(f"len(vals)={len(vals)}")
@@ -128,10 +137,13 @@ def get_original_text_from_summary_response(
     single_summary: Dict[str, Dict[str, Union[str, List[Dict[str, str]]]]],
     summarised_property: str,
 ) -> str:
-    """Returns the original main text that was extracted from the web page out
-    of a Weaviate summary response.
+    """Gets the original text from a Weaviate summary response.
 
-    Assumes the single summary element has a valid structure.
+    Args: :single_summary: (Dict[str, Dict[str, Union[str, List[Dict[str,
+    str]]]]]), The single summary element from a Weaviate query response.
+    :summarised_property: (str), The name of the property in the summary
+    response that contains the original text. Returns: The original text that
+    was extracted from the web page.
     """
     if not isinstance(single_summary, dict):
         raise TypeError("Expected Dict.")
@@ -177,7 +189,10 @@ def get_summary_url(
 ) -> str:
     """Returns the url belonging to the Weaviate summary.
 
-    Assumes the single summary element has a valid structure.
+    Assumes the single summary element has a valid structure. Args:
+    :single_summary_with_url: (Dict[str, Dict[str, Union[str, List[Dict[str,
+    str]]]]]), A Weaviate summary with valid structure. Returns: The URL of the
+    Weaviate summary.
     """
     if not isinstance(single_summary_with_url["url"], str):
         raise TypeError("Expected the url to be a string.")

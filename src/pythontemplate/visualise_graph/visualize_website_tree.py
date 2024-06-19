@@ -14,6 +14,17 @@ def export_url_structure_for_d3(
     website_graph: nx.DiGraph,
     d3_json_output_path: str,
 ) -> None:
+    """Exports a URL structure in a JSON format suitable for d3 visualization.
+
+    Args: :url_structure: (Dict), A dictionary representing the URL structure
+    to export. :website_graph: (nx.DiGraph), A networkx directed graph
+    representing the website structure based on which to build the URL
+    structure. :d3_json_output_path: (str), The path to the output JSON file
+    where the exported URL structure will be saved. Returns: The function
+    returns None, but the URL structure is exported to a JSON file specified by
+    d3_json_output_path.
+    """
+
     d3_structure = get_children(
         parent_name="weaviate.io",
         parent_summary="hello",
@@ -157,10 +168,10 @@ def add_base_url(
     """Adds the base URL to each empty dictionary at the end of the URL
     structure.
 
-    Args:   url_structure: A nested dictionary representing the URL structure.
-    base_url: The base URL to be added.
-
-    Modifies the original url_structure in-place.
+    Args: :G: (nx.DiGraph), The graph containing the pages. :url_structure:
+    (Dict), A nested dictionary representing the URL structure.
+    :cumulative_url: (str), The cumulative URL of the current dictionary.
+    Returns: Modifies the original url_structure in-place.
     """
     #   if url_structure == {}:
     for key, value in url_structure.items():
@@ -201,6 +212,11 @@ def make_graph_compliant(G: nx.DiGraph) -> nx.DiGraph:
 
 @typechecked
 def remove_self_recur(G: nx.DiGraph) -> nx.DiGraph:
+    """Removes self recursion in a tree.
+
+    Args: :G: (nx.DiGraph), A tree represented as a directed graph. Returns: A
+    tree with self recursion removed.
+    """
 
     removed_edges = []
     for edge in G.edges:

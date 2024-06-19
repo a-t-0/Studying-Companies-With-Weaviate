@@ -23,7 +23,16 @@ def get_nx_graph_of_website(
     json_object_name: str,
 ) -> nx.DiGraph:
     """Gets the nx.DiGraph of a website, by either downloading the data and
-    storing it in the structure, or loading the nx.DiGraph from a json."""
+    storing it in the structure, or loading the nx.DiGraph from a json.
+
+    Args: :website_data_path: (str), The path to the json file that holds the
+    data of the website. :company_url: (str), The company url.
+    :weaviate_local_host_url: (str), Weaviate's local host URL.
+    :summarised_property: (str), The property which will be used for
+    summarization of the output data. :json_object_name: (str), The json object
+    name that will hold the output data. Returns: The nx.DiGraph of the
+    website.
+    """
 
     # Create Website Graph
     website_graph = nx.DiGraph()

@@ -12,6 +12,16 @@ def add_url_to_dict(
     url_remainder: str,
     current_path: list[str],
 ) -> None:
+    """Inserts a URL string into a dictionary after parsing it into components.
+
+    Args: :full_url: (str), The full URL string to be inserted into the
+    dictionary. :url_structure: (dict), The dictionary representing the URL
+    structure. :url_remainder: (str), The remaining part of the URL to be
+    processed. :current_path: (list[str]), The current path components being
+    processed. Returns: This function does not return anything, it modifies the
+    `url_structure` dictionary in-place.
+    """
+
     parsed_url = urlparse(url_remainder)
     path_parts = parsed_url.path.strip("/").split("/")
 

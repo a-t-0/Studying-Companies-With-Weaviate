@@ -37,6 +37,15 @@ d3_json_output_path: str = "d3_data.json"
 
 
 def get_website(company_url: str) -> None:
+    """Retrieves the website structure of a company.
+
+    Args: :company_url: (str), URL of the company website. Returns: This
+    function does not directly return data. Instead, it processes the website
+    data and generates various outputs, including:* A summarized website data
+    stored in Weaviate* A URL structure dictionary (`url_structure`)* A D3 JSON
+    output file for frontend visualization (`d3_json_output_path`)* PDF, SVG,
+    and PNG visualizations of the website structure (`graph_dict`)
+    """
 
     website_graph: nx.DiGraph = get_nx_graph_of_website(
         website_data_path=website_data_path,
