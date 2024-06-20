@@ -38,59 +38,6 @@ def export_url_structure_for_d3(
         json.dump(d3_structure, f, indent=4)
 
 
-@typechecked
-def get_url_structure_for_d3(
-    *, data: Dict  # type: ignore[type-arg]
-) -> Union[Dict, List]:  # type: ignore[type-arg]
-    """Converts a dictionary to a nested dictionary representing a URL
-    structure.
-
-    Args:     data: A dictionary containing key-value pairs representing URLs.
-    - Top-level keys become child names.         - Top-level values become
-    child URLs.         - Nested dictionaries within `data` (if present) are
-    treated as grandchildren.
-
-    Returns:     A nested dictionary with the following structure: { "name":
-    "Root",             "url": "The root url.",  # Replace with your desired
-    root URL description             "children": [ { "name": "Child 1 name",
-    "url": "Child 1 URL", "children": [  # Optional: Grandchildren if nested
-    dictionaries exist ... ] }, ...  # More child nodes ] }
-    """
-    children: List = []  # type: ignore[type-arg]
-    for name, url in data.items():
-        if isinstance(url, str):
-            child: Dict[str, Union[str, List]] = {  # type: ignore[type-arg]
-                "name": name,
-                "url": url,
-            }
-
-        elif isinstance(
-            url, dict
-        ):  # Check for nested dictionaries (grandchildren)
-            grandchildren: List = []  # type: ignore[type-arg]
-            grandchildren = list(get_url_structure_for_d3(data=url))
-            if len(grandchildren) > 0:
-                child = {"name": name, "url": "pass"}
-                child["children"] = grandchildren
-                children.append(child)
-    if len(data.keys()) == 1:
-        the_name: str = list(data.keys())[0]
-        summary: str = list(data.values())[0]
-
-        if len(children) > 0:
-            return {"name": the_name, "url": summary, "children": children}
-        else:
-            return {"name": the_name, "url": summary}
-    else:
-        if len(children) > 0:
-            return {
-                "name": "rooturl",
-                "url": "RootSummary",
-                "children": children,
-            }
-        else:
-            return {"name": "rooturl", "url": "RootSummary"}
-
 
 @typechecked
 def get_children(
