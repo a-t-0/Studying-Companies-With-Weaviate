@@ -7,8 +7,10 @@ import networkx as nx
 from src.pythontemplate.get_website_data.get_website_data_manager import (
     get_nx_graph_of_website,
 )
-from src.pythontemplate.visualise_graph.plot_dict import plot_dict_tree
-from src.pythontemplate.visualise_graph.visualize_website_tree import (
+from src.pythontemplate.visualise_graph.plot_url_structure_to_svg_pdf_png import (
+    plot_url_structure_to_svg_pdf_png,
+)
+from src.pythontemplate.visualise_graph.url_structure_to_d3_json import (
     export_url_structure_for_d3,
     get_url_dictionary,
 )
@@ -26,14 +28,15 @@ company_urls: List[str] = ["https://weaviate.io"]
 website_data_path: str = "website_data.json"
 # For this repo the Weaviate data classes are web pages.
 json_object_name: str = "WebPage"  # Must start with Capitalised letter.
-# For this repo, the Weaviate property that is being summarised by is the
-# main text of the web page.
+
 summarised_property: str = "webPageMainText"
 summarised_website_data_path: str = "summarised_by_weaviate.json"
 weaviate_local_host_url: str = "http://localhost:8080"
-md_book_path: str = "frontend"
+
 max_nr_of_queries: int = 10000  # Used to prevent timeout error.
+
 d3_json_output_path: str = "d3_data.json"
+md_book_path: str = "frontend"
 
 
 def get_website(company_url: str) -> None:
@@ -81,7 +84,7 @@ def get_website(company_url: str) -> None:
         d3_json_output_path=d3_json_output_path,
     )
     input("Exported frontend data.")
-    plot_dict_tree(
+    plot_url_structure_to_svg_pdf_png(
         graph_dict={company_url: url_structure}, nx_graph=website_graph
     )
     input("Created pdf, svg and png visualisation of tree.")

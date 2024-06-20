@@ -5,7 +5,7 @@ from typeguard import typechecked
 
 
 @typechecked
-def add_url_to_dict(
+def add_url_to_url_structure_dict(
     *,
     full_url: str,
     url_structure: Dict,  # type: ignore[type-arg]
@@ -35,7 +35,7 @@ def add_url_to_dict(
     if new_key not in url_structure:
         url_structure[new_key] = {}
     # Recursive call with updated current_path and remaining path
-    add_url_to_dict(
+    add_url_to_url_structure_dict(
         full_url=full_url,
         url_structure=url_structure[new_key],
         url_remainder=remaining_path,

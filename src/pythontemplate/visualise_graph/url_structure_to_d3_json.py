@@ -5,7 +5,9 @@ from typing import Dict, List, Union
 import networkx as nx
 from typeguard import typechecked
 
-from src.pythontemplate.visualise_graph.custom_hierarch import add_url_to_dict
+from src.pythontemplate.visualise_graph.custom_hierarch import (
+    add_url_to_url_structure_dict,
+)
 
 
 @typechecked
@@ -145,7 +147,7 @@ def get_url_dictionary(
     url_structure: Dict = {}  # type: ignore[type-arg]
 
     for url in sorted(G.nodes):
-        updated_dict = add_url_to_dict(
+        updated_dict = add_url_to_url_structure_dict(
             full_url=url,
             url_structure=url_structure,
             url_remainder=url,

@@ -4,7 +4,9 @@ from typing import Dict
 
 from typeguard import typechecked
 
-from src.pythontemplate.get_website_data.website_to_graph import load_from_json
+from src.pythontemplate.get_website_data.nx_graph_json_bridge import (
+    load_from_json,
+)
 from src.pythontemplate.weaviate_summaries.summarise_json import (
     ask_weaviate_to_summarise,
 )

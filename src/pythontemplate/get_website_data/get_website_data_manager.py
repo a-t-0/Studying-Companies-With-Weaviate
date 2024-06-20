@@ -4,9 +4,11 @@ import os
 
 import networkx as nx
 
-from src.pythontemplate.get_website_data.website_to_graph import (
+from src.pythontemplate.get_website_data.nx_graph_json_bridge import (
     graph_to_json,
     json_to_graph,
+)
+from src.pythontemplate.get_website_data.website_to_graph import (
     website_to_graph,
 )
 from src.pythontemplate.load_json_into_weaviate.import_local_json import (

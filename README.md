@@ -5,7 +5,7 @@
 [![Code Style: Black][black_badge]](https://github.com/ambv/black)
 
 <p align="center">
-  <img src="image.png" />
+  <img src="Images/bruce_lee.png" />
 
 **“It is not daily increase but daily decrease, hack away the unessential.”**
 
