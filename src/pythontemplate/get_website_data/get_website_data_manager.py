@@ -11,18 +11,12 @@ from src.pythontemplate.get_website_data.nx_graph_json_bridge import (
 from src.pythontemplate.get_website_data.website_to_graph import (
     website_to_graph,
 )
-from src.pythontemplate.load_json_into_weaviate.import_local_json import (
-    load_local_json_data_into_weaviate,
-)
 
 
 def get_nx_graph_of_website(
     *,
     website_data_path: str,
     company_url: str,
-    weaviate_local_host_url: str,
-    summarised_property: str,
-    json_object_name: str,
 ) -> nx.DiGraph:
     """Gets the nx.DiGraph of a website, by either downloading the data and
     storing it in the structure, or loading the nx.DiGraph from a json.
@@ -47,15 +41,8 @@ def get_nx_graph_of_website(
             counter=0,
         )
         graph_to_json(G=website_graph, filepath=website_data_path)
-
-        # Ensure the json data is loaded into weaviate.
-        load_local_json_data_into_weaviate(
-            weaviate_local_host_url=weaviate_local_host_url,
-            json_input_path=website_data_path,
-            json_object_name=json_object_name,
-            summarised_property=summarised_property,
-        )
-
     else:
         website_graph = json_to_graph(filepath=website_data_path)
+    # Ensure the json data is loaded into weaviate.
+
     return website_graph

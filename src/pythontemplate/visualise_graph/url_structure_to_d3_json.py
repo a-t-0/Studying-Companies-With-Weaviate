@@ -1,11 +1,11 @@
 import json
 from pprint import pprint
-from typing import Dict, List, Union
+from typing import Dict, List
 
 import networkx as nx
 from typeguard import typechecked
 
-from src.pythontemplate.visualise_graph.custom_hierarch import (
+from src.pythontemplate.visualise_graph.add_url_to_url_structure_dict import (
     add_url_to_url_structure_dict,
 )
 
@@ -38,7 +38,6 @@ def export_url_structure_for_d3(
         json.dump(d3_structure, f, indent=4)
 
 
-
 @typechecked
 def get_children(
     parent_name: str,
@@ -62,6 +61,8 @@ def get_children(
     children: List[Dict] = []  # type: ignore[type-arg]
     for key, value in url_structure.items():
         if isinstance(value, str):
+            print(f"key={key}")
+            print(f"value={value}")
             summary = website_graph.nodes[value]["summary"]
             # print(value)
             # print(summary)
@@ -123,6 +124,10 @@ def add_base_url(
     Returns: Modifies the original url_structure in-place.
     """
     #   if url_structure == {}:
+    from pprint import pprint
+
+    pprint(url_structure)
+    input("Continue")
     for key, value in url_structure.items():
         if not isinstance(value, dict):
             raise TypeError("Expected dict.")
@@ -130,7 +135,14 @@ def add_base_url(
         if value == {}:
             # Add the base URL if the dictionary is empty
             url_structure[key] = f"{cumulative_url}/{key}"
-            if url_structure[key] not in G.nodes:
+            if (
+                url_structure[key] not in G.nodes
+                and f"{url_structure[key]}/" not in G.nodes
+            ):
+                print(f"G.nodes={G.nodes}")
+                print(f"url_structure={url_structure}")
+                print(f"key={key}")
+
                 raise ValueError(
                     "The reconstructed url was not found in the nodes."
                 )

@@ -1,6 +1,7 @@
 """Example python file with a function."""
 
 import urllib.parse
+from typing import Dict
 
 import networkx as nx
 import requests
@@ -39,7 +40,9 @@ def website_to_graph(
 
     # Find all links on the page and recursively crawl them
     for link in soup.find_all("a", href=True):
-        new_url = urllib.parse.urljoin(root_url, link["href"])
+        new_url = get_new_url(root_url=root_url, link=link)
+
+        input(f"new_url={new_url}")
 
         # Check if link points to the same domain and is not an external link
         if link["href"].startswith("/") and link["href"] != "/":
@@ -58,6 +61,18 @@ def website_to_graph(
                 graph=website_graph, source=previous_url, target=new_url
             )
     return website_graph
+
+
+@typechecked
+def get_new_url(*, root_url: str, link: Dict) -> str:  # type: ignore[type-arg]
+    """Returning new url from the original url and the beautiful soup link
+    dictionary."""
+    new_url: str = urllib.parse.urljoin(root_url, link["href"])
+    while new_url.endswith("/"):
+        new_url = new_url[:-1]  # Remove the trailing slash
+    if len(new_url) == 0:
+        raise ValueError("Did not find new url.")
+    return new_url
 
 
 @typechecked

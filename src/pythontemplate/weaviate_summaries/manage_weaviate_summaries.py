@@ -19,10 +19,12 @@ def ensure_weaviate_summaries_are_available(
     json_object_name: str,
     summarised_property: str,
 ) -> Dict:  # type: ignore[type-arg]
+    print("Ensuring Weaviate summaries are available.")
     # Perform queries to Weaviate to summarise the data.
     # summarised_data: Union[Dict, None]  # type: ignore[type-arg]
     summarised_data: Dict  # type: ignore[type-arg]
     if not os.path.exists(summarised_website_data_path):
+        print("Generating new summaries.")
         summarised_data = ask_weaviate_to_summarise(
             weaviate_local_host_url=weaviate_local_host_url,
             json_object_name=json_object_name,
@@ -34,6 +36,7 @@ def ensure_weaviate_summaries_are_available(
             )  # Add indentation for readability
 
     else:
+        print("Loaded Weaviate summaries from file.")
         summarised_data = load_from_json(filepath=summarised_website_data_path)
 
     return summarised_data

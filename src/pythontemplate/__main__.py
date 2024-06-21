@@ -1,13 +1,22 @@
 """Entry point for the project."""
 
+import sys
 from typing import Dict, List
 
 import networkx as nx
+from typeguard import typechecked
 
+from src.pythontemplate.arg_parsing.arg_parser import parse_skip_upload
+from src.pythontemplate.arg_parsing.verify_configuration import (
+    verify_configuration,
+)
 from src.pythontemplate.get_website_data.get_website_data_manager import (
     get_nx_graph_of_website,
 )
-from src.pythontemplate.visualise_graph.plot_url_structure_to_svg_pdf_png import (
+from src.pythontemplate.load_json_into_weaviate.import_local_json import (
+    load_local_json_data_into_weaviate,
+)
+from src.pythontemplate.visualise_graph.plot_url_structure_to_image import (
     plot_url_structure_to_svg_pdf_png,
 )
 from src.pythontemplate.visualise_graph.url_structure_to_d3_json import (
@@ -21,9 +30,9 @@ from src.pythontemplate.weaviate_summaries.summarise_json import (
     inject_summarisation_into_website_graph,
 )
 
-company_urls: List[str] = ["https://weaviate.io"]
-# company_urls: List[str] = ["https://waarneming.nl/"]
-# company_urls: List[str] = ["https://trucol.io/"]
+# company_urls: List[str] = ["https://weaviate.io"]
+# company_urls: List[str] = ["https://waarneming.nl"]
+company_urls: List[str] = ["https://trucol.io"]
 
 website_data_path: str = "website_data.json"
 # For this repo the Weaviate data classes are web pages.
@@ -38,8 +47,18 @@ max_nr_of_queries: int = 10000  # Used to prevent timeout error.
 d3_json_output_path: str = "d3_data.json"
 md_book_path: str = "frontend"
 
+skip_weaviate_upload: bool = parse_skip_upload(
+    args=sys.argv[1:]
+)  # Skip the script name (sys.argv[0])
+verify_configuration(
+    company_urls=company_urls, json_object_name=json_object_name
+)
 
-def get_website(company_url: str) -> None:
+
+@typechecked
+def get_summarised_website_tree(
+    *, company_url: str, skip_weaviate_upload: bool
+) -> None:
     """Retrieves the website structure of a company.
 
     Args: :company_url: (str), URL of the company website. Returns: This
@@ -49,14 +68,18 @@ def get_website(company_url: str) -> None:
     output file for frontend visualization (`d3_json_output_path`)* PDF, SVG,
     and PNG visualizations of the website structure (`graph_dict`)
     """
-
     website_graph: nx.DiGraph = get_nx_graph_of_website(
         website_data_path=website_data_path,
         company_url=company_url,
-        weaviate_local_host_url=weaviate_local_host_url,
-        summarised_property=summarised_property,
-        json_object_name=json_object_name,
     )
+
+    if not skip_weaviate_upload:
+        load_local_json_data_into_weaviate(
+            weaviate_local_host_url=weaviate_local_host_url,
+            json_input_path=website_data_path,
+            json_object_name=json_object_name,
+            summarised_property=summarised_property,
+        )
 
     summarised_data = ensure_weaviate_summaries_are_available(
         summarised_website_data_path=summarised_website_data_path,
@@ -91,4 +114,6 @@ def get_website(company_url: str) -> None:
 
 
 for company_url in company_urls:
-    get_website(company_url=company_url)
+    get_summarised_website_tree(
+        company_url=company_url, skip_weaviate_upload=skip_weaviate_upload
+    )
