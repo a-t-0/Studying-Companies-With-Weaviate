@@ -11,17 +11,19 @@ from src.pythontemplate.get_website_data.nx_graph_json_bridge import (
 from src.pythontemplate.get_website_data.website_to_graph import (
     website_to_graph,
 )
+from src.pythontemplate.helper import get_output_path
 
 
 def get_nx_graph_of_website(
     *,
-    website_data_path: str,
+    nx_json_filename: str,
     company_url: str,
+    output_dir: str,
 ) -> nx.DiGraph:
     """Gets the nx.DiGraph of a website, by either downloading the data and
     storing it in the structure, or loading the nx.DiGraph from a json.
 
-    Args: :website_data_path: (str), The path to the json file that holds the
+    Args: :nx_json_filename: (str), The path to the json file that holds the
     data of the website. :company_url: (str), The company url.
     :weaviate_local_host_url: (str), Weaviate's local host URL.
     :summarised_property: (str), The property which will be used for
@@ -32,7 +34,13 @@ def get_nx_graph_of_website(
 
     # Create Website Graph
     website_graph = nx.DiGraph()
-    if not os.path.exists(website_data_path):
+
+    nx_json_output_path: str = get_output_path(
+        output_dir=output_dir,
+        company_url=company_url,
+        filename=nx_json_filename,
+    )
+    if not os.path.exists(nx_json_output_path):
         website_to_graph(
             root_url=company_url,
             previous_url=company_url,
@@ -40,9 +48,9 @@ def get_nx_graph_of_website(
             website_graph=website_graph,
             counter=0,
         )
-        graph_to_json(G=website_graph, filepath=website_data_path)
+        graph_to_json(G=website_graph, filepath=nx_json_output_path)
     else:
-        website_graph = json_to_graph(filepath=website_data_path)
+        website_graph = json_to_graph(filepath=nx_json_output_path)
     # Ensure the json data is loaded into weaviate.
 
     return website_graph

@@ -1,10 +1,10 @@
 import json
-from pprint import pprint
 from typing import Dict, List
 
 import networkx as nx
 from typeguard import typechecked
 
+from src.pythontemplate.helper import get_output_path
 from src.pythontemplate.visualise_graph.add_url_to_url_structure_dict import (
     add_url_to_url_structure_dict,
 )
@@ -14,19 +14,26 @@ from src.pythontemplate.visualise_graph.add_url_to_url_structure_dict import (
 def export_url_structure_for_d3(
     url_structure: Dict,  # type: ignore[type-arg]
     website_graph: nx.DiGraph,
-    d3_json_output_path: str,
+    d3_json_filename: str,
+    output_dir: str,
+    company_url: str,
 ) -> None:
     """Exports a URL structure in a JSON format suitable for d3 visualization.
 
     Args: :url_structure: (Dict), A dictionary representing the URL structure
     to export. :website_graph: (nx.DiGraph), A networkx directed graph
     representing the website structure based on which to build the URL
-    structure. :d3_json_output_path: (str), The path to the output JSON file
-    where the exported URL structure will be saved. Returns: The function
-    returns None, but the URL structure is exported to a JSON file specified by
-    d3_json_output_path.
+    structure. :d3_json_filename: (str), The path to the output JSON file where
+    the exported URL structure will be saved. Returns: The function returns
+    None, but the URL structure is exported to a JSON file specified by
+    d3_json_filename.
     """
 
+    d3_json_filepath: str = get_output_path(
+        output_dir=output_dir,
+        company_url=company_url,
+        filename=d3_json_filename,
+    )
     d3_structure = get_children(
         parent_name="weaviate.io",
         parent_summary="hello",
@@ -34,7 +41,7 @@ def export_url_structure_for_d3(
         url_structure=url_structure,
         website_graph=website_graph,
     )
-    with open(d3_json_output_path, "w") as f:
+    with open(d3_json_filepath, "w") as f:
         json.dump(d3_structure, f, indent=4)
 
 
@@ -61,11 +68,7 @@ def get_children(
     children: List[Dict] = []  # type: ignore[type-arg]
     for key, value in url_structure.items():
         if isinstance(value, str):
-            print(f"key={key}")
-            print(f"value={value}")
             summary = website_graph.nodes[value]["summary"]
-            # print(value)
-            # print(summary)
 
             children.append({"name": key, "summary": summary, "url": value})
         elif isinstance(value, dict):
@@ -104,8 +107,6 @@ def get_url_dictionary(
         if updated_dict is not None:
             url_structure = updated_dict
     add_base_url(G=G, url_structure=url_structure, cumulative_url=root_url)
-    pprint(url_structure)
-    input("COntinue?")
     return url_structure
 
 
@@ -124,10 +125,7 @@ def add_base_url(
     Returns: Modifies the original url_structure in-place.
     """
     #   if url_structure == {}:
-    from pprint import pprint
 
-    pprint(url_structure)
-    input("Continue")
     for key, value in url_structure.items():
         if not isinstance(value, dict):
             raise TypeError("Expected dict.")

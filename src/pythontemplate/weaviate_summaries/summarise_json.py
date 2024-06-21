@@ -37,7 +37,7 @@ def ask_weaviate_to_summarise(
         raise ValueError("Duplicate url found.")
 
     for i, url in enumerate(urls):
-        print(f"i={i}, url={url}")
+        print(f"summarizing website: i={i}, url={url}")
 
         result = weaviate_summary_query_on_single_text(
             client,
@@ -103,33 +103,31 @@ def inject_summarisation_into_website_graph(
     """
 
     vals = data["data"]["Get"][json_object_name]
-    print(f"len(vals)={len(vals)}")
+    print(f"Number of webpages={len(vals)}")
     for i, node in enumerate(website_graph.nodes):
-        if i < max_nr_of_queries:
+        # if i < max_nr_of_queries:
 
-            original_main_text: str = get_original_text_from_summary_response(
-                single_summary=vals[i], summarised_property=summarised_property
-            )
-            weaviate_summary: str = get_summary_response(
-                single_summary=vals[i]
-            )
-            summary_url: str = get_summary_url(single_summary_with_url=vals[i])
-            for node in website_graph.nodes:
-                if node == summary_url:
-                    website_graph.nodes[node]["summary"] = weaviate_summary
+        original_main_text: str = get_original_text_from_summary_response(
+            single_summary=vals[i], summarised_property=summarised_property
+        )
+        weaviate_summary: str = get_summary_response(single_summary=vals[i])
+        summary_url: str = get_summary_url(single_summary_with_url=vals[i])
+        for node in website_graph.nodes:
+            if node == summary_url:
+                website_graph.nodes[node]["summary"] = weaviate_summary
 
-                    if (
-                        website_graph.nodes[node]["text_content"]
-                        != original_main_text
-                    ):
-                        print(
-                            "website_graph.nodes[node]="
-                            + f"{website_graph.nodes[node]}"
-                        )
-                        raise ValueError(
-                            "The text_content values of summary and website"
-                            " graph don't match."
-                        )
+                if (
+                    website_graph.nodes[node]["text_content"]
+                    != original_main_text
+                ):
+                    print(
+                        "website_graph.nodes[node]="
+                        + f"{website_graph.nodes[node]}"
+                    )
+                    raise ValueError(
+                        "The text_content values of summary and website"
+                        " graph don't match."
+                    )
 
 
 def get_original_text_from_summary_response(

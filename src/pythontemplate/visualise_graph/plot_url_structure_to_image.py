@@ -5,9 +5,16 @@ import pydot
 from pydot.core import Dot, Edge
 from typeguard import typechecked
 
+from src.pythontemplate.helper import get_output_path
+
 
 def plot_url_structure_to_svg_pdf_png(
-    *, graph_dict: Dict, nx_graph: nx.DiGraph  # type: ignore[type-arg]
+    *,
+    graph_dict: Dict,  # type: ignore[type-arg]
+    nx_graph: nx.DiGraph,
+    graph_plot_filename: str,
+    output_dir: str,
+    company_url: str,
 ) -> None:
     """Plots a directed tree given in 2 formats - a dictionary, the
     dictionary's keys represent nodes whose value is another dictionary of
@@ -29,14 +36,18 @@ def plot_url_structure_to_svg_pdf_png(
     dictionary graph - contains information regarding the nodes of the graph
     and how are
     """
-
+    plot_output_path_without_ext: str = get_output_path(
+        output_dir=output_dir,
+        company_url=company_url,
+        filename=graph_plot_filename,
+    )
     graph: Dot = pydot.Dot(graph_type="graph", prog="neato", rankdir="LR")
     visit_node_in_dict(
         nx_graph=nx_graph, graph_dict=graph, node=graph_dict, parent=None
     )
-    graph.write_png("output.png")
-    graph.write_svg("output.svg")
-    graph.write_pdf("output.pdf")
+    graph.write_png(f"{plot_output_path_without_ext}.png")
+    graph.write_svg(f"{plot_output_path_without_ext}.svg")
+    graph.write_pdf(f"{plot_output_path_without_ext}.pdf")
 
 
 @typechecked

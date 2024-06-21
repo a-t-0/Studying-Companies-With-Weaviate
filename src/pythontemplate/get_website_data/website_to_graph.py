@@ -1,11 +1,9 @@
-"""Example python file with a function."""
-
 import urllib.parse
-from typing import Dict
 
 import networkx as nx
 import requests
 from bs4 import BeautifulSoup
+from bs4.element import Tag
 from typeguard import typechecked
 
 
@@ -24,7 +22,7 @@ def website_to_graph(
 
     Args:   url: The starting URL of the website.
     """
-    print(f"Counter={counter}/?")
+    print(f"Evaluating url index (non-sorted)={counter}/?")
     counter += 1
     try:
         response = requests.get(new_url)
@@ -41,9 +39,6 @@ def website_to_graph(
     # Find all links on the page and recursively crawl them
     for link in soup.find_all("a", href=True):
         new_url = get_new_url(root_url=root_url, link=link)
-
-        input(f"new_url={new_url}")
-
         # Check if link points to the same domain and is not an external link
         if link["href"].startswith("/") and link["href"] != "/":
 
@@ -64,7 +59,7 @@ def website_to_graph(
 
 
 @typechecked
-def get_new_url(*, root_url: str, link: Dict) -> str:  # type: ignore[type-arg]
+def get_new_url(*, root_url: str, link: Tag) -> str:
     """Returning new url from the original url and the beautiful soup link
     dictionary."""
     new_url: str = urllib.parse.urljoin(root_url, link["href"])

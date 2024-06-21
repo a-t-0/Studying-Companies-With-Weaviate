@@ -13,6 +13,7 @@ from src.pythontemplate.arg_parsing.verify_configuration import (
 from src.pythontemplate.get_website_data.get_website_data_manager import (
     get_nx_graph_of_website,
 )
+from src.pythontemplate.helper import create_output_dir
 from src.pythontemplate.load_json_into_weaviate.import_local_json import (
     load_local_json_data_into_weaviate,
 )
@@ -30,22 +31,24 @@ from src.pythontemplate.weaviate_summaries.summarise_json import (
     inject_summarisation_into_website_graph,
 )
 
-# company_urls: List[str] = ["https://weaviate.io"]
+company_urls: List[str] = ["https://weaviate.io"]
 # company_urls: List[str] = ["https://waarneming.nl"]
-company_urls: List[str] = ["https://trucol.io"]
+# company_urls: List[str] = ["https://trucol.io"]
 
-website_data_path: str = "website_data.json"
+nx_json_filename: str = "website_data.json"
+summarised_json_filename: str = "summarised_by_weaviate.json"
+d3_json_filename: str = "d3_data.json"
+graph_plot_filename: str = "website_url_structure"
+
+
 # For this repo the Weaviate data classes are web pages.
 json_object_name: str = "WebPage"  # Must start with Capitalised letter.
-
 summarised_property: str = "webPageMainText"
-summarised_website_data_path: str = "summarised_by_weaviate.json"
 weaviate_local_host_url: str = "http://localhost:8080"
 
-max_nr_of_queries: int = 10000  # Used to prevent timeout error.
-
-d3_json_output_path: str = "d3_data.json"
+max_nr_of_queries: int = 3  # Used to prevent timeout error.
 md_book_path: str = "frontend"
+output_dir: str = "output_data"
 
 skip_weaviate_upload: bool = parse_skip_upload(
     args=sys.argv[1:]
@@ -65,27 +68,35 @@ def get_summarised_website_tree(
     function does not directly return data. Instead, it processes the website
     data and generates various outputs, including:* A summarized website data
     stored in Weaviate* A URL structure dictionary (`url_structure`)* A D3 JSON
-    output file for frontend visualization (`d3_json_output_path`)* PDF, SVG,
-    and PNG visualizations of the website structure (`graph_dict`)
+    output file for frontend visualization (`d3_json_filename`)* PDF, SVG, and
+    PNG visualizations of the website structure (`graph_dict`)
     """
+    create_output_dir(company_url=company_url, output_dir=output_dir)
+
     website_graph: nx.DiGraph = get_nx_graph_of_website(
-        website_data_path=website_data_path,
+        # output_filepath=output_filepath,
+        nx_json_filename=nx_json_filename,
         company_url=company_url,
+        output_dir=output_dir,
     )
 
     if not skip_weaviate_upload:
         load_local_json_data_into_weaviate(
             weaviate_local_host_url=weaviate_local_host_url,
-            json_input_path=website_data_path,
+            json_input_path=nx_json_filename,
             json_object_name=json_object_name,
             summarised_property=summarised_property,
+            output_dir=output_dir,
+            company_url=company_url,
         )
 
     summarised_data = ensure_weaviate_summaries_are_available(
-        summarised_website_data_path=summarised_website_data_path,
+        summarised_json_filename=summarised_json_filename,
         weaviate_local_host_url=weaviate_local_host_url,
         json_object_name=json_object_name,
         summarised_property=summarised_property,
+        output_dir=output_dir,
+        company_url=company_url,
     )
 
     # Export summaries
@@ -96,7 +107,6 @@ def get_summarised_website_tree(
         json_object_name=json_object_name,
         summarised_property=summarised_property,
     )
-
     url_structure: Dict = get_url_dictionary(  # type: ignore[type-arg]
         G=website_graph, root_url=company_url
     )
@@ -104,13 +114,17 @@ def get_summarised_website_tree(
     export_url_structure_for_d3(
         url_structure=url_structure,
         website_graph=website_graph,
-        d3_json_output_path=d3_json_output_path,
+        d3_json_filename=d3_json_filename,
+        output_dir=output_dir,
+        company_url=company_url,
     )
-    input("Exported frontend data.")
     plot_url_structure_to_svg_pdf_png(
-        graph_dict={company_url: url_structure}, nx_graph=website_graph
+        graph_dict={company_url: url_structure},
+        nx_graph=website_graph,
+        graph_plot_filename=graph_plot_filename,
+        output_dir=output_dir,
+        company_url=company_url,
     )
-    input("Created pdf, svg and png visualisation of tree.")
 
 
 for company_url in company_urls:

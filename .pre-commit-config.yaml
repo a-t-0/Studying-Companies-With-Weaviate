@@ -83,13 +83,8 @@ repos:
     - id: codespell
       args:
          [
-           "--skip=book/*",
+           "--skip=output_data/*",
            "--skip=frontend/*",
-           "--skip=original/*",
-           "--skip=summarised_by_weaviate.json",
-           "--skip=website_data.json",
-           "--skip=d3_data.json", # TODO: remove.
-
          ]
 
 

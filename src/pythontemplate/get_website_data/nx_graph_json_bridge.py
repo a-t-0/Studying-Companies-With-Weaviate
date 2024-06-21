@@ -21,7 +21,6 @@ def json_to_graph(filepath: str) -> nx.DiGraph:
     # Create a directed graph
     G = nx.DiGraph()
 
-    print(f'Got: {len(data["nodes"])} pages.')
     # Add nodes with attributes (if present)
     for node in data["nodes"]:
         # text_content is how networkx stores the node attribute.

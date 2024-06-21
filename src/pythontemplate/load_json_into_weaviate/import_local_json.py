@@ -7,11 +7,15 @@ from typing import Collection, Dict, List, Sequence
 import weaviate
 from typeguard import typechecked
 
+from src.pythontemplate.helper import get_output_path
+
 
 @typechecked
 def load_local_json_data_into_weaviate(
     *,
     weaviate_local_host_url: str,
+    company_url: str,
+    output_dir: str,
     json_input_path: str,
     json_object_name: str,
     summarised_property: str,
@@ -24,16 +28,20 @@ def load_local_json_data_into_weaviate(
     that the data should be stored under. :summarised_property: (str), The
     property in the JSON data that represents the summary of the object.
     """
-
+    nx_json_output_path: str = get_output_path(
+        output_dir=output_dir,
+        company_url=company_url,
+        filename=json_input_path,
+    )
     client = weaviate.Client(
         url=weaviate_local_host_url,
     )
 
     try:
-        with open(json_input_path) as f:
+        with open(nx_json_output_path) as f:
             data: Dict = json.load(f)  # type: ignore[type-arg]
     except FileNotFoundError:
-        print(f"Error: File '{json_input_path}' not found.")
+        print(f"Error: File '{nx_json_output_path}' not found.")
         exit()
 
     add_imported_json_graph_to_weaviate(
