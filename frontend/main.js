@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", function() {
     let container = document.getElementById('container');
 
@@ -144,8 +146,17 @@ document.addEventListener("DOMContentLoaded", function() {
         return svg.node();
       }
 
-    // DATA is loaded from file.
-    var data = DATA;
+
+    const url = 'http://0.0.0.0:8000/d3_data.json';
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);  // Log the parsed JSON data
+        // Further processing of the data can be done here
+        // For example, store it in a variable:
+        const jsonData = data;
+        console.log(jsonData);  // Verify that jsonData contains the data
+
 
     // This function creates a hierarchical tree visualization using the provided data.
     // It expects the data to be formatted as an object with nested objects (similar to the "flare.json" format).
@@ -170,4 +181,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     container.append(chart);
+  })
+  .catch(error => {
+    console.error('Error fetching JSON data:', error);
+  });
+
 });
