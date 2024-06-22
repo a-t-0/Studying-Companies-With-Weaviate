@@ -33,7 +33,7 @@ The video below shows how the Weaviate.io website overview can be seen, while qu
 To use this code, install the [prerequisites](prerequisites.md), and run [this](Summarise_website_with_weaviate.ipynb) Jupiter Notebook. Afterwards, you can show your website as summarised by Weaviate with:
 
 ```sh
-python3 -m host_json_locally.py
+python host_json_locally.py
 ```
 
 Then open the `frontend/index.html` to see the website.
