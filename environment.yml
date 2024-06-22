@@ -10,73 +10,73 @@ name: pythontemplate
 channels:
   - conda-forge
 dependencies:
-# Specify specific python version.
+  # Specify specific python version.
   - python=3.12
-# Pre-commit packages for code quality:
-# Run python tests.
+  # Pre-commit packages for code quality:
+  # Run python tests.
   - pytest-cov
-# Turns relative import paths into absolute import paths.
+  # Turns relative import paths into absolute import paths.
   - absolufy-imports
-# Auto format Python code to make it flake8 compliant.
+  # Auto format Python code to make it flake8 compliant.
   - autoflake
-# Scan Python code for security issues.
+  # Scan Python code for security issues.
   - bandit
-# Code formatting compliance.
+  # Code formatting compliance.
   - black
-# Correct code misspellings.
+  # Correct code misspellings.
   - codespell
-# Verify percentage of code that has at least 1 test.
+  # Verify percentage of code that has at least 1 test.
   - coverage
-# Auto formats the Python documentation written in the code.
+  # Auto formats the Python documentation written in the code.
   - docformatter
-# Auto generate docstrings.
+  # Auto generate docstrings.
   - flake8
-# Auto sort the import statements.
+  # Auto sort the import statements.
   - isort
-# Auto format Markdown files.
+  # Auto format Markdown files.
   - mdformat
-# Auto check static typing.
+  # Auto check static typing.
   - mypy
-# Auto generate documentation.
+  # Auto generate documentation.
   - pdoc3
-# Another static type checker for python like mypy.
+  # Another static type checker for python like mypy.
   - pyright
-# Include GitHub pre-commit hook.
+  # Include GitHub pre-commit hook.
   - pre-commit
-# visualize the structure of the code based on a command.
+  # visualize the structure of the code based on a command.
   - pycallgraph2
-# Automatically upgrades Python syntax to the new Python version syntax.
+  # Automatically upgrades Python syntax to the new Python version syntax.
   - pyupgrade
-# Auto generate docstrings.
+  # Auto generate docstrings.
   - pyment
-# Auto check programming style aspects.
+  # Auto check programming style aspects.
   - pylint
-# Support Sphinx documentation.
+  # Support Sphinx documentation.
   - sphinx
-# Support some advanced option for Sphinx documentation.
+  # Support some advanced option for Sphinx documentation.
   - sphinx-design
-# Enable publishing the pip package.
+  # Enable publishing the pip package.
   - twine
-# Ensure the python function arguments are verified at runtime.
+  # Ensure the python function arguments are verified at runtime.
   - typeguard
-# Enable creating the pip package.
+  # Enable creating the pip package.
   - setuptools
   - wheel
-# Show graph
+  # Show graph
   - pygraphviz
-# pip packages:
+  # pip packages:
   - pip
   - pip:
-    # Seems to be an autoformatter like black, but installed using npm instead of pip.
-    - prettier
-    # Allow for auto generation of type-hints during runtime.
-    - pyannotate
-    # Some package that the Sphinx MWE used to create the documents.
-    - furo
-    # Allow the Sphinx documentation to auto generate the typed documentation.
-    - myst_parser
-    # Build the pip package.
-    - build
-    - matplotlib
-    # visualize website graph as tree.
-    - pydot
+      # Seems to be an autoformatter like black, but installed using npm instead of pip.
+      - prettier
+      # Allow for auto generation of type-hints during runtime.
+      - pyannotate
+      # Some package that the Sphinx MWE used to create the documents.
+      - furo
+      # Allow the Sphinx documentation to auto generate the typed documentation.
+      - myst_parser
+      # Build the pip package.
+      - build
+      - matplotlib
+      # visualize website graph as tree.
+      - pydot
