@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 	const container = document.getElementById("container");
 
-	// Copyright 2021-2023 Observable, Inc.
-	// Released under the ISC license.
 	// https://observablehq.com/@d3/tree
 	function Tree(
 		data,
@@ -23,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			r = 4, // radius of nodes
 			padding = 1, // horizontal padding for first and last column (Larger is smaller padding)
 			fill = "#999", // fill for nodes
-			fillOpacity, // fill opacity for nodes
+			// fillOpacity, // fill opacity for nodes
 			stroke = "#555", // stroke for links
 			strokeWidth = 1.5, // stroke width for links
 			strokeOpacity = 0.4, // stroke opacity for links
@@ -178,14 +176,6 @@ document.addEventListener("DOMContentLoaded", () => {
 						.reverse()
 						.map((d) => d.data.name)
 						.join(".")}`,
-
-				// Function to define the link URL for each node.
-				// It constructs a URL based on the node's position in the hierarchy.
-				// For leaf nodes (no children), it uses the ".as" extension.
-				// link: (d, n) => `https://github.com/prefuse/Flare/${n.children ? "tree" : "blob"}/master/flare/src/${n.ancestors().reverse().map(d => d.data.name).join("/")}${n.children ? "" : ".as"}`,
-
-				// Override the default width for the chart.
-				// width: 1152
 			});
 
 			container.append(chart);
