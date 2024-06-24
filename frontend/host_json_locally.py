@@ -19,7 +19,7 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
-            folder_list = get_folder_list("../output_data")
+            folder_list = get_folder_list("output_data")
             self.wfile.write(dumps(folder_list).encode())
         else:
             return SimpleHTTPRequestHandler.do_GET(self)

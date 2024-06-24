@@ -35,7 +35,7 @@ def export_url_structure_for_d3(
         filename=d3_json_filename,
     )
     d3_structure = get_children(
-        parent_name="weaviate.io",
+        parent_name=company_url,
         parent_summary="hello",
         parent_url="parent_url",
         url_structure=url_structure,

@@ -47,8 +47,7 @@ summarised_property: str = "webPageMainText"
 weaviate_local_host_url: str = "http://localhost:8080"
 
 max_nr_of_queries: int = 3  # Used to prevent timeout error.
-md_book_path: str = "frontend"
-output_dir: str = "output_data"
+output_dir: str = "frontend/output_data"
 
 skip_weaviate_upload: bool = parse_skip_upload(
     args=sys.argv[1:]
