@@ -31,10 +31,7 @@ from src.pythontemplate.weaviate_summaries.summarise_json import (
     inject_summarisation_into_website_graph,
 )
 
-company_urls: List[str] = ["https://weaviate.io"]
-# company_urls: List[str] = ["https://waarneming.nl"]
-# company_urls: List[str] = ["https://trucol.io"]
-
+company_urls: List[str] = ["https://weaviate.io", "https://trucol.io"]
 nx_json_filename: str = "website_data.json"
 summarised_json_filename: str = "summarised_by_weaviate.json"
 d3_json_filename: str = "d3_data.json"

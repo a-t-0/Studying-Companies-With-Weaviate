@@ -3389,7 +3389,7 @@
       "url": "https://weaviate.io/weaviate-support-terms"
     }
   ],
-  "name": "weaviate.io",
+  "name": "https://weaviate.io",
   "summary": "hello",
   "url": "parent_url"
 }
