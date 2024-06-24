@@ -150,7 +150,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		return svg.node();
 	}
 
-	const url = "http://0.0.0.0:8000/d3_data.json";
+	// const url = "http://0.0.0.0:8000/d3_data.json";
+	// const url = "http://0.0.0.0:8000/output_data/weaviate.io/d3_data.json";
+	const url = "http://0.0.0.0:8000/output_data/trucol.io/d3_data.json";
 	fetch(url)
 		.then((response) => response.json())
 		.then((data) => {

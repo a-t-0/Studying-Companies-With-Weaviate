@@ -29,13 +29,9 @@ Weaviate is more than just a database. It's a flexible platform for building pow
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-    <script src="./main.js"></script>
+    <script src="./new_tree.js"></script>
 
     <script>
-      const folderDropdown = document.getElementById('folder-dropdown');
-      const selectedFolder = document.createElement('input'); // Create a hidden input for storing the selected folder
-      selectedFolder.type = 'hidden';
-      selectedFolder.name = 'selected_folder'; // This name will be accessible in main.js
 
       // Function to simulate folder retrieval (replace with your actual logic)
       function getFolderNames() {
@@ -51,15 +47,7 @@ Weaviate is more than just a database. It's a flexible platform for building pow
           })
           .catch(error => console.error('Error fetching folders:', error));
       }
-      // Replace this with your actual logic to get folder names
-      // const folderNames = getFolderNames('../output_data');
       const folderNames = getFolderNames();
-
-    folderDropdown.addEventListener('change', () => {
-      selectedFolder.value = folderDropdown.value;
-      console.log("selectedFolder.value=", selectedFolder.value);
-    });
-      console.log("folderNames=",folderNames);
     </script>
 
 
