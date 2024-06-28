@@ -1,9 +1,9 @@
-# Source: https://weaviate.io/developers/weaviate/modules/reader-generator-modules/sum-transformers#in-short
-
 from typing import Dict, List, Union
 
+import networkx as nx
 import weaviate
 from typeguard import typechecked
+from weaviate import Client
 
 from src.pythontemplate.load_json_into_weaviate.import_local_json import (
     get_hash,
@@ -15,8 +15,9 @@ def ask_weaviate_to_summarise(
     weaviate_local_host_url: str,
     json_object_name: str,
     summarised_property: str,
-):
+) -> Dict[str, Dict[str, Dict[str, List]]]:  # type: ignore[type-arg]
     """Working configuration:
+
     json_object_names="Question", summarised_property="theAnswer"
     """
     client = weaviate.Client(weaviate_local_host_url)
@@ -29,14 +30,16 @@ def ask_weaviate_to_summarise(
         .do()["data"]["Get"][json_object_name]
     ]
 
-    summarised_json = {"data": {"Get": {"WebPage": []}}}
+    summarised_json: Dict[  # type: ignore[type-arg]
+        str, Dict[str, Dict[str, List]]
+    ] = {"data": {"Get": {"WebPage": []}}}
     if len(urls) != len(list(set(urls))):
         raise ValueError("Duplicate url found.")
 
     for i, url in enumerate(urls):
-        print(f"i={i}, url={url}")
+        print(f"summarizing website: i={i}, url={url}")
 
-        result = single_query_v0(
+        result = weaviate_summary_query_on_single_text(
             client,
             json_object_name,
             summarised_property,
@@ -49,10 +52,13 @@ def ask_weaviate_to_summarise(
     return summarised_json
 
 
-def single_query_v0(
-    client, json_object_name, summarised_property, url_hash: str
-):
-    result = (
+def weaviate_summary_query_on_single_text(
+    client: Client,
+    json_object_name: str,
+    summarised_property: str,
+    url_hash: str,
+) -> Dict:  # type: ignore[type-arg]
+    result: Dict = (  # type: ignore[type-arg]
         client.query.get(
             json_object_name,
             [
@@ -78,88 +84,50 @@ def single_query_v0(
     return result
 
 
+@typechecked
 def inject_summarisation_into_website_graph(
-    data,
-    website_graph,
-    max_nr_of_queries,
+    data: Dict,  # type: ignore[type-arg]
+    website_graph: nx.DiGraph,
+    max_nr_of_queries: int,
     json_object_name: str,
     summarised_property: str,
-):
+) -> None:
+    """This function injects a summary into a website graph.
+
+    Args: :data: (Dict), A dictionary containing the summary data
+    :website_graph: (nx.DiGraph), A NetworkX directed graph representing the
+    website :max_nr_of_queries: (int), The maximum number of summaries to
+    inject :json_object_name: (str), The name of the JSON object containing the
+    summaries :summarised_property: (str), The name of the property in the JSON
+    object containing the summaries
+    """
 
     vals = data["data"]["Get"][json_object_name]
-    print(f"len(vals)={len(vals)}")
+    print(f"Number of webpages={len(vals)}")
     for i, node in enumerate(website_graph.nodes):
-        if i < max_nr_of_queries:
-            verify_summary_structure(
-                single_summary=vals[i], summarised_property=summarised_property
-            )
-            original_main_text: str = get_original_text_from_summary_response(
-                single_summary=vals[i], summarised_property=summarised_property
-            )
-            weaviate_summary: str = get_summary_response(
-                single_summary=vals[i]
-            )
-            summary_url: str = get_summary_url(single_summary=vals[i])
-            for node in website_graph.nodes:
-                if node == summary_url:
-                    website_graph.nodes[node]["summary"] = weaviate_summary
+        # if i < max_nr_of_queries:
 
-                    if (
-                        website_graph.nodes[node]["text_content"]
-                        != original_main_text
-                    ):
-                        print(
-                            f"website_graph.nodes[node]={website_graph.nodes[node]}"
-                        )
-                        raise ValueError(
-                            "The text_content values of summary and website"
-                            " graph don't match."
-                        )
+        original_main_text: str = get_original_text_from_summary_response(
+            single_summary=vals[i], summarised_property=summarised_property
+        )
+        weaviate_summary: str = get_summary_response(single_summary=vals[i])
+        summary_url: str = get_summary_url(single_summary_with_url=vals[i])
+        for node in website_graph.nodes:
+            if node == summary_url:
+                website_graph.nodes[node]["summary"] = weaviate_summary
 
-
-@typechecked
-def verify_summary_structure(
-    *,
-    single_summary: Dict[str, Dict[str, Union[str, List[Dict[str, str]]]]],
-    summarised_property: str,
-):
-    """Ensures a single summary contains the original text and the new summary
-    in the correct position."""
-
-    if "_additional" not in single_summary.keys():
-        raise KeyError("_additional key containing Summary not found.")
-    if "summary" not in single_summary["_additional"].keys():
-        raise KeyError("summary key not found.")
-    # TODO: include check on whether the website main text is empty or not.
-    if single_summary[summarised_property] != "":
-        if len(single_summary["_additional"]["summary"]) != 1:
-            print(f"single_summary={single_summary}")
-            raise ValueError(
-                "The list of summaries does not contain a single element."
-            )
-        if (
-            "property"
-            not in single_summary["_additional"]["summary"][0].keys()
-        ):
-            raise KeyError("property key not found in summary dictionary.")
-        if (
-            single_summary["_additional"]["summary"][0]["property"]
-            != summarised_property
-        ):
-            raise KeyError(
-                "The summary is made for a different property than the"
-                " text_content."
-            )
-        if "result" not in single_summary["_additional"]["summary"][0].keys():
-            raise KeyError("result key not found in summary dictionary.")
-        if not isinstance(
-            single_summary["_additional"]["summary"][0]["result"], str
-        ):
-            raise TypeError(
-                "The value belonging to the result key was not a string."
-            )
-    if summarised_property not in single_summary.keys():
-        raise KeyError("Original text not in element.")
+                if (
+                    website_graph.nodes[node]["text_content"]
+                    != original_main_text
+                ):
+                    print(
+                        "website_graph.nodes[node]="
+                        + f"{website_graph.nodes[node]}"
+                    )
+                    raise ValueError(
+                        "The text_content values of summary and website"
+                        " graph don't match."
+                    )
 
 
 def get_original_text_from_summary_response(
@@ -167,12 +135,22 @@ def get_original_text_from_summary_response(
     single_summary: Dict[str, Dict[str, Union[str, List[Dict[str, str]]]]],
     summarised_property: str,
 ) -> str:
-    """Returns the original main text that was extracted from the web page out
-    of a Weaviate summary response.
+    """Gets the original text from a Weaviate summary response.
 
-    Assumes the single summary element has a valid structure.
+    Args: :single_summary: (Dict[str, Dict[str, Union[str, List[Dict[str,
+    str]]]]]), The single summary element from a Weaviate query response.
+    :summarised_property: (str), The name of the property in the summary
+    response that contains the original text. Returns: The original text that
+    was extracted from the web page.
     """
-    return single_summary[summarised_property]
+    if not isinstance(single_summary, dict):
+        raise TypeError("Expected Dict.")
+    if not isinstance(single_summary[summarised_property], str):
+        raise TypeError(
+            "Expected summarized property to be a string,"
+            + f" yet it was:{single_summary} of type:{type(single_summary)}."
+        )
+    return str(single_summary[summarised_property])
 
 
 def get_summary_response(
@@ -184,16 +162,36 @@ def get_summary_response(
     Assumes the single summary element has a valid structure.
     """
     if len(single_summary["_additional"]["summary"]) > 0:
+        if not isinstance(single_summary, dict):
+            raise TypeError("Expected Dict.")
+        if not isinstance(single_summary["_additional"], dict):
+            raise TypeError("Expected Dict in additional.")
+        if not isinstance(single_summary["_additional"]["summary"], List):
+            raise TypeError("Expected List.")
+        if not isinstance(single_summary["_additional"]["summary"][0], dict):
+            raise TypeError("Expected Dict within List.")
+        if not isinstance(
+            single_summary["_additional"]["summary"][0]["result"], str
+        ):
+            raise TypeError("Expected the summary response to be a string.")
         return single_summary["_additional"]["summary"][0]["result"]
     else:
         return "No web page text found, so no summary available."
 
 
 def get_summary_url(
-    *, single_summary: Dict[str, Dict[str, Union[str, List[Dict[str, str]]]]]
+    *,
+    single_summary_with_url: Dict[
+        str, Dict[str, Union[str, List[Dict[str, str]]]]
+    ],
 ) -> str:
     """Returns the url belonging to the Weaviate summary.
 
-    Assumes the single summary element has a valid structure.
+    Assumes the single summary element has a valid structure. Args:
+    :single_summary_with_url: (Dict[str, Dict[str, Union[str, List[Dict[str,
+    str]]]]]), A Weaviate summary with valid structure. Returns: The URL of the
+    Weaviate summary.
     """
-    return single_summary["url"]
+    if not isinstance(single_summary_with_url["url"], str):
+        raise TypeError("Expected the url to be a string.")
+    return single_summary_with_url["url"]

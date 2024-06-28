@@ -1,0 +1,37 @@
+{
+  "children": [
+    {
+      "name": "TruSec",
+      "summary": "The TruSec protocol allows companies to hedge against hacks such as ransomware attacks and data leaks. It has been presented at Black Hat USA 2022 in Las Vegas, along with our whitepaper. A cyber-security variant of the TruCol protocol. Watch our talk below:",
+      "url": "https://trucol.io/TruSec"
+    },
+    {
+      "name": "Usecases",
+      "summary": "TruCol is a decentralised smart contract protocol. It makes programming tasks automatically and deterministically verifiable. This guarantees you get the lowest labour cost around the world. It also eliminates the need of HR for these tasks. Find out how you can use TruCol here.",
+      "url": "https://trucol.io/Usecases"
+    },
+    {
+      "name": "about",
+      "summary": "TruCol is a decentralized, trust-less collaboration platform and protocol for test-driven programming development. The project started at the ETHDenver Hackathon as a collaboration between four students interested in the development of Ethereum projects. Learn about the origins of TruCol and the team behind TruCol.",
+      "url": "https://trucol.io/about"
+    },
+    {
+      "name": "contact",
+      "summary": "You can reach the team through email at trucol@protonmail.com. We\u2019ll never share your personal info with anyone else without your explicit permission. Get in touch with the TruCol protocol at TruCol.com/GitHub or via Twitter @TruCol.",
+      "url": "https://trucol.io/contact"
+    },
+    {
+      "name": "faq",
+      "summary": "The costs of the contract depend on what the contract does. A minimum of approximately $50,- can currently be expected. We expect that the contract costs will go down in the future with ETH 2.0 thanks to staking and/or sharding. You can opt to sacrifice some decentralisation through the use of an oracle service with (decentralised) CIs.",
+      "url": "https://trucol.io/faq"
+    },
+    {
+      "name": "protocol",
+      "summary": "The TruCol protocol presents an improvement of market efficiency and developer autonomy. Employers publish a smart contract with a bounty for deterministically verifiable development tasks which are fit for solving by external parties. Developers from all over the world are able to complete these tasks and get rewarded automatically when the requirement of the smart contract is fulfilled.",
+      "url": "https://trucol.io/protocol"
+    }
+  ],
+  "name": "https://trucol.io",
+  "summary": "hello",
+  "url": "parent_url"
+}

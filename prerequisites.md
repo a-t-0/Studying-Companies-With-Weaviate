@@ -29,3 +29,15 @@ reinitialise the Weaviate docker with:
 ```sh
 docker-compose up -d
 ```
+
+## Devs
+
+To use the tools used to develop this repo, one can use:
+
+```sh
+pre-commit install
+npm init
+
+sudo apt install eslint
+npm init @eslint/config@latest
+```

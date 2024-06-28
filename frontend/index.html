@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8" />
+  <select id="folder-dropdown"></select>
+  <textarea
+    id="summary"
+    style="width: 300px; min-height: 200px; line-height: normal"
+  >
+Weaviate is more than just a database. It's a flexible platform for building powerful, production-ready AI applications. Our open source vector database and surrounding offerings are designed to support developers and teams of all sizes on their AI journey. Get the best of vector and keyword techniques with Weaviate.</textarea
+  >
+  <head>
+    <style>
+      #summary {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+        min-height: 60px;
+        background-color: #fff;
+        text-align: center;
+        overflow-wrap: break-word; /* Enable line wrapping */
+        resize: none; /* Disable resizing */
+        border: 1px solid #ccc; /* Optional: Add a border for clarity */
+        padding: 10px; /* Optional: Add padding inside the textarea */
+        box-sizing: border-box; /* Ensure padding and border are included in width and height */
+      }
+    </style>
+    <title>Tidy Tree</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="./build_tree.js"></script>
+
+    <script>
+
+      // Function to simulate folder retrieval (replace with your actual logic)
+      function getFolderNames() {
+        fetch('http://0.0.0.0:8000/folders') // Make a GET request to the server's "/folders" endpoint
+          .then(response => response.json()) // Parse the JSON response
+          .then(folderList => {
+            folderList.forEach(folderName => {
+              const option = document.createElement('option');
+              option.value = folderName;
+              option.text = folderName;
+              folderDropdown.appendChild(option);
+            });
+          })
+          .catch(error => console.error('Error fetching folders:', error));
+      }
+      const folderNames = getFolderNames();
+    </script>
+
+
+  </head>
+  <body>
+    <div id="container"></div>
+  </body>
+</html>

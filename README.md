@@ -5,7 +5,7 @@
 [![Code Style: Black][black_badge]](https://github.com/ambv/black)
 
 <p align="center">
-  <img src="image.png" />
+  <img src="Images/bruce_lee.png" />
 
 **“It is not daily increase but daily decrease, hack away the unessential.”**
 
@@ -33,13 +33,15 @@ The video below shows how the Weaviate.io website overview can be seen, while qu
 To use this code, install the [prerequisites](prerequisites.md), and run [this](Summarise_website_with_weaviate.ipynb) Jupiter Notebook. Afterwards, you can show your website as summarised by Weaviate with:
 
 ```sh
-mdbook build &&  mdbook serve
+python host_json_locally.py
 ```
+
+Then open the `frontend/index.html` to see the website.
 
 (Ps. You can also run `python -m src.pythontemplate` if you prefer CLI over ipynb).
 
-
 ## How can this be made more awesome?🚀
+
 - Include CI pipeline to (show people how to run it a-z with 1 command on their own device).
 - Include support for Mac & Windows.
 - Present as a service.

@@ -1,17 +1,26 @@
 """Entry point for the project."""
 
+import sys
 from typing import Dict, List
 
 import networkx as nx
+from typeguard import typechecked
 
-from src.pythontemplate.frontend.visualize_summarised_website import (
-    create_mdbook,
+from src.pythontemplate.arg_parsing.arg_parser import parse_skip_upload
+from src.pythontemplate.arg_parsing.verify_configuration import (
+    verify_configuration,
 )
 from src.pythontemplate.get_website_data.get_website_data_manager import (
     get_nx_graph_of_website,
 )
-from src.pythontemplate.visualise_graph.plot_dict import plot_dict_tree
-from src.pythontemplate.visualise_graph.visualize_website_tree import (
+from src.pythontemplate.helper import create_output_dir
+from src.pythontemplate.load_json_into_weaviate.import_local_json import (
+    load_local_json_data_into_weaviate,
+)
+from src.pythontemplate.visualise_graph.plot_url_structure_to_image import (
+    plot_url_structure_to_svg_pdf_png,
+)
+from src.pythontemplate.visualise_graph.url_structure_to_d3_json import (
     export_url_structure_for_d3,
     get_url_dictionary,
 )
@@ -22,38 +31,68 @@ from src.pythontemplate.weaviate_summaries.summarise_json import (
     inject_summarisation_into_website_graph,
 )
 
-company_urls: List[str] = ["https://weaviate.io"]
-# company_urls: List[str] = ["https://waarneming.nl/"]
-# company_urls: List[str] = ["https://trucol.io/"]
+company_urls: List[str] = ["https://weaviate.io", "https://trucol.io"]
+nx_json_filename: str = "website_data.json"
+summarised_json_filename: str = "summarised_by_weaviate.json"
+d3_json_filename: str = "d3_data.json"
+graph_plot_filename: str = "website_url_structure"
 
-website_data_path: str = "website_data.json"
+
 # For this repo the Weaviate data classes are web pages.
 json_object_name: str = "WebPage"  # Must start with Capitalised letter.
-# For this repo, the Weaviate property that is being summarised by is the
-# main text of the web page.
 summarised_property: str = "webPageMainText"
-summarised_website_data_path: str = "summarised_by_weaviate.json"
 weaviate_local_host_url: str = "http://localhost:8080"
-md_book_path: str = "frontend"
-max_nr_of_queries: int = 10000  # Used to prevent timeout error.
-d3_json_output_path: str = "d3_data.json"
+
+max_nr_of_queries: int = 3  # Used to prevent timeout error.
+output_dir: str = "frontend/output_data"
+
+skip_weaviate_upload: bool = parse_skip_upload(
+    args=sys.argv[1:]
+)  # Skip the script name (sys.argv[0])
+verify_configuration(
+    company_urls=company_urls, json_object_name=json_object_name
+)
 
 
-def get_website(company_url: str):
+@typechecked
+def get_summarised_website_tree(
+    *, company_url: str, skip_weaviate_upload: bool
+) -> None:
+    """Retrieves the website structure of a company.
+
+    Args: :company_url: (str), URL of the company website. Returns: This
+    function does not directly return data. Instead, it processes the website
+    data and generates various outputs, including:* A summarized website data
+    stored in Weaviate* A URL structure dictionary (`url_structure`)* A D3 JSON
+    output file for frontend visualization (`d3_json_filename`)* PDF, SVG, and
+    PNG visualizations of the website structure (`graph_dict`)
+    """
+    create_output_dir(company_url=company_url, output_dir=output_dir)
 
     website_graph: nx.DiGraph = get_nx_graph_of_website(
-        website_data_path=website_data_path,
+        # output_filepath=output_filepath,
+        nx_json_filename=nx_json_filename,
         company_url=company_url,
-        weaviate_local_host_url=weaviate_local_host_url,
-        summarised_property=summarised_property,
-        json_object_name=json_object_name,
+        output_dir=output_dir,
     )
 
+    if not skip_weaviate_upload:
+        load_local_json_data_into_weaviate(
+            weaviate_local_host_url=weaviate_local_host_url,
+            json_input_path=nx_json_filename,
+            json_object_name=json_object_name,
+            summarised_property=summarised_property,
+            output_dir=output_dir,
+            company_url=company_url,
+        )
+
     summarised_data = ensure_weaviate_summaries_are_available(
-        summarised_website_data_path=summarised_website_data_path,
+        summarised_json_filename=summarised_json_filename,
         weaviate_local_host_url=weaviate_local_host_url,
         json_object_name=json_object_name,
         summarised_property=summarised_property,
+        output_dir=output_dir,
+        company_url=company_url,
     )
 
     # Export summaries
@@ -64,28 +103,27 @@ def get_website(company_url: str):
         json_object_name=json_object_name,
         summarised_property=summarised_property,
     )
-
-    url_structure: Dict = get_url_dictionary(
+    url_structure: Dict = get_url_dictionary(  # type: ignore[type-arg]
         G=website_graph, root_url=company_url
     )
+    # For frontend.
     export_url_structure_for_d3(
         url_structure=url_structure,
         website_graph=website_graph,
-        d3_json_output_path=d3_json_output_path,
+        d3_json_filename=d3_json_filename,
+        output_dir=output_dir,
+        company_url=company_url,
     )
-    input("DONE?")
-    plot_dict_tree(
-        graph_dict={company_url: url_structure}, nx_graph=website_graph
-    )
-
-    # Create frontend
-    create_mdbook(
-        graph=website_graph,
-        root=company_url,
-        output_dir=md_book_path,
-        summarised_property=summarised_property,
+    plot_url_structure_to_svg_pdf_png(
+        graph_dict={company_url: url_structure},
+        nx_graph=website_graph,
+        graph_plot_filename=graph_plot_filename,
+        output_dir=output_dir,
+        company_url=company_url,
     )
 
 
 for company_url in company_urls:
-    get_website(company_url=company_url)
+    get_summarised_website_tree(
+        company_url=company_url, skip_weaviate_upload=skip_weaviate_upload
+    )
